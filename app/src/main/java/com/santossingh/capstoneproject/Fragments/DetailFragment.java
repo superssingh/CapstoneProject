@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.santossingh.capstoneproject.Activities.AmazonActivity;
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
@@ -77,7 +76,6 @@ public class DetailFragment extends Fragment {
         Price.setText(getArguments().getString(String.valueOf(R.string.PRICE)));
         String filteredDescription = filterTags(getArguments().getString(String.valueOf(R.string.DESCRIPTION)));
         Description.setText(filteredDescription);
-//        Description.setText(getArguments().getString(String.valueOf(R.string.DESCRIPTION)));
         Picasso.with(getActivity()).load(getArguments().getString(String.valueOf(R.string.IMAGE)))
                 .error(R.drawable.ic_error_black_24dp)
                 .placeholder(R.drawable.book1).resize(300, 400)
@@ -118,21 +116,12 @@ public class DetailFragment extends Fragment {
                 .error(R.drawable.ic_error_black_24dp).resize(300, 400).into(imageView);
     }
 
-    public void hello(String s) {
-        if (s.equals(null)) {
-            Toast.makeText(view.getContext(), "NULL", Toast.LENGTH_LONG);
-        } else {
-            Toast.makeText(view.getContext(), "he", Toast.LENGTH_LONG);
-        }
-
-    }
-
     private void setAllListener() {
         Amazon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AmazonActivity.class);
-//                        .putExtra(String.valueOf(R.string.BUY_Amazon),Buy_Link);
+                Intent intent = new Intent(getActivity(), AmazonActivity.class)
+                        .putExtra(String.valueOf(R.string.BUY_Amazon), Buy_Link);
                 startActivity(intent);
             }
         });

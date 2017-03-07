@@ -136,8 +136,6 @@
                             android:textAllCaps="false"
                             android:textColor="@color/white" />
 
-                        <!--android:visibility="@{Book.is ? View.GONE : View.VISIBLE}"-->
-
                     </LinearLayout>
                 </LinearLayout>
 
@@ -188,15 +186,6 @@
         android:orientation="horizontal"
         app:layout_anchor="@id/app_bar_layout"
         app:layout_anchorGravity="bottom|end">
-
-        <!--<Button-->
-        <!--android:layout_width="100dp"-->
-        <!--android:layout_height="33dp"-->
-        <!--android:id="@+id/BTN_Preview"-->
-        <!--app:layout_anchor="@id/app_bar_layout"-->
-        <!--app:layout_anchorGravity="bottom"-->
-        <!--android:background="@drawable/gbs_preview_button"-->
-        <!--/>-->
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_fav"

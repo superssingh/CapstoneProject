@@ -1,8 +1,8 @@
 package com.santossingh.capstoneproject.Models.Amazon;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.santossingh.capstoneproject.R;
 
@@ -10,7 +10,18 @@ import com.santossingh.capstoneproject.R;
  * Created by santoshsingh on 22/02/17.
  */
 
-public class AmazonBook extends BaseObservable {
+public class AmazonBook implements Parcelable {
+    public static final Creator<AmazonBook> CREATOR = new Creator<AmazonBook>() {
+        @Override
+        public AmazonBook createFromParcel(Parcel in) {
+            return new AmazonBook(in);
+        }
+
+        @Override
+        public AmazonBook[] newArray(int size) {
+            return new AmazonBook[size];
+        }
+    };
     private String detailURL;
     private String image;
     private String author;
@@ -45,7 +56,17 @@ public class AmazonBook extends BaseObservable {
         detailURL = bundle.getString(String.valueOf(R.string.BUY_LINK));
     }
 
-    @Bindable
+    protected AmazonBook(Parcel in) {
+        detailURL = in.readString();
+        image = in.readString();
+        author = in.readString();
+        price = in.readString();
+        publishedDate = in.readString();
+        title = in.readString();
+        reviews = in.readString();
+        description = in.readString();
+    }
+
     public String getDetailURL() {
         return detailURL;
     }
@@ -54,7 +75,6 @@ public class AmazonBook extends BaseObservable {
         this.detailURL = detailURL;
     }
 
-    @Bindable
     public String getImage() {
         return image;
     }
@@ -63,7 +83,6 @@ public class AmazonBook extends BaseObservable {
         this.image = image;
     }
 
-    @Bindable
     public String getAuthor() {
         return author;
     }
@@ -72,7 +91,6 @@ public class AmazonBook extends BaseObservable {
         this.author = author;
     }
 
-    @Bindable
     public String getPrice() {
         return price;
     }
@@ -81,7 +99,6 @@ public class AmazonBook extends BaseObservable {
         this.price = price;
     }
 
-    @Bindable
     public String getPublishedDate() {
         return publishedDate;
     }
@@ -90,7 +107,6 @@ public class AmazonBook extends BaseObservable {
         this.publishedDate = publishedDate;
     }
 
-    @Bindable
     public String getTitle() {
         return title;
     }
@@ -99,7 +115,6 @@ public class AmazonBook extends BaseObservable {
         this.title = title;
     }
 
-    @Bindable
     public String getReviews() {
         return reviews;
     }
@@ -108,12 +123,28 @@ public class AmazonBook extends BaseObservable {
         this.reviews = reviews;
     }
 
-    @Bindable
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(detailURL);
+        parcel.writeString(image);
+        parcel.writeString(author);
+        parcel.writeString(price);
+        parcel.writeString(publishedDate);
+        parcel.writeString(title);
+        parcel.writeString(reviews);
+        parcel.writeString(description);
     }
 }
