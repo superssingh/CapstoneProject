@@ -1,3 +1,62 @@
 <resources>
     <string name="app_name">Capstone Project</string>
+    <string-array name="drawerCategoryList">
+        <item>Best Seller</item>
+        <item>Business</item>
+        <item>Technology</item>
+        <item>Sports</item>
+        <item>Stories</item>
+        <item>For Kids</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+
+    //URLs
+    <string name="BASE_URL">www.googleapis.com/</string>
+    <string name="Path">"/books/v1/volumes?q=1"</string>
+
+    <string name="Preview">preview</string>
+    <string name="KEY">key</string>
+    <string name="No_Internet">Please Turn ON Internet Connection</string>
+    <string name="AspectRatio">0.73f</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pdf_show_online_dialog_title">OpenTitle</string>
+    <string name="pdf_show_online_dialog_question">dialog_question</string>
+    <string name="pdf_show_online_dialog_button_no">dialog_button_NO</string>
+    <string name="pdf_show_online_dialog_button_yes">dialog_button_YES</string>
+    <string name="pdf_show_local_progress_title">local_progress_title</string>
+    <string name="pdf_show_local_progress_content">local_progress_content</string>
+    <string name="action_share">Share</string>
+
+    //Book Details Captions
+    <string name="BOOK_ID">ID</string>
+    <string name="BOOK_ISBN">ISBN</string>
+    <string name="BOOK_TITLE">TITLE</string>
+    <string name="AUTHOR">AUTHOR</string>
+    <string name="PUBLISHED_YEAR">YEAR</string>
+    <string name="IMAGE">IMAGE</string>
+    <string name="DESCRIPTION">DESCRIPTION</string>
+    <string name="PREVIEW_LINK">PREVIEW_URL</string>
+    <string name="BUY_LINK">BUY_LINK</string>
+    <string name="DOWNLOAD_LINK">DOWNLOAD_LINK</string>
+    <string name="connection_error">Network Connection Error</string>
+    <string name="xml_error">XML error</string>
+    <string name="BUY_Amazon">Buy from Amazon</string>
+    <string name="WEB_LINK">WEB_READER_LINK</string>
+    <string name="RATING">RATING</string>
+    <string name="HAS_ID">HAS_ID</string>
+    <string name="PRICE">PRICE</string>
+    <string name="Review_Link">Review_Link</string>
+    <string name="Business">Business</string>
+    <string name="Fiction">Fiction</string>
+    <string name="Fantasy">Fantasy</string>
+    <string name="NonFiction">Non Fiction</string>
+    <string name="piecePlaceEnum">piecePlace_ham_4</string>
+    <string name="buttonPlaceEnum">buttonPlace_ham_4</string>
+
+
 </resources>
