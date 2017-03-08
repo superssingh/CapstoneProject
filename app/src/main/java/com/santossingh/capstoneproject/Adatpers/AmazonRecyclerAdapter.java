@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.santossingh.capstoneproject.Fragments.AmazonFragment;
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
@@ -43,7 +44,7 @@ public class AmazonRecyclerAdapter extends RecyclerView.Adapter<AmazonRecyclerAd
         holder.dynamicImageView.setImageUrl((holder.book.getImage()),
                 ImageLoaderHelper.getInstance(holder.dynamicImageView.getContext()).getImageLoader());
         holder.dynamicImageView.setAspectRatio(AspectRatio);
-//        holder.mIdView.setText(holder.book.getTitle());
+        holder.mIdView.setText(holder.book.getTitle());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +70,7 @@ public class AmazonRecyclerAdapter extends RecyclerView.Adapter<AmazonRecyclerAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        //        public final TextView mIdView;
+        public final TextView mIdView;
         private final DynamicHeightNetworkImageView dynamicImageView;
         private AmazonBook book;
 
@@ -77,7 +78,7 @@ public class AmazonRecyclerAdapter extends RecyclerView.Adapter<AmazonRecyclerAd
             super(view);
             mView = view;
             dynamicImageView = (DynamicHeightNetworkImageView) view.findViewById(R.id.AWS_thumbnail);
-//            mIdView = (TextView) view.findViewById(R.id.AWS_BookTitle);
+            mIdView = (TextView) view.findViewById(R.id.AWS_BookTitle);
         }
     }
 }

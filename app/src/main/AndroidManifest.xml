@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".Activities.DetailActivity" />
         <activity android:name=".Activities.AmazonActivity" />
-        <activity android:name=".Activities.ViewActivity"></activity>
+        <activity android:name=".Activities.ViewActivity" />
+        <activity android:name=".Activities.FavoriteActivity"></activity>
     </application>
 
 </manifest>
