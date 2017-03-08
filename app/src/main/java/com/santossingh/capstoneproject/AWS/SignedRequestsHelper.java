@@ -20,6 +20,7 @@
 
 package com.santossingh.capstoneproject.AWS;
 
+
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
@@ -51,7 +52,7 @@ public class SignedRequestsHelper {
     private static final String UTF8_CHARSET = "UTF-8";
 
     /**
-     * The HMAC algorithm required by Work
+     * The HMAC algorithm required by Amazon
      */
     private static final String HMAC_SHA256_ALGORITHM = "HmacSHA256";
 
@@ -118,7 +119,7 @@ public class SignedRequestsHelper {
     /**
      * This method signs requests in hashmap form. It returns a URL that should
      * be used to fetch the response. The URL returned should not be modified in
-     * any way, doing so will invalidate the signature and Work will reject
+     * any way, doing so will invalidate the signature and Amazon will reject
      * the request.
      */
     public String sign(Map<String, String> params) {
@@ -133,7 +134,7 @@ public class SignedRequestsHelper {
         // get the canonical form the query string
         String canonicalQS = this.canonicalize(sortedParamMap);
 
-        // create the string upon which the signature is calculated 
+        // create the string upon which the signature is calculated
         String toSign =
                 REQUEST_METHOD + "\n"
                         + this.endpoint + "\n"
@@ -154,7 +155,7 @@ public class SignedRequestsHelper {
     /**
      * This method signs requests in query-string form. It returns a URL that
      * should be used to fetch the response. The URL returned should not be
-     * modified in any way, doing so will invalidate the signature and Work
+     * modified in any way, doing so will invalidate the signature and Amazon
      * will reject the request.
      */
     public String sign(String queryString) {
@@ -187,7 +188,7 @@ public class SignedRequestsHelper {
     }
 
     /**
-     * Generate a ISO-8601 format timestamp as required by Work.
+     * Generate a ISO-8601 format timestamp as required by Amazon.
      *
      * @return ISO-8601 format timestamp.
      */
@@ -201,7 +202,7 @@ public class SignedRequestsHelper {
     }
 
     /**
-     * Canonicalize the query string as required by Work.
+     * Canonicalize the query string as required by Amazon.
      *
      * @param sortedParamMap Parameter name-value pairs in lexicographical order.
      * @return Canonical form of query string.

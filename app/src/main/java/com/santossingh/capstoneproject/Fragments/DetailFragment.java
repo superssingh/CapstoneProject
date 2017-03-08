@@ -77,7 +77,6 @@ public class DetailFragment extends Fragment {
         String filteredDescription = filterTags(getArguments().getString(String.valueOf(R.string.DESCRIPTION)));
         Description.setText(filteredDescription);
         Picasso.with(getActivity()).load(getArguments().getString(String.valueOf(R.string.IMAGE)))
-                .error(R.drawable.ic_error_black_24dp)
                 .placeholder(R.drawable.book1).resize(300, 400)
                 .into(imageView);
     }

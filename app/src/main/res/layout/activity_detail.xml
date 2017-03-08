@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-    <!--<data>-->
-    <!--<variable-->
-    <!--name="Book"-->
-    <!--type="com.santossingh.capstoneproject.Models.Amazon.AmazonBook"/>-->
-    <!--</data>-->
 
-    <RelativeLayout
-        android:id="@+id/activity_detail"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.santossingh.capstoneproject.Activities.DetailActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.santossingh.capstoneproject.Activities.DetailActivity">
 
         <FrameLayout
             android:id="@+id/container"
@@ -22,4 +15,3 @@
         </FrameLayout>
 
     </RelativeLayout>
-</layout>

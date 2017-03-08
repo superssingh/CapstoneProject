@@ -9,7 +9,7 @@
     android:elevation="8dp"
     android:focusable="true"
     android:foreground="?selectableItemBackground"
-    app:cardBackgroundColor="@color/cardview_light_background"
+    app:cardBackgroundColor="@color/colorPrimaryDark"
     app:cardElevation="6dp">
 
     <com.santossingh.capstoneproject.Utilities.DynamicHeightNetworkImageView
@@ -31,12 +31,8 @@
             android:layout_height="wrap_content"
             android:background="@color/Black_transparent_70"
             android:padding="10dp"
-            android:shadowColor="@color/cardview_dark_background"
-            android:shadowDx="40"
-            android:shadowDy="40"
-            android:textAppearance="?attr/textAppearanceListItem"
             android:textColor="@color/white"
-            android:textSize="15dp" />
+            android:textSize="14dp" />
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

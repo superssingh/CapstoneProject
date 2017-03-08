@@ -6,16 +6,9 @@
     android:layout_height="match_parent"
     tools:context="com.santossingh.capstoneproject.Activities.AmazonActivity">
 
-    <FrameLayout
-        android:id="@+id/Amazon"
+    <WebView
+        android:id="@+id/webView_Amazon"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <fragment
-            android:name="com.santossingh.capstoneproject.Fragments.AmazonFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_amazon" />
-    </FrameLayout>
+        android:layout_height="match_parent"></WebView>
 
 </RelativeLayout>
