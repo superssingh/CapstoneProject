@@ -9,6 +9,9 @@
     <WebView
         android:id="@+id/webView_Amazon"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+    </WebView>
 
 </RelativeLayout>

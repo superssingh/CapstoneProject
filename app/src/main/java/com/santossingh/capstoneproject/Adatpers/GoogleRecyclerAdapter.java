@@ -4,12 +4,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.santossingh.capstoneproject.Fragments.GoogleFragment;
 import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;
-import com.santossingh.capstoneproject.Utilities.DynamicHeightNetworkImageView;
-import com.santossingh.capstoneproject.Utilities.ImageLoaderHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +38,7 @@ public class GoogleRecyclerAdapter extends RecyclerView.Adapter<GoogleRecyclerAd
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mData = itemList.get(position);
 
-        holder.dynamicImageView.setImageUrl((holder.mData.getVolumeInfo().getImageLinks().getThumbnail()),
-                ImageLoaderHelper.getInstance(holder.dynamicImageView.getContext()).getImageLoader());
-        holder.dynamicImageView.setAspectRatio(AspectRatio);
+        holder.textView.setText(holder.mData.getVolumeInfo().getTitle() == null ? "Unknown" : holder.mData.getVolumeInfo().getTitle());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,13 +64,15 @@ public class GoogleRecyclerAdapter extends RecyclerView.Adapter<GoogleRecyclerAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        private final DynamicHeightNetworkImageView dynamicImageView;
+        //        private final DynamicHeightNetworkImageView dynamicImageView;
+        private final TextView textView;
         public Item mData;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            dynamicImageView = (DynamicHeightNetworkImageView) view.findViewById(R.id.thumbnail);
+            textView = (TextView) view.findViewById(R.id.book_Title);
+//            dynamicImageView = (DynamicHeightNetworkImageView) view.findViewById(R.id.thumbnail);
         }
     }
 }

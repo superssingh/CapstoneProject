@@ -1,6 +1,7 @@
 package com.santossingh.capstoneproject.Activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -9,6 +10,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -23,7 +26,7 @@ import com.santossingh.capstoneproject.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements AmazonFragment.OnFragmentInteractionListener, GoogleFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements AmazonFragment.OnFragmentInteractionListener, GoogleFragment.OnFragmentInteractionListener, FavoriteFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -54,9 +57,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
             }
         });
 
-        AmazonFragment fragment = new AmazonFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
+        refreshAction();
     }
 
     public void selectDrawerItem(MenuItem menuItem) {
@@ -89,7 +90,33 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+        switch (item.getItemId()) {
+            case R.id.my_search_bar:
+                searchAction();
+                return true;
+
+            case R.id.refresh:
+                refreshAction();
+                return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void refreshAction() {
+        AmazonFragment fragment = new AmazonFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
+    }
+
+    private void searchAction() {
+        Toast.makeText(this, "Hello", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_actionbar, menu);
+        return true;
     }
 
     @Override
@@ -100,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         if (detailFragment != null) {
             detailFragment.setDataforTabletUI(mData);
         } else {
-
             Toast.makeText(this, mData.getPrice(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, DetailActivity.class)
                     .putExtra(String.valueOf(R.string.BOOK_TITLE), mData.getTitle())
@@ -117,6 +143,17 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
     @Override
     public void onFragmentInteraction(Item mData) {
-//        Toast.makeText(this,mData.getVolumeInfo().getTitle(),Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, ViewActivity.class)
+                .putExtra(String.valueOf(R.string.BOOK_ID), mData.getId());
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
     }
 }

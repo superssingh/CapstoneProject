@@ -57,6 +57,9 @@
     <string name="NonFiction">Non Fiction</string>
     <string name="piecePlaceEnum">piecePlace_ham_4</string>
     <string name="buttonPlaceEnum">buttonPlace_ham_4</string>
+    <string name="search_bar">Search</string>
+    <string name="Refresh">Refresh</string>
+    <string name="URL_Link">url</string>
 
 
 </resources>

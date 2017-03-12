@@ -10,15 +10,11 @@
         <item
             android:id="@+id/nav_google"
             android:icon="@mipmap/ic_book_black_24dp"
-            android:title="Google Library" />
+            android:title="Google Free Books" />
         <item
             android:id="@+id/nav_favorite"
             android:icon="@mipmap/ic_book_black_24dp"
             android:title="Favorite Books" />
-        <item
-            android:id="@+id/nav_download"
-            android:icon="@mipmap/ic_book_black_24dp"
-            android:title="Download Free Books" />
 
     </group>
 
@@ -34,3 +30,4 @@
     </item>
 
 </menu>
+

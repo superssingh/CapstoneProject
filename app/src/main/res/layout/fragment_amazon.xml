@@ -2,15 +2,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimary"
     tools:context="com.santossingh.capstoneproject.Fragments.AmazonFragment">
+
+    <ProgressBar
+        android:id="@+id/Progress_bar"
+        style="@android:style/Widget.ProgressBar.Inverse"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal" />
 
     <android.support.v7.widget.RecyclerView
 
         android:id="@+id/AWS_recycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
     </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>

@@ -3,12 +3,16 @@ package com.santossingh.capstoneproject.Fragments;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.santossingh.capstoneproject.AWS.AWS_URL;
 import com.santossingh.capstoneproject.AWS.MyXmlPullParser;
@@ -24,6 +28,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -33,12 +40,17 @@ import java.util.List;
  */
 public class AmazonFragment extends Fragment {
 
+    private static final String STATE_BOOKS = "books";
+    @BindView(R.id.AWS_recycleView)
     RecyclerView recyclerView;
-
+    @BindView(R.id.Progress_bar)
+    ProgressBar progressBar;
+    int menuItemPosition;
     private List<AmazonBook> itemsList;
     private AmazonRecyclerAdapter recyclerViewAdapter;
     private View view;
     private OnFragmentInteractionListener mListener;
+
 
     public AmazonFragment() {
     }
@@ -50,19 +62,51 @@ public class AmazonFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(STATE_BOOKS, (ArrayList<? extends Parcelable>) itemsList);
+        outState.putInt("menu_item", menuItemPosition);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+//        menu.findItem(menuItemPosition).setChecked(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_amazon, container, false);
+        ButterKnife.bind(this, view);
         itemsList = new ArrayList<AmazonBook>();
-
         configRecycleView();
+//        layout.setRefreshStyle(PullRefreshLayout.STYLE_WATER_DROP);
+//        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//
+//            }
+//        });
+
+// refresh complete
+
+//        if (savedInstanceState == null) {
+//            makeService("POPULAR");
+//            menuItemPosition = R.id.most_Popular;
+//        }else{
+//            progressBar.setVisibility(View.GONE);
+//            resultsList=savedInstanceState.getParcelableArrayList(STATE_MOVIES);
+//            menuItemPosition = savedInstanceState.getInt("menu_item");
+//            recyclerAdapter.addMovieList(resultsList);
+//        }
+
         new AWSAsyncTask().execute("business");
         return view;
     }
 
     private void configRecycleView() {
         recyclerViewAdapter = new AmazonRecyclerAdapter(mListener);
-        recyclerView = (RecyclerView) view.findViewById(R.id.AWS_recycleView);
         AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), 300);
         recyclerView.setLayoutManager(autofitGridlayout);
         recyclerView.setAdapter(recyclerViewAdapter);
@@ -105,6 +149,14 @@ public class AmazonFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+            new CountDownTimer(4000, 1000) {
+                public void onTick(long millisUntilFinished) {
+                }
+
+                public void onFinish() {
+                }
+            }.start();
         }
 
         @Override
@@ -129,6 +181,7 @@ public class AmazonFragment extends Fragment {
 
         @Override
         protected void onPostExecute(List<AmazonBook> amazonBooksList) {
+            progressBar.setVisibility(View.GONE);
             itemsList = amazonBooksList;
             recyclerViewAdapter.addList(itemsList);
         }

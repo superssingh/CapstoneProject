@@ -9,7 +9,6 @@ import com.santossingh.capstoneproject.R;
 
 public class AmazonActivity extends AppCompatActivity {
 
-    private static final String url = "file:///android_asset/google_preview.html";
     WebView webview;
 
     @Override
@@ -17,8 +16,7 @@ public class AmazonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_amazon);
         Intent intent = getIntent();
-        String Buy_link = intent.getStringExtra(String.valueOf(R.string.BUY_Amazon));
-//        Toast.makeText(this, Buy_link, Toast.LENGTH_LONG).show();
+        String Buy_link = intent.getStringExtra(String.valueOf(R.string.URL_Link));
         webview = (WebView) findViewById(R.id.webView_Amazon);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setDisplayZoomControls(true);

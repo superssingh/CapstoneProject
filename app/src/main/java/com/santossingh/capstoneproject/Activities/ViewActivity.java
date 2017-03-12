@@ -9,7 +9,7 @@ import com.santossingh.capstoneproject.R;
 
 public class ViewActivity extends AppCompatActivity {
 
-    private static final String url = "file:///android_asset/mypage.html";
+    private static final String url = "file:///android_asset/google_preview.html";
     WebView webview;
     String id = "";
     @Override
@@ -18,7 +18,7 @@ public class ViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view);
 
         Bundle intent = getIntent().getExtras();
-        id = intent.getString("ID");
+        id = intent.getString(String.valueOf(R.string.BOOK_ID));
         webview = (WebView) findViewById(R.id.webView);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setDisplayZoomControls(true);

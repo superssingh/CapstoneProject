@@ -49,7 +49,7 @@ public class DetailFragment extends Fragment {
     TextView Description;
 
     View view;
-    String Buy_Link, Review_Link;
+    String Buy_Link = "", Review_Link = "";
 
     public DetailFragment() {
         setHasOptionsMenu(true);
@@ -79,6 +79,8 @@ public class DetailFragment extends Fragment {
         Picasso.with(getActivity()).load(getArguments().getString(String.valueOf(R.string.IMAGE)))
                 .placeholder(R.drawable.book1).resize(300, 400)
                 .into(imageView);
+        Buy_Link = getArguments().getString(String.valueOf(R.string.BUY_Amazon));
+        Review_Link = getArguments().getString(String.valueOf(R.string.Review_Link));
     }
 
     private String filterTags(String s) {
@@ -101,26 +103,21 @@ public class DetailFragment extends Fragment {
         Buy_Link = book.getDetailURL();
     }
 
-
-    public void setDataforHandsetUI(final Intent intent) {
-        Title.setText(intent.getStringExtra(String.valueOf(R.string.BOOK_TITLE)));
-        Author.setText(intent.getStringExtra(String.valueOf(R.string.AUTHOR)));
-        Year.setText(intent.getStringExtra(String.valueOf(R.string.PUBLISHED_YEAR)));
-        Price.setText(intent.getStringExtra(String.valueOf(R.string.PRICE)));
-        Description.setText(intent.getStringExtra(String.valueOf(R.string.DESCRIPTION)));
-        Review_Link = intent.getStringExtra(String.valueOf(R.string.Review_Link));
-        Buy_Link = intent.getStringExtra(String.valueOf(R.string.BUY_Amazon));
-
-        Picasso.with(getActivity()).load(intent.getStringExtra(String.valueOf(R.string.IMAGE)))
-                .error(R.drawable.ic_error_black_24dp).resize(300, 400).into(imageView);
-    }
-
     private void setAllListener() {
         Amazon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AmazonActivity.class)
-                        .putExtra(String.valueOf(R.string.BUY_Amazon), Buy_Link);
+                        .putExtra(String.valueOf(R.string.URL_Link), Buy_Link);
+                startActivity(intent);
+            }
+        });
+
+        REVIEW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AmazonActivity.class)
+                        .putExtra(String.valueOf(R.string.URL_Link), Review_Link);
                 startActivity(intent);
             }
         });
