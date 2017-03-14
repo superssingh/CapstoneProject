@@ -11,6 +11,7 @@ import com.santossingh.capstoneproject.R;
  */
 
 public class AmazonBook implements Parcelable {
+
     public static final Creator<AmazonBook> CREATOR = new Creator<AmazonBook>() {
         @Override
         public AmazonBook createFromParcel(Parcel in) {

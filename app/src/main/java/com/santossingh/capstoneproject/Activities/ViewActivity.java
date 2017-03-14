@@ -27,6 +27,7 @@ public class ViewActivity extends AppCompatActivity {
                 webview.loadUrl("javascript:initialize('" + id + "')");
             }
         });
+
         webview.loadUrl(url);
     }
 }

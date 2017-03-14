@@ -38,6 +38,7 @@ import butterknife.ButterKnife;
  * to handle interaction events.
  * create an instance of this fragment.
  */
+
 public class AmazonFragment extends Fragment {
 
     private static final String STATE_BOOKS = "books";
@@ -45,12 +46,11 @@ public class AmazonFragment extends Fragment {
     RecyclerView recyclerView;
     @BindView(R.id.Progress_bar)
     ProgressBar progressBar;
-    int menuItemPosition;
+    int menuItemPosition = R.id.nav_amazon;
     private List<AmazonBook> itemsList;
     private AmazonRecyclerAdapter recyclerViewAdapter;
     private View view;
     private OnFragmentInteractionListener mListener;
-
 
     public AmazonFragment() {
     }
@@ -65,13 +65,11 @@ public class AmazonFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(STATE_BOOKS, (ArrayList<? extends Parcelable>) itemsList);
-        outState.putInt("menu_item", menuItemPosition);
     }
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-//        menu.findItem(menuItemPosition).setChecked(true);
     }
 
     @Override
@@ -81,27 +79,16 @@ public class AmazonFragment extends Fragment {
         ButterKnife.bind(this, view);
         itemsList = new ArrayList<AmazonBook>();
         configRecycleView();
-//        layout.setRefreshStyle(PullRefreshLayout.STYLE_WATER_DROP);
-//        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//
-//            }
-//        });
 
-// refresh complete
+        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_BOOKS)) {
+            progressBar.setVisibility(View.GONE);
+            itemsList = savedInstanceState.getParcelableArrayList(STATE_BOOKS);
+            recyclerViewAdapter.addList(itemsList);
+        } else {
+            AWSAsyncTask a = new AWSAsyncTask();
+            a.execute("Business");
+        }
 
-//        if (savedInstanceState == null) {
-//            makeService("POPULAR");
-//            menuItemPosition = R.id.most_Popular;
-//        }else{
-//            progressBar.setVisibility(View.GONE);
-//            resultsList=savedInstanceState.getParcelableArrayList(STATE_MOVIES);
-//            menuItemPosition = savedInstanceState.getInt("menu_item");
-//            recyclerAdapter.addMovieList(resultsList);
-//        }
-
-        new AWSAsyncTask().execute("business");
         return view;
     }
 
@@ -140,11 +127,22 @@ public class AmazonFragment extends Fragment {
         mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(AmazonBook mData);
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
-    //---------AsyncTask----
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(AmazonBook book);
+
+        void onTabletIntraction(AmazonBook book);
+    }
+
     public class AWSAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
         @Override
         protected void onPreExecute() {
@@ -161,11 +159,9 @@ public class AmazonFragment extends Fragment {
 
         @Override
         protected List<AmazonBook> doInBackground(String... urls) {
-
             String url = new AWS_URL().getURLByCategory(urls[0]);
             Log.i("Link", url);
             List<AmazonBook> booksList = new ArrayList<>();
-
             try {
                 MyXmlPullParser myXmlPullParser = new MyXmlPullParser();
                 InputStream is = downloadUrl(url);
@@ -184,7 +180,7 @@ public class AmazonFragment extends Fragment {
             progressBar.setVisibility(View.GONE);
             itemsList = amazonBooksList;
             recyclerViewAdapter.addList(itemsList);
+            mListener.onTabletIntraction(amazonBooksList.get(0));
         }
     }
-
 }

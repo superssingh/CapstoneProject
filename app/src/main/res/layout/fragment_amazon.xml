@@ -10,7 +10,8 @@
         style="@android:style/Widget.ProgressBar.Inverse"
         android:layout_width="30dp"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
 
     <android.support.v7.widget.RecyclerView
 

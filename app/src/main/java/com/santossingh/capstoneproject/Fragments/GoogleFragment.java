@@ -69,7 +69,7 @@ public class GoogleFragment extends Fragment {
         configRecycleView();
 
         if (savedInstanceState == null) {
-            makeService("POPULAR");
+            makeService(String.valueOf(R.string.Business));
             menuItemPosition = R.id.nav_amazon;
         } else {
             itemsList = savedInstanceState.getParcelableArrayList(BOOKS_STATE);
@@ -77,7 +77,7 @@ public class GoogleFragment extends Fragment {
             recyclerViewAdapter.addList(itemsList);
         }
 
-        makeService("free");
+        makeService(String.valueOf(R.string.Fantasy));
         return view;
     }
 
@@ -92,15 +92,22 @@ public class GoogleFragment extends Fragment {
     public void makeService(String string) {
         progressBar.setVisibility(View.VISIBLE);
         dataManager = new DataManager();
-        Call<BooksLibrary> listCall;
+        Call<BooksLibrary> listCall = null;
 
-        if (string.equalsIgnoreCase("free")) {
-
-        } else {
-
+        if (string.equalsIgnoreCase(String.valueOf(R.string.Business))) {
+            listCall = dataManager.getJSONData().getFreeBusinessBooks();
+        } else if (string.equalsIgnoreCase(String.valueOf(R.string.Fiction))) {
+            listCall = dataManager.getJSONData().getFreeFictionBooks();
+        } else if (string.equalsIgnoreCase(String.valueOf(R.string.NonFiction))) {
+            listCall = dataManager.getJSONData().getFreeNonFictionBooks();
+        } else if (string.equalsIgnoreCase(String.valueOf(R.string.Fantasy))) {
+            listCall = dataManager.getJSONData().getFreeFantasyBooks();
+        } else if (string.equalsIgnoreCase(String.valueOf(R.string.Romance))) {
+            listCall = dataManager.getJSONData().getFreeRomanceBooks();
+        } else if (string.equalsIgnoreCase(String.valueOf(R.string.ScienceFiction))) {
+            listCall = dataManager.getJSONData().getFreeSciBooks();
         }
 
-        listCall = dataManager.getJSONData().getFreeTopBooks();
         listCall.enqueue(new Callback<BooksLibrary>() {
             @Override
             public void onResponse(Call<BooksLibrary> call, Response<BooksLibrary> response) {
@@ -112,6 +119,7 @@ public class GoogleFragment extends Fragment {
                         Toast.makeText(getActivity(), "Successfully fetched", Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
                     } else {
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(getActivity(), "Null Value", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -119,6 +127,7 @@ public class GoogleFragment extends Fragment {
 
             @Override
             public void onFailure(Call<BooksLibrary> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

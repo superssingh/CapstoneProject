@@ -50,6 +50,7 @@ public class DetailFragment extends Fragment {
 
     View view;
     String Buy_Link = "", Review_Link = "";
+    AmazonBook book;
 
     public DetailFragment() {
         setHasOptionsMenu(true);
@@ -64,7 +65,15 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_detail, container, false);
         ButterKnife.bind(this, view);
-        setHandsetUI();
+        book = new AmazonBook();
+
+        if (book != null) {
+            setDataforTabletUI(book);
+        } else {
+
+        }
+        setDataforTabletUI(book);
+
         setAllListener();
         return view;
     }
@@ -94,6 +103,8 @@ public class DetailFragment extends Fragment {
     }
 
     public void setDataforTabletUI(final AmazonBook book) {
+        this.book = book;
+
         Title.setText(book.getTitle());
         Author.setText(book.getAuthor());
         Year.setText(book.getPublishedDate());
@@ -101,6 +112,9 @@ public class DetailFragment extends Fragment {
         Description.setText(book.getDescription());
         Review_Link = book.getReviews();
         Buy_Link = book.getDetailURL();
+        Picasso.with(getActivity()).load(book.getImage())
+                .placeholder(R.drawable.book1).resize(300, 400)
+                .into(imageView);
     }
 
     private void setAllListener() {

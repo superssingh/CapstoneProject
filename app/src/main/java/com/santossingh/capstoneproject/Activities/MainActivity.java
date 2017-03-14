@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     }
 
     private void refreshAction() {
+        setTitle("Top Paid Books");
         AmazonFragment fragment = new AmazonFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
@@ -120,24 +121,32 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     }
 
     @Override
-    public void onFragmentInteraction(AmazonBook mData) {
+    public void onFragmentInteraction(AmazonBook book) {
         DetailFragment detailFragment = (DetailFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
-
-        if (detailFragment != null) {
-            detailFragment.setDataforTabletUI(mData);
-        } else {
-            Toast.makeText(this, mData.getPrice(), Toast.LENGTH_LONG).show();
+        if (detailFragment == null) {
+            Toast.makeText(this, book.getPrice(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, DetailActivity.class)
-                    .putExtra(String.valueOf(R.string.BOOK_TITLE), mData.getTitle())
-                    .putExtra(String.valueOf(R.string.AUTHOR), mData.getAuthor())
-                    .putExtra(String.valueOf(R.string.PUBLISHED_YEAR), mData.getPublishedDate())
-                    .putExtra(String.valueOf(R.string.IMAGE), mData.getImage())
-                    .putExtra(String.valueOf(R.string.DESCRIPTION), mData.getDescription())
-                    .putExtra(String.valueOf(R.string.PRICE), mData.getPrice())
-                    .putExtra(String.valueOf(R.string.Review_Link), mData.getReviews())
-                    .putExtra(String.valueOf(R.string.BUY_Amazon), mData.getDetailURL());
+                    .putExtra(String.valueOf(R.string.BOOK_TITLE), book.getTitle())
+                    .putExtra(String.valueOf(R.string.AUTHOR), book.getAuthor())
+                    .putExtra(String.valueOf(R.string.PUBLISHED_YEAR), book.getPublishedDate())
+                    .putExtra(String.valueOf(R.string.IMAGE), book.getImage())
+                    .putExtra(String.valueOf(R.string.DESCRIPTION), book.getDescription())
+                    .putExtra(String.valueOf(R.string.PRICE), book.getPrice())
+                    .putExtra(String.valueOf(R.string.Review_Link), book.getReviews())
+                    .putExtra(String.valueOf(R.string.BUY_Amazon), book.getDetailURL());
             startActivity(intent);
+        } else {
+            detailFragment.setDataforTabletUI(book);
+        }
+    }
+
+    @Override
+    public void onTabletIntraction(AmazonBook book) {
+        DetailFragment detailFragment = (DetailFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_detail);
+        if (detailFragment != null) {
+            detailFragment.setDataforTabletUI(book);
         }
     }
 
@@ -149,11 +158,12 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     }
 
     @Override
+    public void onFragmentInteraction(Uri uri) {
+    }
+
+    @Override
     protected void onRestart() {
         super.onRestart();
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-    }
 }
