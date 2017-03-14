@@ -63,6 +63,10 @@ public class AmazonRecyclerAdapter extends RecyclerView.Adapter<AmazonRecyclerAd
         return booksList.size();
     }
 
+    public List<AmazonBook> getBooksList() {
+        return booksList;
+    }
+
     public void addList(List<AmazonBook> booksList) {
         this.booksList = booksList;
         notifyDataSetChanged();

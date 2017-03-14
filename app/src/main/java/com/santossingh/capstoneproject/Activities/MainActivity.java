@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     Toolbar toolbar;
     @BindView(R.id.navigationView)
     NavigationView navigationView;
+
     private ActionBarDrawerToggle drawerToggle;
 
     @Override
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+
 
         // * Initialize and add navigation drawer
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
