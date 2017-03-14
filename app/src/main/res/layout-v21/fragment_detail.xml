@@ -26,10 +26,14 @@
             <ImageView
                 android:id="@+id/ImageBar"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:elevation="8dp"
+                app:layout_anchor="@id/collapsing_toolbar"
+                app:layout_anchorGravity="bottom"
                 app:layout_collapseMode="pin"
-                app:layout_collapseParallaxMultiplier="3"
+                app:layout_collapseParallaxMultiplier="2"
                 tools:ignore="ContentDescription" />
 
             <LinearLayout
@@ -42,14 +46,11 @@
 
                 <TextView
                     android:id="@+id/Detail_Title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="100dp"
-                    android:background="@color/Black_transparent_70"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="right"
-                    android:maxLines="3"
-                    android:padding="10dp"
-                    android:textColor="#fff"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
@@ -67,7 +68,8 @@
                 <TextView
                     android:id="@+id/Detail_Price"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:gravity="right" />
 
             </LinearLayout>
 
@@ -111,25 +113,18 @@
                     android:gravity="right"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <Button
+                        android:id="@+id/Amazon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:backgroundTint="#07b407"
+                        android:elevation="2dp"
+                        android:text="Buy Now"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="16dp" />
 
-                        <Button
-                            android:id="@+id/Amazon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="#07b407"
-                            android:elevation="2dp"
-                            android:text="Buy Now"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="16dp" />
-
-                    </LinearLayout>
                 </LinearLayout>
-
             </LinearLayout>
 
             <TextView
@@ -163,6 +158,15 @@
         android:orientation="horizontal"
         app:layout_anchor="@id/app_bar_layout"
         app:layout_anchorGravity="bottom|end">
+
+        <ImageButton
+            android:id="@+id/G_Preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#0fdad9d9"
+            android:src="@drawable/gbs_preview_button"
+            android:visibility="gone" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_fav"

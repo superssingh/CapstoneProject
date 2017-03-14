@@ -2,7 +2,6 @@ package com.santossingh.capstoneproject.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,7 +30,7 @@ import retrofit2.Response;
 
 public class GoogleFragment extends Fragment {
 
-    private static final String BOOKS_STATE = "books";
+    private static final String BOOKS_STATE = "free_books";
     @BindView(R.id.base_Progress_bar)
     ProgressBar progressBar;
     @BindView(R.id.recycleView)
@@ -56,8 +55,7 @@ public class GoogleFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(BOOKS_STATE, (ArrayList<? extends Parcelable>) itemsList);
-        outState.putInt("menu_item", menuItemPosition);
+        outState.putParcelableArrayList(BOOKS_STATE, new ArrayList<Item>(recyclerViewAdapter.getBooksList()));
     }
 
     @Override
@@ -70,10 +68,8 @@ public class GoogleFragment extends Fragment {
 
         if (savedInstanceState == null) {
             makeService(String.valueOf(R.string.Business));
-            menuItemPosition = R.id.nav_amazon;
         } else {
             itemsList = savedInstanceState.getParcelableArrayList(BOOKS_STATE);
-            menuItemPosition = savedInstanceState.getInt("menu_item");
             recyclerViewAdapter.addList(itemsList);
         }
 
@@ -116,7 +112,6 @@ public class GoogleFragment extends Fragment {
                     itemsList = new ArrayList<Item>(Arrays.asList(items));
                     if (itemsList != null) {
                         recyclerViewAdapter.addList(itemsList);
-                        Toast.makeText(getActivity(), "Successfully fetched", Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
                     } else {
                         progressBar.setVisibility(View.GONE);
@@ -153,4 +148,5 @@ public class GoogleFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Item mData);
     }
+
 }

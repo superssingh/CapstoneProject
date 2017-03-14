@@ -65,7 +65,9 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     public void selectDrawerItem(MenuItem menuItem) {
         int id = menuItem.getItemId();
         if (id == R.id.nav_amazon) {
+            onRestart();
             setTitle("Amazon Library");
+
             AmazonFragment fragment = new AmazonFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
@@ -129,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         if (detailFragment == null) {
             Toast.makeText(this, book.getPrice(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, DetailActivity.class)
+                    .putExtra(String.valueOf(R.string.BOOK_ID), R.string.NULL)
                     .putExtra(String.valueOf(R.string.BOOK_TITLE), book.getTitle())
                     .putExtra(String.valueOf(R.string.AUTHOR), book.getAuthor())
                     .putExtra(String.valueOf(R.string.PUBLISHED_YEAR), book.getPublishedDate())
@@ -153,10 +156,26 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     }
 
     @Override
-    public void onFragmentInteraction(Item mData) {
-        Intent intent = new Intent(this, ViewActivity.class)
-                .putExtra(String.valueOf(R.string.BOOK_ID), mData.getId());
-        startActivity(intent);
+    public void onFragmentInteraction(Item book) {
+
+        DetailFragment detailFragment = (DetailFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_detail);
+        if (detailFragment == null) {
+            Intent intent = new Intent(this, DetailActivity.class)
+                    .putExtra(String.valueOf(R.string.BOOK_ID), book.getId())
+                    .putExtra(String.valueOf(R.string.BOOK_TITLE), book.getVolumeInfo().getTitle() == null ? "[N/A]" : book.getVolumeInfo().getTitle())
+                    .putExtra(String.valueOf(R.string.AUTHOR), book.getVolumeInfo().getAuthors() == null ? "[N/A]" : book.getVolumeInfo().getAuthors().get(0))
+                    .putExtra(String.valueOf(R.string.PUBLISHED_YEAR), book.getVolumeInfo().getPublishedDate() == null ? "[N/A]" : book.getVolumeInfo().getPublishedDate())
+                    .putExtra(String.valueOf(R.string.IMAGE), book.getVolumeInfo().getImageLinks().getThumbnail())
+                    .putExtra(String.valueOf(R.string.DESCRIPTION), book.getVolumeInfo().getDescription() == null ? "[N/A]" : book.getVolumeInfo().getDescription())
+                    .putExtra(String.valueOf(R.string.PRICE), "[FREE]")
+                    .putExtra(String.valueOf(R.string.Review_Link), "N/A")
+                    .putExtra(String.valueOf(R.string.BUY_Amazon), "N/A");
+            startActivity(intent);
+        } else {
+            detailFragment.setFreeDataforTabletUI(book);
+        }
+
     }
 
     @Override

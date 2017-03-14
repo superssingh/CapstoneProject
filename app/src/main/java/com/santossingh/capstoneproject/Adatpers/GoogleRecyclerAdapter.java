@@ -57,6 +57,10 @@ public class GoogleRecyclerAdapter extends RecyclerView.Adapter<GoogleRecyclerAd
         return itemList.size();
     }
 
+    public List<Item> getBooksList() {
+        return itemList;
+    }
+
     public void addList(List<Item> itemList) {
         this.itemList = itemList;
         notifyDataSetChanged();

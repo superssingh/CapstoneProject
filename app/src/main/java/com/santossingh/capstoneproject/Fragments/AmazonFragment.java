@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.santossingh.capstoneproject.AWS.AWS_URL;
 import com.santossingh.capstoneproject.AWS.MyXmlPullParser;
@@ -41,7 +40,7 @@ import butterknife.ButterKnife;
 
 public class AmazonFragment extends Fragment {
 
-    private static final String STATE_BOOKS = "books";
+    private static final String STATE_BOOKS = "paid_books";
     @BindView(R.id.AWS_recycleView)
     RecyclerView recyclerView;
     @BindView(R.id.Progress_bar)
@@ -82,14 +81,12 @@ public class AmazonFragment extends Fragment {
         itemsList = new ArrayList<AmazonBook>();
         configRecycleView();
         if (savedInstanceState != null) {
-            Toast.makeText(getActivity(), "Data", Toast.LENGTH_LONG).show();
             progressBar.setVisibility(View.GONE);
             itemsList = savedInstanceState.getParcelableArrayList(STATE_BOOKS);
             recyclerViewAdapter.addList(itemsList);
         } else {
             AWSAsyncTask a = new AWSAsyncTask();
             a.execute("Business");
-            Toast.makeText(getActivity(), "Null", Toast.LENGTH_LONG).show();
         }
 
         return view;

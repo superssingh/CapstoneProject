@@ -62,6 +62,7 @@
     <string name="URL_Link">url</string>
     <string name="Romance">Romance</string>
     <string name="ScienceFiction">science_fiction</string>
+    <string name="NULL">null</string>
 
 
 </resources>

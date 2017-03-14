@@ -20,6 +20,8 @@ public class DetailActivity extends AppCompatActivity {
     private void sendData(Intent intent) {
         //PACK DATA IN A BUNDLE
         Bundle bundle = new Bundle();
+
+        bundle.putString(String.valueOf(R.string.BOOK_ID), intent.getStringExtra(String.valueOf(R.string.BOOK_ID)));
         bundle.putString(String.valueOf(R.string.BOOK_TITLE), intent.getStringExtra(String.valueOf(R.string.BOOK_TITLE)));
         bundle.putString(String.valueOf(R.string.AUTHOR), intent.getStringExtra(String.valueOf(R.string.AUTHOR)));
         bundle.putString(String.valueOf(R.string.PUBLISHED_YEAR), intent.getStringExtra(String.valueOf(R.string.PUBLISHED_YEAR)));
