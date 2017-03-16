@@ -64,8 +64,6 @@ public class AmazonFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(STATE_BOOKS, new ArrayList<AmazonBook>(recyclerViewAdapter.getBooksList()));
-//        outState.putParcelableArrayList(STATE_BOOKS, (ArrayList<? extends Parcelable>) itemsList);
-
     }
 
     @Override

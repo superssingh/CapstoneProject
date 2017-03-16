@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import android.widget.Toast;
 import com.santossingh.capstoneproject.Activities.AmazonActivity;
 import com.santossingh.capstoneproject.Activities.ViewActivity;
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
+import com.santossingh.capstoneproject.Models.Amazon.Constants;
 import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;
 import com.squareup.picasso.Picasso;
@@ -26,8 +26,9 @@ import butterknife.ButterKnife;
 
 /**
  */
-public class DetailFragment extends Fragment {
+public class DetailFragment extends android.app.Fragment {
 
+    private final static String BOOK_TYPE = "PAID";
     @BindView(R.id.ImageBar)
     ImageView imageView;
     @BindView(R.id.Amazon)
@@ -40,7 +41,6 @@ public class DetailFragment extends Fragment {
     FloatingActionButton FAVORITE;
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbarLayout;
-
     @BindView(R.id.Detail_Title)
     TextView Title;
     @BindView(R.id.Detail_Author)
@@ -51,7 +51,6 @@ public class DetailFragment extends Fragment {
     TextView Price;
     @BindView(R.id.Detail_Description)
     TextView Description;
-
     View view;
     String Buy_Link = "", Review_Link = "", Book_ID = "";
     AmazonBook book;
@@ -74,65 +73,10 @@ public class DetailFragment extends Fragment {
 
         if (book != null) {
             setDataforTabletUI(book);
-        } else {
         }
 
         setAllListener();
         return view;
-    }
-
-    public void setHandsetUI() {
-        Book_ID = getArguments().getString(String.valueOf(R.string.BOOK_ID));
-
-        if (Book_ID.equalsIgnoreCase(String.valueOf(R.string.NULL))) {
-            Toast.makeText(getActivity(), Book_ID, Toast.LENGTH_LONG).show();
-            Google_Preview.setVisibility(View.GONE);
-            REVIEW.setVisibility(View.VISIBLE);
-            Amazon.setVisibility(View.VISIBLE);
-        } else {
-            Toast.makeText(getActivity(), Book_ID, Toast.LENGTH_LONG).show();
-            REVIEW.setVisibility(View.GONE);
-            Amazon.setVisibility(View.GONE);
-            Google_Preview.setVisibility(View.VISIBLE);
-        }
-        Title.setText(getArguments().getString(String.valueOf(R.string.BOOK_TITLE)));
-        Author.setText(getArguments().getString(String.valueOf(R.string.AUTHOR)));
-        Year.setText(getArguments().getString(String.valueOf(R.string.PUBLISHED_YEAR)));
-        Price.setText(getArguments().getString(String.valueOf(R.string.PRICE)));
-        String filteredDescription = filterTags(getArguments().getString(String.valueOf(R.string.DESCRIPTION)));
-        Description.setText(filteredDescription);
-        Picasso.with(getActivity()).load(getArguments().getString(String.valueOf(R.string.IMAGE)))
-                .placeholder(R.drawable.book1).resize(300, 400)
-                .into(imageView);
-        Buy_Link = getArguments().getString(String.valueOf(R.string.BUY_Amazon));
-        Review_Link = getArguments().getString(String.valueOf(R.string.Review_Link));
-    }
-
-    private String filterTags(String s) {
-        String filter = "";
-        filter = s.replaceAll("<p>", "");
-        s = filter.replaceAll("</p>", "\n");
-        filter = s.replaceAll("<b>", "");
-        s = filter.replaceAll("</b>", "");
-        filter = s.replaceAll("<br>", "\n");
-        return filter;
-    }
-
-    public void setDataforTabletUI(final AmazonBook book) {
-        this.book = book;
-        Amazon.setVisibility(View.VISIBLE);
-        REVIEW.setVisibility(View.VISIBLE);
-        Google_Preview.setVisibility(View.GONE);
-        Title.setText(book.getTitle());
-        Author.setText(book.getAuthor());
-        Year.setText(book.getPublishedDate());
-        Price.setText(book.getPrice());
-        Description.setText(book.getDescription());
-        Review_Link = book.getReviews();
-        Buy_Link = book.getDetailURL();
-        Picasso.with(getActivity()).load(book.getImage())
-                .placeholder(R.drawable.book1).resize(300, 400)
-                .into(imageView);
     }
 
     private void setAllListener() {
@@ -165,21 +109,77 @@ public class DetailFragment extends Fragment {
 
     }
 
+    public void setDataforTabletUI(final AmazonBook book) {
+        this.book = book;
+        Amazon.setVisibility(View.VISIBLE);
+        REVIEW.setVisibility(View.VISIBLE);
+        Google_Preview.setVisibility(View.GONE);
+        Title.setText(book.getTitle());
+        Author.setText(book.getAuthor());
+        Year.setText(book.getPublishedDate());
+        Price.setText(book.getPrice());
+        String filteredDescription = filterTags(book.getDescription() + " ");
+        Description.setText(filteredDescription);
+        Review_Link = book.getReviews();
+        Buy_Link = book.getDetailURL();
+        Picasso.with(getActivity()).load(book.getImage())
+                .placeholder(R.mipmap.ic_book).resize(300, 400)
+                .into(imageView);
+    }
+
     public void setFreeDataforTabletUI(Item book) {
         FreeBook = book;
         Book_ID = book.getId();
         Title.setText(book.getVolumeInfo().getTitle() == null ? "N/A" : book.getVolumeInfo().getTitle());
         Author.setText(book.getVolumeInfo().getAuthors() == null ? "N/A" : book.getVolumeInfo().getAuthors().get(0));
         Year.setText(book.getVolumeInfo().getPublishedDate() == null ? "N/A" : book.getVolumeInfo().getPublishedDate());
-        Price.setText("[FREE]");
-        Description.setText("[N/A]. Please click on [Google Preview] for free access.");
+        Price.setText(Constants.FREE_TAG);
+        Description.setText(Constants.FREE_DESCRIPTION_TAG);
         Picasso.with(getActivity()).load(book.getVolumeInfo().getImageLinks().getThumbnail())
-                .placeholder(R.drawable.book1).resize(300, 400)
+                .placeholder(R.mipmap.ic_book).resize(300, 400)
                 .into(imageView);
         Google_Preview.setVisibility(View.VISIBLE);
         Amazon.setVisibility(View.GONE);
         REVIEW.setVisibility(View.GONE);
     }
 
+
+    public void setDataHandsetUI(Intent intent) {
+        Book_ID = intent.getStringExtra(String.valueOf(R.string.BOOK_ID));
+
+        if (Book_ID.equals(BOOK_TYPE)) {
+            Toast.makeText(getActivity(), Book_ID, Toast.LENGTH_LONG).show();
+            Google_Preview.setVisibility(View.GONE);
+            REVIEW.setVisibility(View.VISIBLE);
+            Amazon.setVisibility(View.VISIBLE);
+        } else {
+            Toast.makeText(getActivity(), Book_ID, Toast.LENGTH_LONG).show();
+            REVIEW.setVisibility(View.GONE);
+            Amazon.setVisibility(View.GONE);
+            Google_Preview.setVisibility(View.VISIBLE);
+        }
+
+        Title.setText(intent.getStringExtra(String.valueOf(R.string.BOOK_TITLE)));
+        Author.setText(intent.getStringExtra(String.valueOf(R.string.AUTHOR)));
+        Year.setText(intent.getStringExtra(String.valueOf(R.string.PUBLISHED_YEAR)));
+        Price.setText(intent.getStringExtra(String.valueOf(R.string.PRICE)));
+        String filteredDescription = filterTags(intent.getStringExtra(String.valueOf(R.string.DESCRIPTION)));
+        Description.setText(filteredDescription);
+        Picasso.with(getActivity()).load(intent.getStringExtra(String.valueOf(R.string.IMAGE)))
+                .placeholder(R.mipmap.ic_book).resize(300, 400)
+                .into(imageView);
+        Buy_Link = intent.getStringExtra(String.valueOf(R.string.BUY_Amazon));
+        Review_Link = intent.getStringExtra(String.valueOf(R.string.Review_Link));
+    }
+
+    private String filterTags(String s) {
+        String filter = "";
+        filter = s.replaceAll("<p>", "");
+        s = filter.replaceAll("</p>", "\n");
+        filter = s.replaceAll("<b>", "");
+        s = filter.replaceAll("</b>", "");
+        filter = s.replaceAll("<br>", "\n");
+        return filter;
+    }
 
 }

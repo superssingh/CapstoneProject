@@ -1,7 +1,6 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
@@ -33,24 +32,24 @@
                 app:layout_anchor="@id/collapsing_toolbar"
                 app:layout_anchorGravity="bottom"
                 app:layout_collapseMode="pin"
-                app:layout_collapseParallaxMultiplier="2"
+                app:layout_collapseParallaxMultiplier="3"
                 tools:ignore="ContentDescription" />
 
             <LinearLayout
                 android:id="@+id/layoutTitle"
-                android:layout_width="match_parent"
+                android:layout_width="240dp"
                 android:layout_height="match_parent"
+                android:layout_gravity="right"
                 android:gravity="right"
                 android:orientation="vertical"
                 android:paddingRight="10dp">
 
                 <TextView
                     android:id="@+id/Detail_Title"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="10dp"
                     android:gravity="right"
+                    android:maxLines="2"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
@@ -58,6 +57,7 @@
                     android:id="@+id/Detail_Author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxLines="2"
                     android:textSize="18dp" />
 
                 <TextView

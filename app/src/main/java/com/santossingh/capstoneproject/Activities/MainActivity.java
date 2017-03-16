@@ -20,6 +20,7 @@ import com.santossingh.capstoneproject.Fragments.DetailFragment;
 import com.santossingh.capstoneproject.Fragments.FavoriteFragment;
 import com.santossingh.capstoneproject.Fragments.GoogleFragment;
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
+import com.santossingh.capstoneproject.Models.Amazon.Constants;
 import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;
 
@@ -126,12 +127,12 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
     @Override
     public void onFragmentInteraction(AmazonBook book) {
-        DetailFragment detailFragment = (DetailFragment) getSupportFragmentManager()
+        DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
         if (detailFragment == null) {
             Toast.makeText(this, book.getPrice(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, DetailActivity.class)
-                    .putExtra(String.valueOf(R.string.BOOK_ID), R.string.NULL)
+                    .putExtra(String.valueOf(R.string.BOOK_ID), Constants.PAID_TAG)
                     .putExtra(String.valueOf(R.string.BOOK_TITLE), book.getTitle())
                     .putExtra(String.valueOf(R.string.AUTHOR), book.getAuthor())
                     .putExtra(String.valueOf(R.string.PUBLISHED_YEAR), book.getPublishedDate())
@@ -148,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
     @Override
     public void onTabletIntraction(AmazonBook book) {
-        DetailFragment detailFragment = (DetailFragment) getSupportFragmentManager()
+        DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
         if (detailFragment != null) {
             detailFragment.setDataforTabletUI(book);
@@ -158,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     @Override
     public void onFragmentInteraction(Item book) {
 
-        DetailFragment detailFragment = (DetailFragment) getSupportFragmentManager()
+        DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
         if (detailFragment == null) {
             Intent intent = new Intent(this, DetailActivity.class)
@@ -167,8 +168,8 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
                     .putExtra(String.valueOf(R.string.AUTHOR), book.getVolumeInfo().getAuthors() == null ? "[N/A]" : book.getVolumeInfo().getAuthors().get(0))
                     .putExtra(String.valueOf(R.string.PUBLISHED_YEAR), book.getVolumeInfo().getPublishedDate() == null ? "[N/A]" : book.getVolumeInfo().getPublishedDate())
                     .putExtra(String.valueOf(R.string.IMAGE), book.getVolumeInfo().getImageLinks().getThumbnail())
-                    .putExtra(String.valueOf(R.string.DESCRIPTION), book.getVolumeInfo().getDescription() == null ? "[N/A]" : book.getVolumeInfo().getDescription())
-                    .putExtra(String.valueOf(R.string.PRICE), "[FREE]")
+                    .putExtra(String.valueOf(R.string.DESCRIPTION), book.getVolumeInfo().getDescription() == null ? Constants.FREE_DESCRIPTION_TAG : book.getVolumeInfo().getDescription())
+                    .putExtra(String.valueOf(R.string.PRICE), Constants.FREE_TAG)
                     .putExtra(String.valueOf(R.string.Review_Link), "N/A")
                     .putExtra(String.valueOf(R.string.BUY_Amazon), "N/A");
             startActivity(intent);
