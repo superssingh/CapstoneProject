@@ -68,7 +68,6 @@ public class GoogleRecyclerAdapter extends RecyclerView.Adapter<GoogleRecyclerAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        //        private final DynamicHeightNetworkImageView dynamicImageView;
         private final TextView textView;
         public Item mData;
 
@@ -76,7 +75,6 @@ public class GoogleRecyclerAdapter extends RecyclerView.Adapter<GoogleRecyclerAd
             super(view);
             mView = view;
             textView = (TextView) view.findViewById(R.id.book_Title);
-//            dynamicImageView = (DynamicHeightNetworkImageView) view.findViewById(R.id.thumbnail);
         }
     }
 }

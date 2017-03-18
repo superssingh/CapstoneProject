@@ -23,6 +23,7 @@ public class AmazonBook implements Parcelable {
             return new AmazonBook[size];
         }
     };
+    private String asin;
     private String detailURL;
     private String image;
     private String author;
@@ -35,7 +36,8 @@ public class AmazonBook implements Parcelable {
     public AmazonBook() {
     }
 
-    public AmazonBook(String detailURL, String image, String author, String price, String publishedDate, String title, String reviews, String description) {
+    public AmazonBook(String asin, String detailURL, String image, String author, String price, String publishedDate, String title, String reviews, String description) {
+        this.asin = asin;
         this.detailURL = detailURL;
         this.image = image;
         this.author = author;
@@ -47,6 +49,7 @@ public class AmazonBook implements Parcelable {
     }
 
     public AmazonBook(Bundle bundle) {
+        asin = bundle.getString(String.valueOf(R.string.ASIN));
         title = bundle.getString(String.valueOf(R.string.BOOK_TITLE));
         author = bundle.getString(String.valueOf(R.string.AUTHOR));
         publishedDate = bundle.getString(String.valueOf(R.string.PUBLISHED_YEAR));
@@ -58,6 +61,7 @@ public class AmazonBook implements Parcelable {
     }
 
     protected AmazonBook(Parcel in) {
+        asin = in.readString();
         detailURL = in.readString();
         image = in.readString();
         author = in.readString();
@@ -66,6 +70,18 @@ public class AmazonBook implements Parcelable {
         title = in.readString();
         reviews = in.readString();
         description = in.readString();
+    }
+
+    public static Creator<AmazonBook> getCREATOR() {
+        return CREATOR;
+    }
+
+    public String getAsin() {
+        return asin;
+    }
+
+    public void setAsin(String asin) {
+        this.asin = asin;
     }
 
     public String getDetailURL() {
@@ -139,6 +155,7 @@ public class AmazonBook implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(asin);
         parcel.writeString(detailURL);
         parcel.writeString(image);
         parcel.writeString(author);

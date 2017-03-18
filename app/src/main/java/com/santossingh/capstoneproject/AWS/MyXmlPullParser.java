@@ -20,6 +20,7 @@ public class MyXmlPullParser {
     private static final String BASE_TAG = "ItemSearchResponse";
     private static final String PARENT_TAG = "Items";
     private static final String TARGET_TAG = "Item";
+    private static final String ASIN = "ASIN";
     private static final String DETAIL = "DetailPageURL";
     private static final String IMAGE_PATH = "MediumImage";
     private static final String IMAGE = "URL";
@@ -96,7 +97,10 @@ public class MyXmlPullParser {
             }
             String name = parser.getName();
 
-            if (name.equals(DETAIL)) {
+            if (name.equals(ASIN)) {
+                book.setAsin(readTAG(ASIN, parser));
+
+            } else if (name.equals(DETAIL)) {
                 book.setDetailURL(readTAG(DETAIL, parser));
 
             } else if (name.equals(IMAGE_PATH)) {

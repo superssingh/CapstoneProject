@@ -64,6 +64,7 @@
     <string name="ScienceFiction">science_fiction</string>
     <string name="NULL">NULL</string>
     <string name="BOOK_TAG">BOOK_TAG</string>
+    <string name="ASIN">asin</string>
 
 
 </resources>

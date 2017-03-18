@@ -17,6 +17,7 @@ import com.santossingh.capstoneproject.Activities.AmazonActivity;
 import com.santossingh.capstoneproject.Activities.ViewActivity;
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
 import com.santossingh.capstoneproject.Models.Amazon.Constants;
+import com.santossingh.capstoneproject.Models.Database.FavoriteBooks;
 import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;
 import com.squareup.picasso.Picasso;
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
  */
 public class DetailFragment extends android.app.Fragment {
 
-    private final static String BOOK_TYPE = "PAID";
+    private final static String FREE_BOOK = "FREE";
     @BindView(R.id.ImageBar)
     ImageView imageView;
     @BindView(R.id.Amazon)
@@ -107,6 +108,13 @@ public class DetailFragment extends android.app.Fragment {
             }
         });
 
+        FAVORITE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 
     public void setDataforTabletUI(final AmazonBook book) {
@@ -145,10 +153,9 @@ public class DetailFragment extends android.app.Fragment {
 
 
     public void setDataHandsetUI(Intent intent) {
-        Book_ID = intent.getStringExtra(String.valueOf(R.string.BOOK_ID));
+        String priceStatus = intent.getStringExtra(String.valueOf(R.string.PRICE));
 
-        if (Book_ID.equals(BOOK_TYPE)) {
-            Toast.makeText(getActivity(), Book_ID, Toast.LENGTH_LONG).show();
+        if (!priceStatus.equals(FREE_BOOK)) {
             Google_Preview.setVisibility(View.GONE);
             REVIEW.setVisibility(View.VISIBLE);
             Amazon.setVisibility(View.VISIBLE);
@@ -163,8 +170,8 @@ public class DetailFragment extends android.app.Fragment {
         Author.setText(intent.getStringExtra(String.valueOf(R.string.AUTHOR)));
         Year.setText(intent.getStringExtra(String.valueOf(R.string.PUBLISHED_YEAR)));
         Price.setText(intent.getStringExtra(String.valueOf(R.string.PRICE)));
-        String filteredDescription = filterTags(intent.getStringExtra(String.valueOf(R.string.DESCRIPTION)));
-        Description.setText(filteredDescription);
+
+        Description.setText(filterTags(intent.getStringExtra(String.valueOf(R.string.DESCRIPTION))));
         Picasso.with(getActivity()).load(intent.getStringExtra(String.valueOf(R.string.IMAGE)))
                 .placeholder(R.mipmap.ic_book).resize(300, 400)
                 .into(imageView);
@@ -173,13 +180,13 @@ public class DetailFragment extends android.app.Fragment {
     }
 
     private String filterTags(String s) {
-        String filter = "";
-        filter = s.replaceAll("<p>", "");
-        s = filter.replaceAll("</p>", "\n");
-        filter = s.replaceAll("<b>", "");
-        s = filter.replaceAll("</b>", "");
-        filter = s.replaceAll("<br>", "\n");
+        String filter = android.text.Html.fromHtml(s).toString();
         return filter;
+    }
+
+    private void saveAsFavorite() {
+        FavoriteBooks book = new FavoriteBooks();
+
     }
 
 }
