@@ -8,7 +8,7 @@ import io.realm.annotations.PrimaryKey;
  */
 
 public class FavoriteBooks extends RealmObject {
- 
+
     @PrimaryKey
     private String id;
     private String title;

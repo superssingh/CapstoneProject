@@ -15,9 +15,9 @@ import android.widget.Toast;
 
 import com.santossingh.capstoneproject.Activities.AmazonActivity;
 import com.santossingh.capstoneproject.Activities.ViewActivity;
+import com.santossingh.capstoneproject.ContentProvider.MyContentProvider;
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
 import com.santossingh.capstoneproject.Models.Amazon.Constants;
-import com.santossingh.capstoneproject.Models.Database.FavoriteBooks;
 import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;
 import com.squareup.picasso.Picasso;
@@ -108,13 +108,6 @@ public class DetailFragment extends android.app.Fragment {
             }
         });
 
-        FAVORITE.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
     }
 
     public void setDataforTabletUI(final AmazonBook book) {
@@ -133,6 +126,14 @@ public class DetailFragment extends android.app.Fragment {
         Picasso.with(getActivity()).load(book.getImage())
                 .placeholder(R.mipmap.ic_book).resize(300, 400)
                 .into(imageView);
+
+        FAVORITE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyContentProvider contentProvider = new MyContentProvider();
+                contentProvider.addBookFromTabletUI(getActivity(), book);
+            }
+        });
     }
 
     public void setFreeDataforTabletUI(Item book) {
@@ -152,7 +153,7 @@ public class DetailFragment extends android.app.Fragment {
     }
 
 
-    public void setDataHandsetUI(Intent intent) {
+    public void setDataHandsetUI(final Intent intent) {
         String priceStatus = intent.getStringExtra(String.valueOf(R.string.PRICE));
 
         if (!priceStatus.equals(FREE_BOOK)) {
@@ -177,16 +178,20 @@ public class DetailFragment extends android.app.Fragment {
                 .into(imageView);
         Buy_Link = intent.getStringExtra(String.valueOf(R.string.BUY_Amazon));
         Review_Link = intent.getStringExtra(String.valueOf(R.string.Review_Link));
+
+        FAVORITE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyContentProvider contentProvider = new MyContentProvider();
+                contentProvider.addBookFromIntent(getActivity(), intent);
+            }
+        });
     }
- 
+
     private String filterTags(String s) {
         String filter = android.text.Html.fromHtml(s).toString();
         return filter;
     }
 
-    private void saveAsFavorite() {
-        FavoriteBooks book = new FavoriteBooks();
-
-    }
 
 }

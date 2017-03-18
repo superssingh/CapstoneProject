@@ -27,6 +27,7 @@ import com.santossingh.capstoneproject.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class MainActivity extends AppCompatActivity implements AmazonFragment.OnFragmentInteractionListener, GoogleFragment.OnFragmentInteractionListener, FavoriteFragment.OnFragmentInteractionListener {
 
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     NavigationView navigationView;
 
     private ActionBarDrawerToggle drawerToggle;
-    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,10 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
         //Realm initialization
         Realm.init(this);
-        realm = Realm.getDefaultInstance();
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(config);
 
         // * Initialize and add navigation drawer
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
