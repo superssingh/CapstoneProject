@@ -178,7 +178,7 @@ public class DetailFragment extends android.app.Fragment {
         Buy_Link = intent.getStringExtra(String.valueOf(R.string.BUY_Amazon));
         Review_Link = intent.getStringExtra(String.valueOf(R.string.Review_Link));
     }
-
+ 
     private String filterTags(String s) {
         String filter = android.text.Html.fromHtml(s).toString();
         return filter;
