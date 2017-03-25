@@ -1,7 +1,6 @@
 package com.santossingh.capstoneproject.Activities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -21,6 +20,7 @@ import com.santossingh.capstoneproject.Fragments.FavoriteFragment;
 import com.santossingh.capstoneproject.Fragments.GoogleFragment;
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
 import com.santossingh.capstoneproject.Models.Amazon.Constants;
+import com.santossingh.capstoneproject.Models.Database.FavoriteBooks;
 import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;
 
@@ -132,7 +132,18 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onFragmentInteraction(FavoriteBooks book) {
+        Intent intent = new Intent(this, DetailActivity.class)
+                .putExtra(String.valueOf(R.string.BOOK_ID), book.getId())
+                .putExtra(String.valueOf(R.string.BOOK_TITLE), book.getTitle())
+                .putExtra(String.valueOf(R.string.AUTHOR), book.getAuthor())
+                .putExtra(String.valueOf(R.string.PUBLISHED_YEAR), book.getPublishedDate())
+                .putExtra(String.valueOf(R.string.IMAGE), book.getImage())
+                .putExtra(String.valueOf(R.string.DESCRIPTION), book.getDescription())
+                .putExtra(String.valueOf(R.string.PRICE), book.getPrice())
+                .putExtra(String.valueOf(R.string.Review_Link), book.getReviewLink())
+                .putExtra(String.valueOf(R.string.BUY_Amazon), book.getBuyLink());
+        startActivity(intent);
     }
 
     private void searchAction() {

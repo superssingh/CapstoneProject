@@ -6,7 +6,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
+import com.santossingh.capstoneproject.Models.Amazon.Constants;
 import com.santossingh.capstoneproject.Models.Database.FavoriteBooks;
+import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;
 
 import io.realm.Realm;
@@ -26,7 +28,6 @@ public class MyContentProvider {
     // To write data on background thread which avoid blocking the UI thread----
     // Adding current movie info which comes from Intent (Handset view)----------
 
-
     public void addBookFromIntent(final Context context, final Intent intent) {
         this.context = context;
         final String book_id = intent.getStringExtra(String.valueOf(R.string.BOOK_ID));
@@ -39,7 +40,6 @@ public class MyContentProvider {
             @Override
             public void execute(Realm bgRealm) {
                 FavoriteBooks favoriteBook = bgRealm.createObject(FavoriteBooks.class, book_id);
-//                favoriteBook.setId(intent.getStringExtra(String.valueOf(R.string.BOOK_ID)));
                 favoriteBook.setTitle(intent.getStringExtra(String.valueOf(R.string.BOOK_TITLE)));
                 favoriteBook.setAuthor(intent.getStringExtra(String.valueOf(R.string.AUTHOR)));
                 favoriteBook.setImage(intent.getStringExtra(String.valueOf(R.string.IMAGE)));
@@ -67,7 +67,7 @@ public class MyContentProvider {
     }
 
     // adding selected movie info which comes from ArratList (Tablet view)
-    public void addBookFromTabletUI(final Context context, final AmazonBook book) {
+    public void addBookFromTabletUIForPaid(final Context context, final AmazonBook book) {
         this.context = context;
         final Realm realm = Realm.getDefaultInstance();
         final RealmResults<FavoriteBooks> Fav_Book = realm.where(FavoriteBooks.class)
@@ -76,8 +76,7 @@ public class MyContentProvider {
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
-                FavoriteBooks favoriteBook = bgRealm.createObject(FavoriteBooks.class);
-                favoriteBook.setId(book.getAsin());
+                FavoriteBooks favoriteBook = bgRealm.createObject(FavoriteBooks.class, book.getAsin());
                 favoriteBook.setTitle(book.getTitle());
                 favoriteBook.setAuthor(book.getAuthor());
                 favoriteBook.setImage(book.getImage());
@@ -86,6 +85,41 @@ public class MyContentProvider {
                 favoriteBook.setDescription(book.getDescription());
                 favoriteBook.setReviewLink(book.getReviews());
                 favoriteBook.setBuyLink(book.getDetailURL());
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(context, R.string.FavoriteMarked, Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                //delete method (for un-favorite) when it already exists--------------------------
+                Toast.makeText(context, R.string.Already_exists, Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+    }
+
+    public void addBookFromTabletUIForFree(final Context context, final Item book) {
+        this.context = context;
+        final Realm realm = Realm.getDefaultInstance();
+        final RealmResults<FavoriteBooks> Fav_Book = realm.where(FavoriteBooks.class)
+                .equalTo("id", book.getId())
+                .findAllAsync();
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm bgRealm) {
+                FavoriteBooks favoriteBook = bgRealm.createObject(FavoriteBooks.class, book.getId());
+                favoriteBook.setTitle(book.getVolumeInfo().getTitle());
+                favoriteBook.setAuthor(book.getVolumeInfo().getAuthors() == null ? Constants.NOT_AVAILABLE : book.getVolumeInfo().getAuthors().get(0));
+                favoriteBook.setImage(Constants.NOT_AVAILABLE);
+                favoriteBook.setPrice(Constants.FREE_TAG);
+                favoriteBook.setPublishedDate(book.getVolumeInfo().getPublishedDate() == null ? Constants.NOT_AVAILABLE : book.getVolumeInfo().getPublishedDate());
+                favoriteBook.setDescription(book.getVolumeInfo().getDescription() == null ? Constants.FREE_DESCRIPTION_TAG : book.getVolumeInfo().getDescription());
+                favoriteBook.setReviewLink(Constants.NOT_AVAILABLE);
+                favoriteBook.setBuyLink(Constants.NOT_AVAILABLE);
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override

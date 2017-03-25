@@ -110,8 +110,8 @@ public class DetailFragment extends android.app.Fragment {
 
     }
 
-    public void setDataforTabletUI(final AmazonBook book) {
-        this.book = book;
+    public void setDataforTabletUI(final AmazonBook book1) {
+        book = book1;
         Amazon.setVisibility(View.VISIBLE);
         REVIEW.setVisibility(View.VISIBLE);
         Google_Preview.setVisibility(View.GONE);
@@ -131,12 +131,12 @@ public class DetailFragment extends android.app.Fragment {
             @Override
             public void onClick(View view) {
                 MyContentProvider contentProvider = new MyContentProvider();
-                contentProvider.addBookFromTabletUI(getActivity(), book);
+                contentProvider.addBookFromTabletUIForPaid(getActivity(), book1);
             }
         });
     }
 
-    public void setFreeDataforTabletUI(Item book) {
+    public void setFreeDataforTabletUI(final Item book) {
         FreeBook = book;
         Book_ID = book.getId();
         Title.setText(book.getVolumeInfo().getTitle() == null ? "N/A" : book.getVolumeInfo().getTitle());
@@ -150,6 +150,15 @@ public class DetailFragment extends android.app.Fragment {
         Google_Preview.setVisibility(View.VISIBLE);
         Amazon.setVisibility(View.GONE);
         REVIEW.setVisibility(View.GONE);
+
+        FAVORITE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "Hi", Toast.LENGTH_LONG).show();
+                MyContentProvider contentProvider = new MyContentProvider();
+                contentProvider.addBookFromTabletUIForFree(getActivity(), book);
+            }
+        });
     }
 
 

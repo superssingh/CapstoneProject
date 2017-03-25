@@ -45,7 +45,6 @@ public class AmazonFragment extends Fragment {
     RecyclerView recyclerView;
     @BindView(R.id.Progress_bar)
     ProgressBar progressBar;
-    int menuItemPosition = R.id.nav_amazon;
     private List<AmazonBook> itemsList;
     private AmazonRecyclerAdapter recyclerViewAdapter;
     private View view;

@@ -1,34 +1,43 @@
 package com.santossingh.capstoneproject.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.santossingh.capstoneproject.Adatpers.FavoriteRecyclerAdapter;
+import com.santossingh.capstoneproject.Models.Database.FavoriteBooks;
 import com.santossingh.capstoneproject.R;
+import com.santossingh.capstoneproject.Utilities.AutofitGridlayout;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link FavoriteFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FavoriteFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 
 public class FavoriteFragment extends Fragment {
 
+    @BindView(R.id.Favorite_recycleView)
+    RecyclerView recyclerView;
+    private RealmResults<FavoriteBooks> booksList;
+    private FavoriteRecyclerAdapter recyclerViewAdapter;
+    private View view;
+    private Realm realm;
     private OnFragmentInteractionListener mListener;
 
     public FavoriteFragment() {
-    }
-
-    public static FavoriteFragment newInstance(String param1, String param2) {
-        FavoriteFragment fragment = new FavoriteFragment();
-        return fragment;
     }
 
     @Override
@@ -39,13 +48,31 @@ public class FavoriteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_favorite, container, false);
+        view = inflater.inflate(R.layout.fragment_favorite, container, false);
+        ButterKnife.bind(this, view);
+        getFavoriteList();
+        return view;
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    private void getFavoriteList() {
+        realm = Realm.getDefaultInstance();
+        booksList = realm.where(FavoriteBooks.class).findAll();
+        if (booksList.size() == 0) {
+            Log.i("0", "0");
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            Log.i("1", "1");
+            configRecycleView(booksList);
         }
+    }
+
+    private void configRecycleView(RealmResults<FavoriteBooks> results) {
+        AutofitGridlayout layoutManager = new AutofitGridlayout(getActivity(), 460);
+        recyclerView.setHasFixedSize(true);
+//        recyclerView.setRecycledViewPool(new RecyclerView.RecycledViewPool());
+        recyclerViewAdapter = new FavoriteRecyclerAdapter(mListener, results);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(recyclerViewAdapter);
     }
 
     @Override
@@ -66,6 +93,6 @@ public class FavoriteFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(FavoriteBooks book);
     }
 }
