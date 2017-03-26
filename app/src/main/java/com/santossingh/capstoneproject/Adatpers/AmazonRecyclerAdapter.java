@@ -19,6 +19,7 @@ import java.util.List;
  * {@link RecyclerView.Adapter} that can display a {@link } and makes a call to the
  * TODO: Replace the implementation with code for your data type.
  */
+
 public class AmazonRecyclerAdapter extends RecyclerView.Adapter<AmazonRecyclerAdapter.ViewHolder> {
 
     private List<AmazonBook> booksList = new ArrayList<>();

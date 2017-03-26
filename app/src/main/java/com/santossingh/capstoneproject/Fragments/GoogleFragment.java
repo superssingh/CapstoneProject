@@ -42,7 +42,6 @@ public class GoogleFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private int menuItemPosition;
 
-
     public GoogleFragment() {
     }
 

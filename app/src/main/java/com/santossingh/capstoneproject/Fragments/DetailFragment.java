@@ -18,6 +18,7 @@ import com.santossingh.capstoneproject.Activities.ViewActivity;
 import com.santossingh.capstoneproject.ContentProvider.MyContentProvider;
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
 import com.santossingh.capstoneproject.Models.Amazon.Constants;
+import com.santossingh.capstoneproject.Models.Database.FavoriteBooks;
 import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;
 import com.squareup.picasso.Picasso;
@@ -29,7 +30,6 @@ import butterknife.ButterKnife;
  */
 public class DetailFragment extends android.app.Fragment {
 
-    private final static String FREE_BOOK = "FREE";
     @BindView(R.id.ImageBar)
     ImageView imageView;
     @BindView(R.id.Amazon)
@@ -52,10 +52,11 @@ public class DetailFragment extends android.app.Fragment {
     TextView Price;
     @BindView(R.id.Detail_Description)
     TextView Description;
-    View view;
-    String Buy_Link = "", Review_Link = "", Book_ID = "";
-    AmazonBook book;
-    Item FreeBook;
+
+    private View view;
+    private String Buy_Link = "", Review_Link = "", Book_ID = "";
+    private AmazonBook book;
+    private Item FreeBook;
 
     public DetailFragment() {
         setHasOptionsMenu(true);
@@ -89,7 +90,6 @@ public class DetailFragment extends android.app.Fragment {
                 startActivity(intent);
             }
         });
-
         REVIEW.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +98,6 @@ public class DetailFragment extends android.app.Fragment {
                 startActivity(intent);
             }
         });
-
         Google_Preview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,11 +106,11 @@ public class DetailFragment extends android.app.Fragment {
                 startActivity(intent);
             }
         });
-
     }
 
     public void setDataforTabletUI(final AmazonBook book1) {
         book = book1;
+        FAVORITE.setVisibility(View.VISIBLE);
         Amazon.setVisibility(View.VISIBLE);
         REVIEW.setVisibility(View.VISIBLE);
         Google_Preview.setVisibility(View.GONE);
@@ -154,26 +153,23 @@ public class DetailFragment extends android.app.Fragment {
         FAVORITE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Hi", Toast.LENGTH_LONG).show();
                 MyContentProvider contentProvider = new MyContentProvider();
                 contentProvider.addBookFromTabletUIForFree(getActivity(), book);
             }
         });
     }
 
-
     public void setDataHandsetUI(final Intent intent) {
         String priceStatus = intent.getStringExtra(String.valueOf(R.string.PRICE));
 
-        if (!priceStatus.equals(FREE_BOOK)) {
+        if (!priceStatus.equals(Constants.FREE_TAG)) {
             Google_Preview.setVisibility(View.GONE);
             REVIEW.setVisibility(View.VISIBLE);
             Amazon.setVisibility(View.VISIBLE);
         } else {
-            Toast.makeText(getActivity(), Book_ID, Toast.LENGTH_LONG).show();
+            Google_Preview.setVisibility(View.VISIBLE);
             REVIEW.setVisibility(View.GONE);
             Amazon.setVisibility(View.GONE);
-            Google_Preview.setVisibility(View.VISIBLE);
         }
 
         Title.setText(intent.getStringExtra(String.valueOf(R.string.BOOK_TITLE)));
@@ -202,5 +198,34 @@ public class DetailFragment extends android.app.Fragment {
         return filter;
     }
 
+    public void setFavoriteDataforTabletUI(final FavoriteBooks book) {
+        if (!book.getPrice().equals(Constants.FREE_TAG)) {
+            Google_Preview.setVisibility(View.GONE);
+            REVIEW.setVisibility(View.VISIBLE);
+            Amazon.setVisibility(View.VISIBLE);
+        } else {
+            REVIEW.setVisibility(View.GONE);
+            Amazon.setVisibility(View.GONE);
+            Google_Preview.setVisibility(View.VISIBLE);
+        }
 
+        Book_ID = book.getId();
+        Title.setText(book.getTitle());
+        Author.setText(book.getAuthor());
+        Year.setText(book.getPublishedDate());
+        Price.setText(book.getPrice());
+        Description.setText(filterTags(book.getDescription()));
+        Picasso.with(getActivity()).load(book.getImage())
+                .placeholder(R.mipmap.ic_book).resize(300, 400)
+                .into(imageView);
+        Buy_Link = book.getBuyLink();
+        Review_Link = book.getReviewLink();
+
+        FAVORITE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), R.string.Already_exists, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }

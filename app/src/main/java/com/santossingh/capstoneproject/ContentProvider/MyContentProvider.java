@@ -1,5 +1,6 @@
 package com.santossingh.capstoneproject.ContentProvider;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -130,10 +131,13 @@ public class MyContentProvider {
         }, new Realm.Transaction.OnError() {
             @Override
             public void onError(Throwable error) {
-                //delete method (for un-favorite) when it already exists--------------------------
                 Toast.makeText(context, R.string.Already_exists, Toast.LENGTH_SHORT)
                         .show();
             }
         });
+    }
+
+    public void removeBookFromList(Activity activity, String id) {
+
     }
 }

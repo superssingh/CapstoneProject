@@ -68,6 +68,7 @@
     <string name="FavoriteMarked">This book marked as favorite.</string>
     <string name="UnFavorite">This book removed from favorite.</string>
     <string name="Already_exists">This book is already marked as favorite.</string>
+    <string name="Favorite_empty_list">Favorite list is empty.</string>
 
 
 </resources>

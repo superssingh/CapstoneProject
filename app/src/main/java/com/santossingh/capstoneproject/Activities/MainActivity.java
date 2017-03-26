@@ -133,17 +133,23 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
     @Override
     public void onFragmentInteraction(FavoriteBooks book) {
-        Intent intent = new Intent(this, DetailActivity.class)
-                .putExtra(String.valueOf(R.string.BOOK_ID), book.getId())
-                .putExtra(String.valueOf(R.string.BOOK_TITLE), book.getTitle())
-                .putExtra(String.valueOf(R.string.AUTHOR), book.getAuthor())
-                .putExtra(String.valueOf(R.string.PUBLISHED_YEAR), book.getPublishedDate())
-                .putExtra(String.valueOf(R.string.IMAGE), book.getImage())
-                .putExtra(String.valueOf(R.string.DESCRIPTION), book.getDescription())
-                .putExtra(String.valueOf(R.string.PRICE), book.getPrice())
-                .putExtra(String.valueOf(R.string.Review_Link), book.getReviewLink())
-                .putExtra(String.valueOf(R.string.BUY_Amazon), book.getBuyLink());
-        startActivity(intent);
+        DetailFragment detailFragment = (DetailFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_detail);
+        if (detailFragment == null) {
+            Intent intent = new Intent(this, DetailActivity.class)
+                    .putExtra(String.valueOf(R.string.BOOK_ID), book.getId())
+                    .putExtra(String.valueOf(R.string.BOOK_TITLE), book.getTitle())
+                    .putExtra(String.valueOf(R.string.AUTHOR), book.getAuthor())
+                    .putExtra(String.valueOf(R.string.PUBLISHED_YEAR), book.getPublishedDate())
+                    .putExtra(String.valueOf(R.string.IMAGE), book.getImage())
+                    .putExtra(String.valueOf(R.string.DESCRIPTION), book.getDescription())
+                    .putExtra(String.valueOf(R.string.PRICE), book.getPrice())
+                    .putExtra(String.valueOf(R.string.Review_Link), book.getReviewLink())
+                    .putExtra(String.valueOf(R.string.BUY_Amazon), book.getBuyLink());
+            startActivity(intent);
+        } else {
+            detailFragment.setFavoriteDataforTabletUI(book);
+        }
     }
 
     private void searchAction() {
@@ -156,7 +162,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         inflater.inflate(R.menu.menu_actionbar, menu);
         return true;
     }
-
 
     public void selectDrawerItem(MenuItem menuItem) {
         int id = menuItem.getItemId();
@@ -175,10 +180,12 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
             fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
 
         } else if (id == R.id.nav_favorite) {
-            setTitle("Favorites Books");
+
+            setTitle("Favorite List");
             FavoriteFragment fragment = new FavoriteFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
+
         }
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
@@ -206,5 +213,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     protected void onRestart() {
         super.onRestart();
     }
+
 
 }

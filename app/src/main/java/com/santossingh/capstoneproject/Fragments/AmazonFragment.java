@@ -62,7 +62,8 @@ public class AmazonFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(STATE_BOOKS, new ArrayList<AmazonBook>(recyclerViewAdapter.getBooksList()));
+        outState.putParcelableArrayList(STATE_BOOKS,
+                new ArrayList<AmazonBook>(recyclerViewAdapter.getBooksList()));
     }
 
     @Override
@@ -85,7 +86,6 @@ public class AmazonFragment extends Fragment {
             AWSAsyncTask a = new AWSAsyncTask();
             a.execute("Business");
         }
-
         return view;
     }
 
@@ -147,7 +147,6 @@ public class AmazonFragment extends Fragment {
             new CountDownTimer(4000, 1000) {
                 public void onTick(long millisUntilFinished) {
                 }
-
                 public void onFinish() {
                 }
             }.start();
@@ -162,12 +161,10 @@ public class AmazonFragment extends Fragment {
                 MyXmlPullParser myXmlPullParser = new MyXmlPullParser();
                 InputStream is = downloadUrl(url);
                 booksList = myXmlPullParser.parse(is);
-
                 return booksList;
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return booksList;
         }
 

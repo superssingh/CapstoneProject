@@ -46,8 +46,7 @@ public class FavoriteFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_favorite, container, false);
         ButterKnife.bind(this, view);
         getFavoriteList();
@@ -67,9 +66,9 @@ public class FavoriteFragment extends Fragment {
     }
 
     private void configRecycleView(RealmResults<FavoriteBooks> results) {
-        AutofitGridlayout layoutManager = new AutofitGridlayout(getActivity(), 460);
+        AutofitGridlayout layoutManager = new AutofitGridlayout(getActivity(), 300);
         recyclerView.setHasFixedSize(true);
-//        recyclerView.setRecycledViewPool(new RecyclerView.RecycledViewPool());
+        recyclerView.setRecycledViewPool(new RecyclerView.RecycledViewPool());
         recyclerViewAdapter = new FavoriteRecyclerAdapter(mListener, results);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);
@@ -95,4 +94,5 @@ public class FavoriteFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(FavoriteBooks book);
     }
+
 }
