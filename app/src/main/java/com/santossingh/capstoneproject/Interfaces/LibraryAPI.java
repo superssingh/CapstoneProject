@@ -37,20 +37,4 @@ public interface LibraryAPI {
     @GET("/books/v1/volumes?q=fantasy&filter=free-ebooks&maxResults=40")
     Call<BooksLibrary> getFreeFantasyBooks();
 
-//
-//    //Paid Books
-//    @GET("/books/v1/volumes?q=fiction&filter=paid-ebooks&maxResults=40")
-//    Call<BooksLibrary> getPaidFictionBooks();
-//    @GET("/books/v1/volumes?q=science&filter=paid-ebooks&maxResults=40")
-//    Call<BooksLibrary> getPaidSciBooks();
-//    @GET("/books/v1/volumes?q=sports&filter=paid-ebooks&maxResults=40")
-//    Call<BooksLibrary> getPaidSportsBooks();
-//    @GET("/books/v1/volumes?q=business&filter=paid-ebooks&maxResults=40")
-//    Call<BooksLibrary> getPaidBusinessBooks();
-//
-//    @GET("/books/v1/volumes?q=Top&filter=paid-ebooks&maxResults=40")
-//    Call<BooksLibrary> getPaidTopBooks();
-//
-//    @GET("/books/v1/volumes?q=romance&filter=paid-ebooks&maxResults=40")
-//    Call<BooksLibrary> getPaidRomanceBooks();
 }

@@ -4,19 +4,26 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.santossingh.capstoneproject.AWS.AWS_URL;
 import com.santossingh.capstoneproject.AWS.MyXmlPullParser;
 import com.santossingh.capstoneproject.Adatpers.AmazonRecyclerAdapter;
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
+import com.santossingh.capstoneproject.Models.Amazon.Constants;
 import com.santossingh.capstoneproject.R;
 import com.santossingh.capstoneproject.Utilities.AutofitGridlayout;
 
@@ -45,6 +52,15 @@ public class AmazonFragment extends Fragment {
     RecyclerView recyclerView;
     @BindView(R.id.Progress_bar)
     ProgressBar progressBar;
+    @BindView(R.id.searchLayout)
+    LinearLayout searchLayout;
+    @BindView(R.id.BTN_Cancel)
+    ImageButton search_cancel;
+    @BindView(R.id.BTN_search)
+    ImageButton searchButton;
+    @BindView(R.id.input_name)
+    EditText inputName;
+    int menuPosition;
     private List<AmazonBook> itemsList;
     private AmazonRecyclerAdapter recyclerViewAdapter;
     private View view;
@@ -78,20 +94,23 @@ public class AmazonFragment extends Fragment {
         ButterKnife.bind(this, view);
         itemsList = new ArrayList<AmazonBook>();
         configRecycleView();
+
         if (savedInstanceState != null) {
             progressBar.setVisibility(View.GONE);
             itemsList = savedInstanceState.getParcelableArrayList(STATE_BOOKS);
             recyclerViewAdapter.addList(itemsList);
         } else {
-            AWSAsyncTask a = new AWSAsyncTask();
-            a.execute("Business");
+            AWSAsyncTask searchQuery = new AWSAsyncTask();
+            searchQuery.execute(Constants.Business);
+            menuPosition = R.id.Business;
         }
+
         return view;
     }
 
     private void configRecycleView() {
-        recyclerViewAdapter = new AmazonRecyclerAdapter(mListener);
         AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), 300);
+        recyclerViewAdapter = new AmazonRecyclerAdapter(mListener);
         recyclerView.setLayoutManager(autofitGridlayout);
         recyclerView.setAdapter(recyclerViewAdapter);
     }
@@ -134,6 +153,80 @@ public class AmazonFragment extends Fragment {
         super.onResume();
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_category, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        AWSAsyncTask searchQuery = new AWSAsyncTask();
+        switch (item.getItemId()) {
+
+            case R.id.my_search_bar:
+                searchbarQuery();
+                return true;
+
+            case R.id.Business:
+                item.setChecked(true);
+                menuPosition = R.id.Business;
+                searchQuery.execute(Constants.Business);
+                return true;
+
+            case R.id.Fantasy:
+                item.setChecked(true);
+                menuPosition = R.id.Fantasy;
+                searchQuery.execute(Constants.Fantasy);
+                return true;
+
+            case R.id.Fiction:
+                item.setChecked(true);
+                menuPosition = R.id.Fiction;
+                searchQuery.execute(Constants.Fiction);
+                return true;
+
+            case R.id.NonFiction:
+                item.setChecked(true);
+                menuPosition = R.id.NonFiction;
+                searchQuery.execute(Constants.NonFiction);
+                return true;
+
+            case R.id.Romance:
+                item.setChecked(true);
+                menuPosition = R.id.Romance;
+                searchQuery.execute(Constants.Romance);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void searchbarQuery() {
+        searchLayout.setVisibility(View.VISIBLE);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!inputName.getText().toString().equals("")) {
+                    searchLayout.setVisibility(View.GONE);
+                    AWSAsyncTask searchQuery = new AWSAsyncTask();
+                    searchQuery.execute(inputName.getText().toString());
+                    inputName.setText("");
+                } else {
+                    Snackbar.make(view, "Please enter your desire book name", Snackbar.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        search_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchLayout.setVisibility(View.GONE);
+            }
+        });
+
+    }
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(AmazonBook book);
         void onTabletIntraction(AmazonBook book);
@@ -143,6 +236,7 @@ public class AmazonFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            recyclerView.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
             new CountDownTimer(4000, 1000) {
                 public void onTick(long millisUntilFinished) {
@@ -171,10 +265,12 @@ public class AmazonFragment extends Fragment {
         @Override
         protected void onPostExecute(List<AmazonBook> amazonBooksList) {
             progressBar.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
             itemsList = amazonBooksList;
             recyclerViewAdapter.addList(itemsList);
-            mListener.onTabletIntraction(amazonBooksList.get(0));
+            mListener.onTabletIntraction(itemsList.get(0));
         }
     }
+
 
 }

@@ -10,8 +10,8 @@
         android:id="@+id/webView_Amazon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/gradient"
         android:padding="10dp">
-
     </WebView>
 
 </RelativeLayout>

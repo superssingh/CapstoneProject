@@ -51,17 +51,19 @@
     <string name="HAS_ID">HAS_ID</string>
     <string name="PRICE">PRICE</string>
     <string name="Review_Link">Review_Link</string>
-    <string name="Business">Business</string>
-    <string name="Fiction">Fiction</string>
-    <string name="Fantasy">Fantasy</string>
-    <string name="NonFiction">Non Fiction</string>
+
     <string name="piecePlaceEnum">piecePlace_ham_4</string>
     <string name="buttonPlaceEnum">buttonPlace_ham_4</string>
     <string name="search_bar">Search</string>
     <string name="Refresh">Refresh</string>
     <string name="URL_Link">url</string>
+
+    <string name="Business">Business</string>
+    <string name="Fiction">Fiction</string>
+    <string name="Fantasy">Fantasy</string>
+    <string name="NonFiction">Non Fiction</string>
     <string name="Romance">Romance</string>
-    <string name="ScienceFiction">science_fiction</string>
+
     <string name="NULL">NULL</string>
     <string name="BOOK_TAG">BOOK_TAG</string>
     <string name="ASIN">asin</string>
@@ -69,6 +71,9 @@
     <string name="UnFavorite">This book removed from favorite.</string>
     <string name="Already_exists">This book is already marked as favorite.</string>
     <string name="Favorite_empty_list">Favorite list is empty.</string>
+    <string name="searchable">Searchable</string>
+    <string name="hint_search">Enter your desire book name</string>
+    <string name="DetailActivity">Book Detail</string>
 
 
 </resources>

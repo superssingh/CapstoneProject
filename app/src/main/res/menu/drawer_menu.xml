@@ -5,15 +5,15 @@
         <item
             android:id="@+id/nav_amazon"
             android:checked="true"
-            android:icon="@mipmap/ic_book_black_24dp"
+            android:icon="@drawable/book1"
             android:title="@string/BUY_Amazon" />
         <item
             android:id="@+id/nav_google"
-            android:icon="@mipmap/ic_book_black_24dp"
+            android:icon="@drawable/book_24dp"
             android:title="Google Free Books" />
         <item
             android:id="@+id/nav_favorite"
-            android:icon="@mipmap/ic_book_black_24dp"
+            android:icon="@drawable/ic_favorite"
             android:title="Favorite Books" />
 
     </group>

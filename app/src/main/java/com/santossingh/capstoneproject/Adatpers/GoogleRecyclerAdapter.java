@@ -21,7 +21,6 @@ public class GoogleRecyclerAdapter extends RecyclerView.Adapter<GoogleRecyclerAd
 
     private List<Item> itemList = new ArrayList<Item>();
     private GoogleFragment.OnFragmentInteractionListener mListener;
-    private float AspectRatio = 0.73f;
 
     public GoogleRecyclerAdapter(GoogleFragment.OnFragmentInteractionListener listener) {
         mListener = listener;
@@ -37,15 +36,11 @@ public class GoogleRecyclerAdapter extends RecyclerView.Adapter<GoogleRecyclerAd
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mData = itemList.get(position);
-
         holder.textView.setText(holder.mData.getVolumeInfo().getTitle() == null ? "Unknown" : holder.mData.getVolumeInfo().getTitle());
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
                     mListener.onFragmentInteraction(holder.mData);
                 }
             }

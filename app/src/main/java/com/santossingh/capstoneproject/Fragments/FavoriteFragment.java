@@ -67,8 +67,6 @@ public class FavoriteFragment extends Fragment {
 
     private void configRecycleView(RealmResults<FavoriteBooks> results) {
         AutofitGridlayout layoutManager = new AutofitGridlayout(getActivity(), 300);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setRecycledViewPool(new RecyclerView.RecycledViewPool());
         recyclerViewAdapter = new FavoriteRecyclerAdapter(mListener, results);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);

@@ -3,46 +3,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/Fav_cardView"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="160dp"
     android:layout_margin="10dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?selectableItemBackground"
-    app:cardBackgroundColor="@color/black"
     app:cardElevation="4dp">
 
     <ImageView
         android:id="@+id/Fav_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:background="@color/colorPrimary" />
+        android:background="@mipmap/book_cover" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/Black_transparent_70"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/Fav_BookTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:elevation="4dp"
-                android:gravity="center"
-                android:maxLines="3"
+                android:layout_marginLeft="20dp"
+                android:gravity="left"
+                android:maxLines="1"
+                android:padding="10dp"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="15dp"
-                android:textStyle="italic" />
+                android:textSize="12dp" />
         </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/Fav_delete"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_gravity="bottom|end"
-        android:backgroundTint="#71393838"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="end"
+        android:backgroundTint="#190d0d0d"
         android:elevation="4dp"
         android:src="@drawable/ic_delete" />
 

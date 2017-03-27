@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="140dp"
+    android:background="@drawable/gradient_transparent"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="120dp"
-        android:background="@drawable/book1" />
+        android:background="@mipmap/placeholder" />
 
     <TextView
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
         android:text="BookReader"
-        android:textColor="#20dccf"
+        android:textColor="#f9fafa"
         android:textSize="24dp" />
 
 </LinearLayout>

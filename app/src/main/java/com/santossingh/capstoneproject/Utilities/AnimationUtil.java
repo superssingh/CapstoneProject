@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 /**
  * Created by Stark on 18/04/2016.
  */
+
 public class AnimationUtil {
 
     public static void animate(RecyclerView.ViewHolder holder, boolean down) {

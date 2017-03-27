@@ -3,7 +3,7 @@
     android:id="@+id/fragment_base"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimary"
     tools:context="com.santossingh.capstoneproject.Fragments.GoogleFragment">
 
     <ProgressBar
@@ -21,14 +21,5 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <!--<com.nightonke.boommenu.BoomMenuButton-->
-    <!--android:id="@+id/bmb"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--app:bmb_buttonEnum="ham"-->
-    <!--android:layout_gravity="bottom|right"-->
-    <!--app:bmb_piecePlaceEnum="@string/piecePlaceEnum"-->
-    <!--app:bmb_buttonPlaceEnum="@string/buttonPlaceEnum"-->
-    <!--/>-->
 
 </FrameLayout>

@@ -8,7 +8,6 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?selectableItemBackground"
-    app:cardBackgroundColor="#4d4b4b"
     app:cardCornerRadius="5dp"
     app:cardElevation="4dp">
 
@@ -16,8 +15,7 @@
         android:id="@+id/layout_book"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="15dp"
-        android:background="@color/colorPrimary"
+        android:background="@mipmap/book_cover"
         android:orientation="horizontal">
 
         <TextView
@@ -25,12 +23,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
             android:gravity="center"
             android:maxLines="3"
-            android:padding="5dp"
             android:textColor="@color/white"
-            android:textSize="12dp"
-            android:textStyle="bold|italic" />
+            android:textSize="14dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

@@ -10,7 +10,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     Toolbar toolbar;
     @BindView(R.id.navigationView)
     NavigationView navigationView;
-
     private ActionBarDrawerToggle drawerToggle;
 
     @Override
@@ -68,14 +66,8 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
             }
         });
 
-        refreshAction();
-    }
+        AMAZON();
 
-    private void refreshAction() {
-        setTitle("Top Paid Books");
-        AmazonFragment fragment = new AmazonFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
     }
 
     @Override
@@ -152,42 +144,20 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         }
     }
 
-    private void searchAction() {
-        Toast.makeText(this, "Hello", Toast.LENGTH_LONG).show();
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_actionbar, menu);
         return true;
     }
 
     public void selectDrawerItem(MenuItem menuItem) {
         int id = menuItem.getItemId();
         if (id == R.id.nav_amazon) {
-            onRestart();
-            setTitle("Amazon Library");
-
-            AmazonFragment fragment = new AmazonFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
-
+            AMAZON();
         } else if (id == R.id.nav_google) {
-            setTitle("Google Library");
-            GoogleFragment fragment = new GoogleFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
-
+            GOOGLE();
         } else if (id == R.id.nav_favorite) {
-
-            setTitle("Favorite List");
-            FavoriteFragment fragment = new FavoriteFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
-
+            FAVORITE();
         }
-        // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
         drawerLayout.closeDrawers();
     }
@@ -197,15 +167,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        switch (item.getItemId()) {
-            case R.id.my_search_bar:
-                searchAction();
-                return true;
-
-            case R.id.refresh:
-                refreshAction();
-                return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -214,5 +175,25 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         super.onRestart();
     }
 
+    private void AMAZON() {
+        setTitle("Paid Books");
+        AmazonFragment fragment = new AmazonFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
+    }
+
+    private void GOOGLE() {
+        setTitle("Free Books");
+        GoogleFragment fragment = new GoogleFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
+    }
+
+    private void FAVORITE() {
+        setTitle("Favorite List");
+        FavoriteFragment fragment = new FavoriteFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
+    }
 
 }

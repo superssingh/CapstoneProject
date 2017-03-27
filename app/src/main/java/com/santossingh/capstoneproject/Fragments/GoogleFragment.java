@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.santossingh.capstoneproject.Adatpers.GoogleRecyclerAdapter;
+import com.santossingh.capstoneproject.Models.Amazon.Constants;
 import com.santossingh.capstoneproject.Models.Google.BooksLibrary;
 import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;
@@ -40,7 +44,7 @@ public class GoogleFragment extends Fragment {
     private GoogleRecyclerAdapter recyclerViewAdapter;
     private View view;
     private OnFragmentInteractionListener mListener;
-    private int menuItemPosition;
+    private int menuPosition;
 
     public GoogleFragment() {
     }
@@ -66,20 +70,19 @@ public class GoogleFragment extends Fragment {
         configRecycleView();
 
         if (savedInstanceState == null) {
-            makeService(String.valueOf(R.string.Business));
+            makeService(Constants.Business);
         } else {
             itemsList = savedInstanceState.getParcelableArrayList(BOOKS_STATE);
             recyclerViewAdapter.addList(itemsList);
         }
 
-        makeService(String.valueOf(R.string.Fantasy));
         return view;
     }
 
     private void configRecycleView() {
+        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), 330);
         recyclerViewAdapter = new GoogleRecyclerAdapter(mListener);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
-        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), 300);
         recyclerView.setLayoutManager(autofitGridlayout);
         recyclerView.setAdapter(recyclerViewAdapter);
     }
@@ -89,18 +92,16 @@ public class GoogleFragment extends Fragment {
         dataManager = new DataManager();
         Call<BooksLibrary> listCall = null;
 
-        if (string.equalsIgnoreCase(String.valueOf(R.string.Business))) {
+        if (string.equalsIgnoreCase(Constants.Business)) {
             listCall = dataManager.getJSONData().getFreeBusinessBooks();
-        } else if (string.equalsIgnoreCase(String.valueOf(R.string.Fiction))) {
+        } else if (string.equalsIgnoreCase(Constants.Fiction)) {
             listCall = dataManager.getJSONData().getFreeFictionBooks();
-        } else if (string.equalsIgnoreCase(String.valueOf(R.string.NonFiction))) {
+        } else if (string.equalsIgnoreCase(Constants.NonFiction)) {
             listCall = dataManager.getJSONData().getFreeNonFictionBooks();
-        } else if (string.equalsIgnoreCase(String.valueOf(R.string.Fantasy))) {
+        } else if (string.equalsIgnoreCase(Constants.Fantasy)) {
             listCall = dataManager.getJSONData().getFreeFantasyBooks();
-        } else if (string.equalsIgnoreCase(String.valueOf(R.string.Romance))) {
+        } else if (string.equalsIgnoreCase(Constants.Romance)) {
             listCall = dataManager.getJSONData().getFreeRomanceBooks();
-        } else if (string.equalsIgnoreCase(String.valueOf(R.string.ScienceFiction))) {
-            listCall = dataManager.getJSONData().getFreeSciBooks();
         }
 
         listCall.enqueue(new Callback<BooksLibrary>() {
@@ -144,8 +145,49 @@ public class GoogleFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_category, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.Business:
+                item.setChecked(true);
+                menuPosition = R.id.Business;
+                makeService(Constants.Business);
+                return true;
+
+            case R.id.Fantasy:
+                item.setChecked(true);
+                menuPosition = R.id.Fantasy;
+                makeService(Constants.Fantasy);
+                return true;
+
+            case R.id.Fiction:
+                item.setChecked(true);
+                menuPosition = R.id.Fiction;
+                makeService(Constants.Fiction);
+                return true;
+
+            case R.id.NonFiction:
+                item.setChecked(true);
+                menuPosition = R.id.NonFiction;
+                makeService(Constants.NonFiction);
+                return true;
+
+            case R.id.Romance:
+                item.setChecked(true);
+                menuPosition = R.id.Romance;
+                makeService(Constants.Romance);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Item mData);
     }
-
 }

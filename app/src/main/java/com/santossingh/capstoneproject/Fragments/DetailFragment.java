@@ -1,9 +1,17 @@
 package com.santossingh.capstoneproject.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.graphics.Palette;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +38,7 @@ import butterknife.ButterKnife;
  */
 public class DetailFragment extends android.app.Fragment {
 
+    private static Typeface mFont;
     @BindView(R.id.ImageBar)
     ImageView imageView;
     @BindView(R.id.Amazon)
@@ -52,14 +61,23 @@ public class DetailFragment extends android.app.Fragment {
     TextView Price;
     @BindView(R.id.Detail_Description)
     TextView Description;
+    @BindView(R.id.CoordinateLayout)
+    CoordinatorLayout coordinatorLayout;
 
     private View view;
     private String Buy_Link = "", Review_Link = "", Book_ID = "";
     private AmazonBook book;
-    private Item FreeBook;
 
     public DetailFragment() {
         setHasOptionsMenu(true);
+    }
+
+    public static Typeface getTypeface(Context context, String typeface) {
+
+        if (mFont == null) {
+            mFont = Typeface.createFromAsset(context.getAssets(), typeface);
+        }
+        return mFont;
     }
 
     @Override
@@ -72,11 +90,9 @@ public class DetailFragment extends android.app.Fragment {
         view = inflater.inflate(R.layout.fragment_detail, container, false);
         ButterKnife.bind(this, view);
         book = new AmazonBook();
-
         if (book != null) {
             setDataforTabletUI(book);
         }
-
         setAllListener();
         return view;
     }
@@ -122,9 +138,7 @@ public class DetailFragment extends android.app.Fragment {
         Description.setText(filteredDescription);
         Review_Link = book.getReviews();
         Buy_Link = book.getDetailURL();
-        Picasso.with(getActivity()).load(book.getImage())
-                .placeholder(R.mipmap.ic_book).resize(300, 400)
-                .into(imageView);
+        setImage(book.getImage());
 
         FAVORITE.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,16 +150,14 @@ public class DetailFragment extends android.app.Fragment {
     }
 
     public void setFreeDataforTabletUI(final Item book) {
-        FreeBook = book;
         Book_ID = book.getId();
         Title.setText(book.getVolumeInfo().getTitle() == null ? "N/A" : book.getVolumeInfo().getTitle());
         Author.setText(book.getVolumeInfo().getAuthors() == null ? "N/A" : book.getVolumeInfo().getAuthors().get(0));
         Year.setText(book.getVolumeInfo().getPublishedDate() == null ? "N/A" : book.getVolumeInfo().getPublishedDate());
         Price.setText(Constants.FREE_TAG);
         Description.setText(Constants.FREE_DESCRIPTION_TAG);
-        Picasso.with(getActivity()).load(book.getVolumeInfo().getImageLinks().getThumbnail())
-                .placeholder(R.mipmap.ic_book).resize(300, 400)
-                .into(imageView);
+        setImage(book.getVolumeInfo().getImageLinks().getThumbnail());
+
         Google_Preview.setVisibility(View.VISIBLE);
         Amazon.setVisibility(View.GONE);
         REVIEW.setVisibility(View.GONE);
@@ -160,6 +172,7 @@ public class DetailFragment extends android.app.Fragment {
     }
 
     public void setDataHandsetUI(final Intent intent) {
+        Book_ID = intent.getStringExtra(String.valueOf(R.string.BOOK_ID));
         String priceStatus = intent.getStringExtra(String.valueOf(R.string.PRICE));
 
         if (!priceStatus.equals(Constants.FREE_TAG)) {
@@ -176,11 +189,8 @@ public class DetailFragment extends android.app.Fragment {
         Author.setText(intent.getStringExtra(String.valueOf(R.string.AUTHOR)));
         Year.setText(intent.getStringExtra(String.valueOf(R.string.PUBLISHED_YEAR)));
         Price.setText(intent.getStringExtra(String.valueOf(R.string.PRICE)));
-
         Description.setText(filterTags(intent.getStringExtra(String.valueOf(R.string.DESCRIPTION))));
-        Picasso.with(getActivity()).load(intent.getStringExtra(String.valueOf(R.string.IMAGE)))
-                .placeholder(R.mipmap.ic_book).resize(300, 400)
-                .into(imageView);
+        setImage(intent.getStringExtra(String.valueOf(R.string.IMAGE)));
         Buy_Link = intent.getStringExtra(String.valueOf(R.string.BUY_Amazon));
         Review_Link = intent.getStringExtra(String.valueOf(R.string.Review_Link));
 
@@ -193,8 +203,13 @@ public class DetailFragment extends android.app.Fragment {
         });
     }
 
-    private String filterTags(String s) {
-        String filter = android.text.Html.fromHtml(s).toString();
+    private String filterTags(String string) {
+        String filter = "[N/A]";
+        if (string != null) {
+            filter = Html.fromHtml(string).toString();
+        } else {
+
+        }
         return filter;
     }
 
@@ -209,15 +224,13 @@ public class DetailFragment extends android.app.Fragment {
             Google_Preview.setVisibility(View.VISIBLE);
         }
 
+        setImage(book.getImage());
         Book_ID = book.getId();
         Title.setText(book.getTitle());
         Author.setText(book.getAuthor());
         Year.setText(book.getPublishedDate());
         Price.setText(book.getPrice());
         Description.setText(filterTags(book.getDescription()));
-        Picasso.with(getActivity()).load(book.getImage())
-                .placeholder(R.mipmap.ic_book).resize(300, 400)
-                .into(imageView);
         Buy_Link = book.getBuyLink();
         Review_Link = book.getReviewLink();
 
@@ -227,5 +240,37 @@ public class DetailFragment extends android.app.Fragment {
                 Toast.makeText(getActivity(), R.string.Already_exists, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void setImage(String imageURL) {
+        Picasso.with(getActivity())
+                .load(imageURL)
+                .resize(300, 480)
+                .placeholder(R.mipmap.placeholder)
+                .into(imageView, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                        if (bitmap != null) {
+                            Palette.from(bitmap)
+                                    .generate(new Palette.PaletteAsyncListener() {
+                                        @Override
+                                        public void onGenerated(Palette palette) {
+                                            Palette.Swatch vibrantSwatch = palette.getDominantSwatch();
+                                            if (vibrantSwatch != null) {
+                                                collapsingToolbarLayout.setBackgroundColor(vibrantSwatch.getRgb());
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+                        Snackbar snackbar = Snackbar
+                                .make(collapsingToolbarLayout, "Error on image load.", Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                    }
+                });
     }
 }

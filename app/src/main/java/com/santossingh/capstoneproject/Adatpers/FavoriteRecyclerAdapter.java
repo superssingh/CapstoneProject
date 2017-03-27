@@ -49,6 +49,8 @@ public class FavoriteRecyclerAdapter extends RecyclerView.Adapter<FavoriteRecycl
         holder.book = booksList.get(position);
         holder.title.setText(holder.book.getTitle());
         Picasso.with(holder.mView.getContext()).load(holder.book.getImage())
+                .fit()
+                .placeholder(R.mipmap.book_cover)
                 .into(holder.imageView);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +73,6 @@ public class FavoriteRecyclerAdapter extends RecyclerView.Adapter<FavoriteRecycl
             }
         });
 
-//         animation part ----------------
         if (position > preposition) {
             AnimationUtil.animate(holder, true);
         } else {
