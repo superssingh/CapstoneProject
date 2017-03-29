@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Capstone Project</string>
+    <string name="app_name">Book Reader</string>
     <string-array name="drawerCategoryList">
         <item>Best Seller</item>
         <item>Business</item>
@@ -74,6 +74,8 @@
     <string name="searchable">Searchable</string>
     <string name="hint_search">Enter your desire book name</string>
     <string name="DetailActivity">Book Detail</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 
 </resources>

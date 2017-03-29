@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:layout_margin="10dp"
-        android:background="#75f8f8fa"
+        android:background="#f6079cce"
         android:elevation="8dp"
         android:orientation="vertical"
         android:padding="10dp"

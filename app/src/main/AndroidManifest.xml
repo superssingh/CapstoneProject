@@ -23,6 +23,16 @@
         <activity android:name=".Activities.DetailActivity" />
         <activity android:name=".Activities.AmazonActivity" />
         <activity android:name=".Activities.ViewActivity" />
+
+        <receiver android:name=".Widget.MyAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/my_app_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

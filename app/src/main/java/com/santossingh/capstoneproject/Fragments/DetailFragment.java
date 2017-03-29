@@ -134,8 +134,7 @@ public class DetailFragment extends android.app.Fragment {
         Author.setText(book.getAuthor());
         Year.setText(book.getPublishedDate());
         Price.setText(book.getPrice());
-        String filteredDescription = filterTags(book.getDescription() + " ");
-        Description.setText(filteredDescription);
+        Description.setText(filterTags(book.getDescription() + " "));
         Review_Link = book.getReviews();
         Buy_Link = book.getDetailURL();
         setImage(book.getImage());
@@ -204,11 +203,11 @@ public class DetailFragment extends android.app.Fragment {
     }
 
     private String filterTags(String string) {
-        String filter = "[N/A]";
+        String filter;
         if (string != null) {
             filter = Html.fromHtml(string).toString();
         } else {
-
+            filter = "[N/A]";
         }
         return filter;
     }

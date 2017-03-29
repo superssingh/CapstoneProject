@@ -1,35 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item
-        android:id="@+id/my_search_bar"
-        android:icon="@drawable/ic_search_bar"
-        android:title="@string/search_bar"
-        app:showAsAction="collapseActionView|ifRoom" />
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-
         <item
             android:id="@+id/Business"
             android:title="@string/Business" />
-
         <item
             android:id="@+id/Fantasy"
             android:title="@string/Fantasy" />
-
         <item
             android:id="@+id/Fiction"
             android:title="@string/Fiction" />
-
         <item
             android:id="@+id/NonFiction"
             android:title="@string/NonFiction" />
-
         <item
             android:id="@+id/Romance"
             android:title="@string/Romance" />
-
     </group>
-
 </menu>

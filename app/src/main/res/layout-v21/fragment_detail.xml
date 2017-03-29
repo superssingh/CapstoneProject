@@ -47,7 +47,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
-                    android:background="@drawable/gradient3"
+                    android:background="@drawable/gradient2"
                     android:gravity="right"
                     android:orientation="vertical"
                     android:paddingRight="10dp">
@@ -183,6 +183,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
+            android:backgroundTint="@color/red"
             android:clickable="true"
             android:contentDescription="@string/action_share"
             android:elevation="4dp"
