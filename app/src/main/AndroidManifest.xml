@@ -24,15 +24,40 @@
         <activity android:name=".Activities.AmazonActivity" />
         <activity android:name=".Activities.ViewActivity" />
 
-        <receiver android:name=".Widget.MyAppWidget">
+        <!-- &lt;!&ndash;Configure Activity for widget&ndash;&gt; -->
+        <!-- <activity android:name=".Widget.MyWidget.ConfigActivity"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+
+
+        <!-- <receiver android:name=".Widget.MyWidget.WidgetProvider"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.appwidget.action.APPWIDGET_UPDATE" /> -->
+        <!-- <action android:name="com.santossingh.capstoneproject.DATA_FETCHED"/> -->
+        <!-- </intent-filter> -->
+
+
+        <!-- <meta-data -->
+        <!-- android:name="android.appwidget.provider" -->
+        <!-- android:resource="@xml/my_app_widget_info" /> -->
+        <!-- </receiver> -->
+
+        <receiver android:name=".Widget.CollectionWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/my_app_widget_info" />
+                android:resource="@xml/collection_widget_info" />
         </receiver>
+
+        <service
+            android:name=".Widget.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
     </application>
 
 </manifest>

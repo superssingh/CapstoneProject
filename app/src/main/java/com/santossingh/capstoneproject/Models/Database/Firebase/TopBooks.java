@@ -1,24 +1,35 @@
-package com.santossingh.capstoneproject.Models.Database;
-
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+package com.santossingh.capstoneproject.Models.Database.Firebase;
 
 /**
- * Created by santoshsingh on 18/03/17.
+ * Created by santoshsingh on 01/04/17.
  */
 
-public class FavoriteBooks extends RealmObject {
-
-    @PrimaryKey
+public class TopBooks {
     private String id;
     private String title;
     private String author;
-    private String buyLink;
     private String image;
-    private String price;
     private String publishedDate;
+    private String price;
+    private String buyLink;
     private String reviewLink;
     private String description;
+    private String key;
+
+    public TopBooks() {
+    }
+
+    public TopBooks(String id, String title, String author, String image, String publishedDate, String price, String buyLink, String reviewLink, String description) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.buyLink = buyLink;
+        this.image = image;
+        this.price = price;
+        this.publishedDate = publishedDate;
+        this.reviewLink = reviewLink;
+        this.description = description;
+    }
 
     public String getId() {
         return id;
@@ -60,6 +71,14 @@ public class FavoriteBooks extends RealmObject {
         this.image = image;
     }
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     public String getPublishedDate() {
         return publishedDate;
     }
@@ -84,11 +103,11 @@ public class FavoriteBooks extends RealmObject {
         this.description = description;
     }
 
-    public String getPrice() {
-        return price;
+    public String getKey() {
+        return key;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setKey(String key) {
+        this.key = key;
     }
 }

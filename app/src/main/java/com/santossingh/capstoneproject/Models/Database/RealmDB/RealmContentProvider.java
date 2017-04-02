@@ -1,14 +1,12 @@
-package com.santossingh.capstoneproject.ContentProvider;
+package com.santossingh.capstoneproject.Models.Database.RealmDB;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
-import com.santossingh.capstoneproject.Models.Amazon.Constants;
-import com.santossingh.capstoneproject.Models.Database.FavoriteBooks;
+import com.santossingh.capstoneproject.Models.Constants;
 import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;
 
@@ -19,11 +17,11 @@ import io.realm.RealmResults;
  * Created by santoshsingh on 18/03/17.
  */
 
-public class MyContentProvider {
+public class RealmContentProvider {
 
     private Context context;
 
-    public MyContentProvider() {
+    public RealmContentProvider() {
     }
     // Add method with Realm Asynchronous Transactions---------------------------
     // To write data on background thread which avoid blocking the UI thread----
@@ -33,6 +31,7 @@ public class MyContentProvider {
         this.context = context;
         final String book_id = intent.getStringExtra(String.valueOf(R.string.BOOK_ID));
         final Realm realm = Realm.getDefaultInstance();
+
         final RealmResults<FavoriteBooks> Fav_Book = realm.where(FavoriteBooks.class)
                 .equalTo("id", book_id)
                 .findAllAsync();
@@ -65,6 +64,7 @@ public class MyContentProvider {
                         .show();
             }
         });
+        realm.close();
     }
 
     // adding selected movie info which comes from ArratList (Tablet view)
@@ -101,6 +101,7 @@ public class MyContentProvider {
                         .show();
             }
         });
+        realm.close();
     }
 
     public void addBookFromTabletUIForFree(final Context context, final Item book) {
@@ -135,9 +136,13 @@ public class MyContentProvider {
                         .show();
             }
         });
+        realm.close();
     }
 
-    public void removeBookFromList(Activity activity, String id) {
-
+    public RealmResults<FavoriteBooks> getBooksList() {
+        final Realm realm = Realm.getDefaultInstance();
+        final RealmResults<FavoriteBooks> Fav_Book = realm.where(FavoriteBooks.class).findAllAsync();
+        realm.close();
+        return Fav_Book;
     }
 }

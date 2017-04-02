@@ -10,7 +10,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.graphics.Palette;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,15 +20,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
 import com.santossingh.capstoneproject.Activities.AmazonActivity;
 import com.santossingh.capstoneproject.Activities.ViewActivity;
-import com.santossingh.capstoneproject.ContentProvider.MyContentProvider;
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
-import com.santossingh.capstoneproject.Models.Amazon.Constants;
-import com.santossingh.capstoneproject.Models.Database.FavoriteBooks;
+import com.santossingh.capstoneproject.Models.Constants;
+import com.santossingh.capstoneproject.Models.Database.Firebase.TopBooks;
+import com.santossingh.capstoneproject.Models.Database.RealmDB.FavoriteBooks;
+import com.santossingh.capstoneproject.Models.Database.RealmDB.RealmContentProvider;
+import com.santossingh.capstoneproject.Models.Database.SQLiteDB.DatabaseHelper;
 import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,7 +67,8 @@ public class DetailFragment extends android.app.Fragment {
     TextView Description;
     @BindView(R.id.CoordinateLayout)
     CoordinatorLayout coordinatorLayout;
-
+    List<TopBooks> topBooksList;
+    DatabaseReference databaseReference;
     private View view;
     private String Buy_Link = "", Review_Link = "", Book_ID = "";
     private AmazonBook book;
@@ -89,6 +94,7 @@ public class DetailFragment extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_detail, container, false);
         ButterKnife.bind(this, view);
+
         book = new AmazonBook();
         if (book != null) {
             setDataforTabletUI(book);
@@ -142,8 +148,9 @@ public class DetailFragment extends android.app.Fragment {
         FAVORITE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyContentProvider contentProvider = new MyContentProvider();
-                contentProvider.addBookFromTabletUIForPaid(getActivity(), book1);
+                RealmContentProvider contentProvider = new RealmContentProvider();
+                contentProvider.addBookFromTabletUIForPaid(getActivity(), book);
+//                addFavorite(book);
             }
         });
     }
@@ -164,8 +171,9 @@ public class DetailFragment extends android.app.Fragment {
         FAVORITE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyContentProvider contentProvider = new MyContentProvider();
+                RealmContentProvider contentProvider = new RealmContentProvider();
                 contentProvider.addBookFromTabletUIForFree(getActivity(), book);
+//                addFavorite(book);
             }
         });
     }
@@ -196,8 +204,17 @@ public class DetailFragment extends android.app.Fragment {
         FAVORITE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyContentProvider contentProvider = new MyContentProvider();
+                RealmContentProvider contentProvider = new RealmContentProvider();
                 contentProvider.addBookFromIntent(getActivity(), intent);
+//                addFavorite(intent);
+
+//                TopBooks topBooks=new TopBooks(
+//                        Book_ID, Title.getText().toString(), Author.getText().toString(), intent.getStringExtra(String.valueOf(R.string.IMAGE)),
+//                        Year.getText().toString(), Price.getText().toString(), Buy_Link, Review_Link, Description.getText().toString()
+//                );
+//
+//                databaseReference.push().setValue(topBooks);
+
             }
         });
     }
@@ -251,16 +268,16 @@ public class DetailFragment extends android.app.Fragment {
                     public void onSuccess() {
                         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                         if (bitmap != null) {
-                            Palette.from(bitmap)
-                                    .generate(new Palette.PaletteAsyncListener() {
-                                        @Override
-                                        public void onGenerated(Palette palette) {
-                                            Palette.Swatch vibrantSwatch = palette.getDominantSwatch();
-                                            if (vibrantSwatch != null) {
-                                                collapsingToolbarLayout.setBackgroundColor(vibrantSwatch.getRgb());
-                                            }
-                                        }
-                                    });
+//                            Palette.from(bitmap)
+//                                    .generate(new Palette.PaletteAsyncListener() {
+//                                        @Override
+//                                        public void onGenerated(Palette palette) {
+//                                            Palette.Swatch vibrantSwatch = palette.getDominantSwatch();
+//                                            if (vibrantSwatch != null) {
+//                                                collapsingToolbarLayout.setBackgroundColor(vibrantSwatch.getRgb());
+//                                            }
+//                                        }
+//                                    });
                         }
                     }
 
@@ -272,4 +289,65 @@ public class DetailFragment extends android.app.Fragment {
                     }
                 });
     }
+
+    public void addFavorite(Intent intent) {
+        DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
+        boolean answer = databaseHelper.addBook(
+                intent.getStringExtra(String.valueOf(R.string.BOOK_ID)),
+                intent.getStringExtra(String.valueOf(R.string.BOOK_TITLE)),
+                intent.getStringExtra(String.valueOf(R.string.AUTHOR)),
+                intent.getStringExtra(String.valueOf(R.string.IMAGE)),
+                intent.getStringExtra(String.valueOf(R.string.PRICE)),
+                intent.getStringExtra(String.valueOf(R.string.PUBLISHED_YEAR)),
+                intent.getStringExtra(String.valueOf(R.string.BUY_Amazon)),
+                intent.getStringExtra(String.valueOf(R.string.Review_Link)),
+                intent.getStringExtra(String.valueOf(R.string.DESCRIPTION))
+        );
+        if (answer == true) {
+            Toast.makeText(getActivity(), "Data add as favorite", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getActivity(), "Data already exists", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void addFavorite(AmazonBook book) {
+        DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
+        boolean answer = databaseHelper.addBook(
+                book.getAsin(),
+                book.getTitle(),
+                book.getAuthor(),
+                book.getImage(),
+                book.getPrice(),
+                book.getPublishedDate(),
+                book.getDetailURL(),
+                book.getReviews(),
+                book.getDescription()
+        );
+        if (answer == true) {
+            Toast.makeText(getActivity(), "Data add as favorite", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getActivity(), "Data already exists", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void addFavorite(Item book) {
+        DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
+        boolean answer = databaseHelper.addBook(
+                book.getId(),
+                book.getVolumeInfo().getTitle(),
+                book.getVolumeInfo().getAuthors().get(0) == null ? Constants.NOT_AVAILABLE : book.getVolumeInfo().getAuthors().get(0),
+                book.getVolumeInfo().getImageLinks().getThumbnail(),
+                Constants.FREE_TAG,
+                book.getVolumeInfo().getPublishedDate() == null ? Constants.NOT_AVAILABLE : book.getVolumeInfo().getPublishedDate(),
+                Constants.NOT_AVAILABLE,
+                Constants.NOT_AVAILABLE,
+                Constants.FREE_DESCRIPTION_TAG
+        );
+        if (answer == true) {
+            Toast.makeText(getActivity(), "Data add as favorite", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getActivity(), "Data already exists", Toast.LENGTH_LONG).show();
+        }
+    }
+
 }

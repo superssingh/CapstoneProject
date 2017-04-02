@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.santossingh.capstoneproject.Adatpers.GoogleRecyclerAdapter;
-import com.santossingh.capstoneproject.Models.Amazon.Constants;
+import com.santossingh.capstoneproject.Models.Constants;
 import com.santossingh.capstoneproject.Models.Google.BooksLibrary;
 import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;

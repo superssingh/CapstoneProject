@@ -26,6 +26,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/gradient1"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -33,9 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
-                    android:layout_marginLeft="10dp"
-                    android:elevation="8dp"
-                    android:outlineProvider="paddedBounds"
+                    android:layout_margin="10dp"
                     app:layout_anchor="@id/collapsing_toolbar"
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="3"
@@ -48,9 +47,11 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
                     android:background="@drawable/gradient2"
+                    android:elevation="4dp"
                     android:gravity="right"
                     android:orientation="vertical"
-                    android:paddingRight="10dp">
+                    android:paddingRight="10dp"
+                    android:showDividers="beginning">
 
                     <TextView
                         android:id="@+id/Detail_Title"

@@ -23,7 +23,7 @@ import com.santossingh.capstoneproject.AWS.AWS_URL;
 import com.santossingh.capstoneproject.AWS.MyXmlPullParser;
 import com.santossingh.capstoneproject.Adatpers.AmazonRecyclerAdapter;
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
-import com.santossingh.capstoneproject.Models.Amazon.Constants;
+import com.santossingh.capstoneproject.Models.Constants;
 import com.santossingh.capstoneproject.R;
 import com.santossingh.capstoneproject.Utilities.AutofitGridlayout;
 

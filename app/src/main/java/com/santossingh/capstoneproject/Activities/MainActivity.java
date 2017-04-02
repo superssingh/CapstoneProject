@@ -1,5 +1,6 @@
 package com.santossingh.capstoneproject.Activities;
 
+import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,8 +19,8 @@ import com.santossingh.capstoneproject.Fragments.DetailFragment;
 import com.santossingh.capstoneproject.Fragments.FavoriteFragment;
 import com.santossingh.capstoneproject.Fragments.GoogleFragment;
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
-import com.santossingh.capstoneproject.Models.Amazon.Constants;
-import com.santossingh.capstoneproject.Models.Database.FavoriteBooks;
+import com.santossingh.capstoneproject.Models.Constants;
+import com.santossingh.capstoneproject.Models.Database.RealmDB.FavoriteBooks;
 import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;
 
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     NavigationView navigationView;
     private ActionBarDrawerToggle drawerToggle;
 
+    private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         //Realm initialization
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
+                .name("favorite.realm")
+                .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(config);
@@ -195,5 +200,15 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    //-----------Widgets
+
+
 
 }

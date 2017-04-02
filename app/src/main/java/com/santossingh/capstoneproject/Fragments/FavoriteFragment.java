@@ -4,13 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.santossingh.capstoneproject.Adatpers.FavoriteRecyclerAdapter;
-import com.santossingh.capstoneproject.Models.Database.FavoriteBooks;
+import com.santossingh.capstoneproject.Models.Database.RealmDB.FavoriteBooks;
 import com.santossingh.capstoneproject.R;
 import com.santossingh.capstoneproject.Utilities.AutofitGridlayout;
 
@@ -57,10 +56,8 @@ public class FavoriteFragment extends Fragment {
         realm = Realm.getDefaultInstance();
         booksList = realm.where(FavoriteBooks.class).findAll();
         if (booksList.size() == 0) {
-            Log.i("0", "0");
             recyclerView.setVisibility(View.GONE);
         } else {
-            Log.i("1", "1");
             configRecycleView(booksList);
         }
     }
@@ -89,8 +86,13 @@ public class FavoriteFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        realm.close();
+    }
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(FavoriteBooks book);
     }
-
 }
