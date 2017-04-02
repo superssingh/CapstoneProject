@@ -4,7 +4,7 @@
     android:layout_height="160dp"
     android:elevation="4dp"
     android:padding="8dp"
-    android:rotationY="30">
+    android:rotationY="24">
 
     <ImageView
         android:id="@+id/widgetImage"

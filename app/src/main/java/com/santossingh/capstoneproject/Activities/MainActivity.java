@@ -1,6 +1,5 @@
 package com.santossingh.capstoneproject.Activities;
 
-import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -39,8 +38,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     NavigationView navigationView;
     private ActionBarDrawerToggle drawerToggle;
 
-    private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         });
 
         AMAZON();
-
     }
 
     @Override
@@ -151,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Locate MenuItem with ShareActionProvider
         return true;
     }
 
@@ -162,10 +159,15 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
             GOOGLE();
         } else if (id == R.id.nav_favorite) {
             FAVORITE();
+        } else if (id == R.id.menu_item_share) {
+            runShare();
         }
+
         menuItem.setChecked(true);
         drawerLayout.closeDrawers();
     }
+
+    // Call to update the share intent
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -207,8 +209,12 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
     }
 
-    //-----------Widgets
-
-
+    private void runShare() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Awesome Reader App");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Hi, I believe that This is an amazing app for readers. Just try this here is the link  http://myappwebsitelink.com");
+        startActivity(Intent.createChooser(shareIntent, "Share using"));
+    }
 
 }
