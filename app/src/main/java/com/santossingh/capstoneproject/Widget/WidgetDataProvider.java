@@ -3,6 +3,7 @@ package com.santossingh.capstoneproject.Widget;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -14,6 +15,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.santossingh.capstoneproject.Models.Database.Firebase.TopBooks;
 import com.santossingh.capstoneproject.R;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,15 +79,16 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
                 R.layout.widget_item);
         remoteViews.setTextViewText(R.id.widgetTitle, topBooksList.get(position).getTitle());
 
-//            try {
-//                url = new URL(topBooksList.get(position).getImage());
-//                image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        remoteViews.setImageViewBitmap(R.id.widgetImage, image);
+        try {
+            url = new URL(topBooksList.get(position).getImage());
+            image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        remoteViews.setImageViewBitmap(R.id.widgetImage, image);
+
 
         return remoteViews;
     }
