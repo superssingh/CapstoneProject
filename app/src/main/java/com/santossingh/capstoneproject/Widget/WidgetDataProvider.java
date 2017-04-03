@@ -1,5 +1,7 @@
 package com.santossingh.capstoneproject.Widget;
 
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.santossingh.capstoneproject.Activities.MainActivity;
 import com.santossingh.capstoneproject.Models.Database.Firebase.TopBooks;
 import com.santossingh.capstoneproject.R;
 
@@ -30,12 +33,17 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     List<String> collection = new ArrayList<>();
     Context context;
     Intent intent;
+    int appWidgetIds;
     List<TopBooks> topBooksList;
     DatabaseReference databaseReference;
+
 
     public WidgetDataProvider(Context context, Intent intent) {
         this.context = context;
         this.intent = intent;
+        appWidgetIds = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+                AppWidgetManager.INVALID_APPWIDGET_ID);
+
     }
 
     private void initData() {
@@ -89,6 +97,10 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
         }
         remoteViews.setImageViewBitmap(R.id.widgetImage, image);
 
+        Intent configIntent = new Intent(context, MainActivity.class);
+//        configIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, configIntent, 0);
+        remoteViews.setOnClickPendingIntent(R.id.widgetImage, pendingIntent);
 
         return remoteViews;
     }

@@ -1,0 +1,18 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_widget"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    android:padding="16dp"
+    tools:context="com.santossingh.capstoneproject.Fragments.WidgetFragment">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/WidgetRecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+    </android.support.v7.widget.RecyclerView>
+
+</FrameLayout>

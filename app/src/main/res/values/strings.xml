@@ -78,6 +78,7 @@
     <string name="add_widget">Add widget</string>
     <string name="empty_widget">Empty widget.</string>
     <string name="configure">Configure</string>
+    <string name="TopBooks">Famous Books</string>
 
 
     <!--<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"-->

@@ -108,7 +108,7 @@ public class DetailFragment extends android.app.Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AmazonActivity.class)
-                        .putExtra(String.valueOf(R.string.URL_Link), Buy_Link);
+                        .putExtra(String.valueOf(R.string.BUY_Amazon), Buy_Link);
                 startActivity(intent);
             }
         });
@@ -116,7 +116,7 @@ public class DetailFragment extends android.app.Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AmazonActivity.class)
-                        .putExtra(String.valueOf(R.string.URL_Link), Review_Link);
+                        .putExtra(String.valueOf(R.string.Review_Link), Review_Link);
                 startActivity(intent);
             }
         });

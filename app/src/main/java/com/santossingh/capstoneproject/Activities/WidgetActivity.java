@@ -6,15 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.santossingh.capstoneproject.Fragments.DetailFragment;
+import com.santossingh.capstoneproject.Fragments.WidgetFragment;
+import com.santossingh.capstoneproject.Models.Database.Firebase.TopBooks;
 import com.santossingh.capstoneproject.R;
 
-public class DetailActivity extends AppCompatActivity {
+public class WidgetActivity extends AppCompatActivity implements WidgetFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_widget);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -27,10 +28,14 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        // Before send data from activity to fragment, first  we need to extend a fragment class with android.app.Fragment.
-        DetailFragment detailFragment = (DetailFragment) getFragmentManager().findFragmentById(R.id.fragment_detail);
-        detailFragment.setDataHandsetUI(intent);
-
     }
 
+    @Override
+    public void onFragmentInteraction(TopBooks book) {
+        if (book != null) {
+            Intent intent = new Intent(WidgetActivity.this, AmazonActivity.class)
+                    .putExtra(String.valueOf(R.string.BUY_Amazon), book.getBuyLink());
+            startActivity(intent);
+        }
+    }
 }

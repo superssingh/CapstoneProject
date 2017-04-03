@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
-    @BindView(R.id.nav_toolbar)
+    @BindView(R.id.customToolbar)
     Toolbar toolbar;
     @BindView(R.id.navigationView)
     NavigationView navigationView;

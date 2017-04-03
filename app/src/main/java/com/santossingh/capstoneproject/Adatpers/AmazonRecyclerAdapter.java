@@ -45,6 +45,7 @@ public class AmazonRecyclerAdapter extends RecyclerView.Adapter<AmazonRecyclerAd
         holder.book = booksList.get(position);
         Picasso.with(holder.mView.getContext()).load(holder.book.getImage())
                 .fit()
+                .error(R.mipmap.placeholder)
                 .into(holder.imageView);
         holder.title.setText(holder.book.getTitle());
 

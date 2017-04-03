@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context="com.santossingh.capstoneproject.Activities.WidgetActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <fragment
+        android:id="@+id/fragment_widget"
+        class="com.santossingh.capstoneproject.Fragments.WidgetFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Fragments.WidgetFrament"
+        tools:layout="@layout/fragment_widget" />
+</LinearLayout>
+

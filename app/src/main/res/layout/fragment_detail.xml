@@ -4,7 +4,7 @@
     android:id="@+id/CoordinateLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient1"
+    android:background="@drawable/gradient6"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
@@ -26,7 +26,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradient1"
+                android:background="@drawable/gradient2"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -34,8 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_margin="10dp"
                     app:layout_anchor="@id/collapsing_toolbar"
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="3"
@@ -47,7 +46,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
-                    android:background="@drawable/gradient2"
+                    android:background="@color/Black_transparent_50"
                     android:elevation="4dp"
                     android:gravity="right"
                     android:orientation="vertical"
@@ -106,7 +105,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_margin="10dp"
                 android:gravity="left"
                 android:orientation="horizontal">
 
@@ -114,7 +113,10 @@
                     android:id="@+id/BTNReview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#0d5093"
+                    android:background="@drawable/gradient5"
+                    android:elevation="4dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:text="RATING AND REVIEWS"
                     android:textColor="@color/white"
                     android:textSize="16dp" />
@@ -129,10 +131,14 @@
                         android:id="@+id/Amazon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#07b407"
-                        android:elevation="2dp"
+                        android:background="@drawable/gradient1"
+                        android:elevation="4dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:shadowColor="@color/cardview_shadow_end_color"
+                        android:shadowRadius="50"
                         android:text="Buy Now"
-                        android:textAllCaps="false"
+                        android:textAllCaps="true"
                         android:textColor="@color/white"
                         android:textSize="16dp" />
 
@@ -188,7 +194,7 @@
             android:backgroundTint="@color/red"
             android:clickable="true"
             android:contentDescription="@string/action_share"
-            android:elevation="4dp"
+            android:elevation="6dp"
             android:src="@drawable/ic_favorite"
             app:layout_anchor="@id/app_bar_layout"
             app:layout_anchorGravity="bottom|right"
