@@ -15,7 +15,6 @@
             android:id="@+id/nav_favorite"
             android:icon="@drawable/ic_favorite"
             android:title="Favorite Books" />
-
     </group>
 
     <item android:title="Communicate">

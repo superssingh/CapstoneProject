@@ -9,7 +9,7 @@ import com.santossingh.capstoneproject.R;
 
 public class AmazonActivity extends AppCompatActivity {
 
-    WebView webview;
+    private WebView webview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

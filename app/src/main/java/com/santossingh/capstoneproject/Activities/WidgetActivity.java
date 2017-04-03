@@ -19,8 +19,7 @@ public class WidgetActivity extends AppCompatActivity implements WidgetFragment.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle(R.string.DetailActivity);
-        Intent intent = getIntent();
+        setTitle(R.string.TopBooks);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

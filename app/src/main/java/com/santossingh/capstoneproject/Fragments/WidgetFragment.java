@@ -25,7 +25,6 @@ public class WidgetFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public WidgetFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -68,7 +67,6 @@ public class WidgetFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(TopBooks book);
     }
 }

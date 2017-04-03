@@ -12,6 +12,7 @@ public class ViewActivity extends AppCompatActivity {
     private static final String url = "file:///android_asset/google_preview.html";
     WebView webview;
     String id = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

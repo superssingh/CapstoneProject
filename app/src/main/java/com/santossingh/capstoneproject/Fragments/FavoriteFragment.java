@@ -2,6 +2,7 @@ package com.santossingh.capstoneproject.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -57,6 +58,7 @@ public class FavoriteFragment extends Fragment {
         booksList = realm.where(FavoriteBooks.class).findAll();
         if (booksList.size() == 0) {
             recyclerView.setVisibility(View.GONE);
+            Snackbar.make(view, R.string.Favorite_empty_list, Snackbar.LENGTH_LONG).show();
         } else {
             configRecycleView(booksList);
         }

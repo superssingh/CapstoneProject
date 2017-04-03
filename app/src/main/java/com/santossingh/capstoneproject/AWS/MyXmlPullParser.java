@@ -122,7 +122,6 @@ public class MyXmlPullParser {
             } else {
                 skip(parser);
             }
-
         }
 
         return book;

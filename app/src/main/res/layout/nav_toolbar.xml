@@ -4,7 +4,7 @@
     android:id="@+id/customToolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/gradient3"
+    android:background="@drawable/gradient5"
     android:elevation="4dp"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"

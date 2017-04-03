@@ -229,6 +229,7 @@ public class AmazonFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(AmazonBook book);
+
         void onTabletIntraction(AmazonBook book);
     }
 
@@ -241,6 +242,7 @@ public class AmazonFragment extends Fragment {
             new CountDownTimer(4000, 1000) {
                 public void onTick(long millisUntilFinished) {
                 }
+
                 public void onFinish() {
                 }
             }.start();

@@ -19,17 +19,8 @@ public interface LibraryAPI {
     @GET("/books/v1/volumes?q=nonfiction&filter=free-ebooks&maxResults=40")
     Call<BooksLibrary> getFreeNonFictionBooks();
 
-    @GET("/books/v1/volumes?q=science&filter=free-ebooks&maxResults=40")
-    Call<BooksLibrary> getFreeSciBooks();
-
-    @GET("/books/v1/volumes?q=sports&filter=free-ebooks&maxResults=40")
-    Call<BooksLibrary> getFreeSportsBooks();
-
     @GET("/books/v1/volumes?q=business&filter=free-ebooks&maxResults=40")
     Call<BooksLibrary> getFreeBusinessBooks();
-
-    @GET("/books/v1/volumes?q=Top&filter=free-ebooks&maxResults=40")
-    Call<BooksLibrary> getFreeTopBooks();
 
     @GET("/books/v1/volumes?q=romance&filter=free-ebooks&maxResults=40")
     Call<BooksLibrary> getFreeRomanceBooks();

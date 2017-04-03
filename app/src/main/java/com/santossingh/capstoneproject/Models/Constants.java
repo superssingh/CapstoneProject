@@ -16,6 +16,4 @@ public class Constants {
     public final static String Romance = "Romance";
     public final static String Fantasy = "Fantasy";
 
-    //    SQLite table  constants----
-//    public final static String
 }

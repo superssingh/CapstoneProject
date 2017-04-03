@@ -136,8 +136,6 @@
                         android:elevation="4dp"
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
-                        android:shadowColor="@color/cardview_shadow_end_color"
-                        android:shadowRadius="50"
                         android:text="Buy Now"
                         android:textAllCaps="true"
                         android:textColor="@color/white"

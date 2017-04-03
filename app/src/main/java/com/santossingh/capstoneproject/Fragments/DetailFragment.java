@@ -28,7 +28,6 @@ import com.santossingh.capstoneproject.Models.Constants;
 import com.santossingh.capstoneproject.Models.Database.Firebase.TopBooks;
 import com.santossingh.capstoneproject.Models.Database.RealmDB.FavoriteBooks;
 import com.santossingh.capstoneproject.Models.Database.RealmDB.RealmContentProvider;
-import com.santossingh.capstoneproject.Models.Database.SQLiteDB.DatabaseHelper;
 import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;
 import com.squareup.picasso.Picasso;
@@ -206,15 +205,6 @@ public class DetailFragment extends android.app.Fragment {
             public void onClick(View view) {
                 RealmContentProvider contentProvider = new RealmContentProvider();
                 contentProvider.addBookFromIntent(getActivity(), intent);
-//                addFavorite(intent);
-
-//                TopBooks topBooks=new TopBooks(
-//                        Book_ID, Title.getText().toString(), Author.getText().toString(), intent.getStringExtra(String.valueOf(R.string.IMAGE)),
-//                        Year.getText().toString(), Price.getText().toString(), Buy_Link, Review_Link, Description.getText().toString()
-//                );
-//
-//                databaseReference.push().setValue(topBooks);
-
             }
         });
     }
@@ -288,66 +278,6 @@ public class DetailFragment extends android.app.Fragment {
                         snackbar.show();
                     }
                 });
-    }
-
-    public void addFavorite(Intent intent) {
-        DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
-        boolean answer = databaseHelper.addBook(
-                intent.getStringExtra(String.valueOf(R.string.BOOK_ID)),
-                intent.getStringExtra(String.valueOf(R.string.BOOK_TITLE)),
-                intent.getStringExtra(String.valueOf(R.string.AUTHOR)),
-                intent.getStringExtra(String.valueOf(R.string.IMAGE)),
-                intent.getStringExtra(String.valueOf(R.string.PRICE)),
-                intent.getStringExtra(String.valueOf(R.string.PUBLISHED_YEAR)),
-                intent.getStringExtra(String.valueOf(R.string.BUY_Amazon)),
-                intent.getStringExtra(String.valueOf(R.string.Review_Link)),
-                intent.getStringExtra(String.valueOf(R.string.DESCRIPTION))
-        );
-        if (answer == true) {
-            Toast.makeText(getActivity(), "Data add as favorite", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getActivity(), "Data already exists", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void addFavorite(AmazonBook book) {
-        DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
-        boolean answer = databaseHelper.addBook(
-                book.getAsin(),
-                book.getTitle(),
-                book.getAuthor(),
-                book.getImage(),
-                book.getPrice(),
-                book.getPublishedDate(),
-                book.getDetailURL(),
-                book.getReviews(),
-                book.getDescription()
-        );
-        if (answer == true) {
-            Toast.makeText(getActivity(), "Data add as favorite", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getActivity(), "Data already exists", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void addFavorite(Item book) {
-        DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
-        boolean answer = databaseHelper.addBook(
-                book.getId(),
-                book.getVolumeInfo().getTitle(),
-                book.getVolumeInfo().getAuthors().get(0) == null ? Constants.NOT_AVAILABLE : book.getVolumeInfo().getAuthors().get(0),
-                book.getVolumeInfo().getImageLinks().getThumbnail(),
-                Constants.FREE_TAG,
-                book.getVolumeInfo().getPublishedDate() == null ? Constants.NOT_AVAILABLE : book.getVolumeInfo().getPublishedDate(),
-                Constants.NOT_AVAILABLE,
-                Constants.NOT_AVAILABLE,
-                Constants.FREE_DESCRIPTION_TAG
-        );
-        if (answer == true) {
-            Toast.makeText(getActivity(), "Data add as favorite", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getActivity(), "Data already exists", Toast.LENGTH_LONG).show();
-        }
     }
 
 }
