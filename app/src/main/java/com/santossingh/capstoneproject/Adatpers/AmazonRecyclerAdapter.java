@@ -43,11 +43,11 @@ public class AmazonRecyclerAdapter extends RecyclerView.Adapter<AmazonRecyclerAd
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         holder.book = booksList.get(position);
+        holder.title.setText(holder.book.getTitle());
         Picasso.with(holder.mView.getContext()).load(holder.book.getImage())
                 .fit()
                 .error(R.mipmap.placeholder)
                 .into(holder.imageView);
-        holder.title.setText(holder.book.getTitle());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

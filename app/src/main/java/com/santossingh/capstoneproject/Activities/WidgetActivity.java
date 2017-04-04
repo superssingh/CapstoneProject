@@ -26,7 +26,6 @@ public class WidgetActivity extends AppCompatActivity implements WidgetFragment.
                 finish();
             }
         });
-
     }
 
     @Override

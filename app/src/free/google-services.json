@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "4034208760",
+    "firebase_url": "https://readerlibrary-153022.firebaseio.com",
+    "project_id": "readerlibrary-153022",
+    "storage_bucket": "readerlibrary-153022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4034208760:android:da48467d5b3709a1",
+        "android_client_info": {
+          "package_name": "com.santossingh.capstoneproject.flavors.free"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4034208760-jnm4n683ke3usilsqg9p4o3s9vu4f76a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.santossingh.capstoneproject.flavors.free",
+            "certificate_hash": "EEB62BA605179A4CA19342C5554144BD5B7F3A61"
+          }
+        },
+        {
+          "client_id": "4034208760-jakothltdsld19966v1ah1ln3j4n2532.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIQfbB0_Tze-zM-WUpBjClvmWaz1lY7R8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "4034208760-jakothltdsld19966v1ah1ln3j4n2532.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

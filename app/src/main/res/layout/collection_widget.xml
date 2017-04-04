@@ -47,7 +47,9 @@
                 android:id="@+id/widget_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:numColumns="auto_fit"></GridView>
+                android:numColumns="2">
+
+            </GridView>
 
             <ImageButton
                 android:id="@+id/widgetButton"

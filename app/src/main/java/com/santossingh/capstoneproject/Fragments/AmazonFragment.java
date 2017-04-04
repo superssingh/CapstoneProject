@@ -109,10 +109,13 @@ public class AmazonFragment extends Fragment {
     }
 
     private void configRecycleView() {
-        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), 300);
+//        StaggeredGridLayoutManager sglm =
+//                new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), 240);
         recyclerViewAdapter = new AmazonRecyclerAdapter(mListener);
-        recyclerView.setLayoutManager(autofitGridlayout);
         recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setLayoutManager(autofitGridlayout);
+
     }
 
     private InputStream downloadUrl(String urls) throws IOException {
@@ -270,7 +273,7 @@ public class AmazonFragment extends Fragment {
             recyclerView.setVisibility(View.VISIBLE);
             itemsList = amazonBooksList;
             recyclerViewAdapter.addList(itemsList);
-            mListener.onTabletIntraction(itemsList.get(0));
+            mListener.onTabletIntraction(amazonBooksList.get(0));
         }
     }
 

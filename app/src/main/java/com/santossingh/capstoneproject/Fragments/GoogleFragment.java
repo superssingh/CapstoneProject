@@ -80,7 +80,7 @@ public class GoogleFragment extends Fragment {
     }
 
     private void configRecycleView() {
-        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), 330);
+        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), 240);
         recyclerViewAdapter = new GoogleRecyclerAdapter(mListener);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(autofitGridlayout);

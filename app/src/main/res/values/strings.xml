@@ -9,7 +9,6 @@
         <item>For Kids</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
 
@@ -79,5 +78,6 @@
     <string name="empty_widget">Empty widget.</string>
     <string name="configure">Configure</string>
     <string name="TopBooks">Famous Books</string>
+    <string name="action_Favorite">favorite</string>
 
 </resources>

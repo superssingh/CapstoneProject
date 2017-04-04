@@ -9,8 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/gradient1"
+        android:background="@drawable/gradient5"
         app:navigationIcon="@drawable/ic_arrow_back"
         app:titleTextColor="@color/white" />
 </LinearLayout>

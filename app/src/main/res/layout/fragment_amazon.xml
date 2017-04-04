@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:layout_margin="10dp"
-        android:background="@color/Orange_transparent_50"
+        android:background="@color/Black_transparent_50"
         android:elevation="8dp"
         android:orientation="vertical"
         android:padding="10dp"

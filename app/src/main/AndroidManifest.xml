@@ -14,11 +14,17 @@
         <activity
             android:name=".Activities.MainActivity"
             android:configChanges="orientation|screenSize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--
+           To stop double installation OR this Launcher Delete or comment intent filter from
+           main>manifest.
+           -->
+
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity android:name=".Activities.DetailActivity" />
         <activity android:name=".Activities.AmazonActivity" />
