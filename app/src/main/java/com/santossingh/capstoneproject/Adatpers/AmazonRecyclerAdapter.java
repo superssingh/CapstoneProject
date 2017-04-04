@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.santossingh.capstoneproject.Fragments.AmazonFragment;
 import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
 import com.santossingh.capstoneproject.R;
+import com.santossingh.capstoneproject.Utilities.AnimationUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -18,13 +19,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link } and makes a call to the
- * TODO: Replace the implementation with code for your data type.
- */
 
 public class AmazonRecyclerAdapter extends RecyclerView.Adapter<AmazonRecyclerAdapter.ViewHolder> {
 
+    int preposition;
     private List<AmazonBook> booksList = new ArrayList<>();
     private AmazonFragment.OnFragmentInteractionListener mListener;
 
@@ -57,6 +55,13 @@ public class AmazonRecyclerAdapter extends RecyclerView.Adapter<AmazonRecyclerAd
                 }
             }
         });
+
+        if (position > preposition) {
+            AnimationUtil.animate(holder, true);
+        } else {
+            AnimationUtil.animate(holder, false);
+        }
+        preposition = position;
     }
 
     @Override

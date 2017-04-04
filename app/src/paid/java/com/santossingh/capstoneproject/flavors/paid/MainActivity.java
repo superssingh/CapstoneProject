@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //Realm initialization
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
@@ -59,8 +59,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -98,7 +96,9 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     public void onTabletIntraction(AmazonBook book) {
         DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
-        if (detailFragment != null) {
+        Boolean has = detailFragment != null;
+
+        if (has == true) {
             detailFragment.setDataforTabletUI(book);
         }
     }

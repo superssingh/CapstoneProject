@@ -1,7 +1,6 @@
 package com.santossingh.capstoneproject.flavors.free;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     AdView adView;
     @BindView(R.id.progressBarLayout)
     LinearLayout layoutProgressbar;
-
     @BindView(R.id.main_frame)
     FrameLayout main_frame;
 
@@ -64,7 +62,8 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        main_frame.setVisibility(View.GONE);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //Realm initialization
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
@@ -78,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -88,17 +86,15 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
             }
         });
 
-        //--------------------------
-
+        // Banner Ad initialization
         adRequestBanner = new AdRequest.Builder().build();
         adView.loadAd(adRequestBanner);
 
+        // Interstitial Ad initialization
+        AdRequest adRequestInterstitial = new AdRequest.Builder().build();
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
-        AdRequest adRequestInterstitial = new AdRequest.Builder().build();
-
         mInterstitialAd.loadAd(adRequestInterstitial);
-
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
@@ -123,16 +119,30 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
             }
         });
 
-        //---------
-
         runTask();
 
+    }
+
+    public void runTask() {
+        new CountDownTimer(4000, 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                showInterstitial();
+            }
+        }.start();
     }
 
     private void showInterstitial() {
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -161,7 +171,9 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     public void onTabletIntraction(AmazonBook book) {
         DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
-        if (detailFragment != null) {
+        Boolean has= detailFragment==null ? false : true;
+
+        if (has==true) {
             detailFragment.setDataforTabletUI(book);
         }
     }
@@ -231,8 +243,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         drawerLayout.closeDrawers();
     }
 
-    // Call to update the share intent
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (drawerToggle.onOptionsItemSelected(item)) {
@@ -270,46 +280,14 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
     }
 
     private void runShare() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Awesome Reader App");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "Hi, I believe that This is an amazing app for readers. Just try this here is the link  http://myappwebsitelink.com");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Hi, This is an amazing app for readers. Just try this, here is the link: http://myappwebsitelink.com");
         startActivity(Intent.createChooser(shareIntent, "Share using"));
-    }
-
-    public void runTask() {
-        new CountDownTimer(4000, 1000) {
-            public void onTick(long millisUntilFinished) {
-            }
-
-            public void onFinish() {
-                showInterstitial();
-            }
-        }.start();
-    }
-
-    public class AWSAsyncTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-        }
     }
 
 }

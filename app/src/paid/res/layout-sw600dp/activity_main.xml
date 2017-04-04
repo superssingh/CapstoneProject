@@ -14,11 +14,40 @@
 
         <include layout="@layout/nav_toolbar" />
 
-        <FrameLayout
-            android:id="@+id/main_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
+        <FrameLayout
+            android:id="@+id/base_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <FrameLayout
+                        android:id="@+id/main_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </FrameLayout>
+                </LinearLayout>
+
+
+                <fragment
+                    android:id="@+id/fragment_detail"
+                    class="com.santossingh.capstoneproject.Fragments.DetailFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    tools:layout="@layout/fragment_detail" />
+            </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
 
     <android.support.design.widget.NavigationView

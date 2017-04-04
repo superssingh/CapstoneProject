@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.santossingh.capstoneproject.Fragments.GoogleFragment;
 import com.santossingh.capstoneproject.Models.Google.Item;
 import com.santossingh.capstoneproject.R;
+import com.santossingh.capstoneproject.Utilities.AnimationUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class GoogleRecyclerAdapter extends RecyclerView.Adapter<GoogleRecyclerAd
 
     private List<Item> itemList = new ArrayList<Item>();
     private GoogleFragment.OnFragmentInteractionListener mListener;
+    private int preposition;
 
     public GoogleRecyclerAdapter(GoogleFragment.OnFragmentInteractionListener listener) {
         mListener = listener;
@@ -45,6 +47,13 @@ public class GoogleRecyclerAdapter extends RecyclerView.Adapter<GoogleRecyclerAd
                 }
             }
         });
+
+        if (position > preposition) {
+            AnimationUtil.animate(holder, true);
+        } else {
+            AnimationUtil.animate(holder, false);
+        }
+        preposition = position;
     }
 
     @Override

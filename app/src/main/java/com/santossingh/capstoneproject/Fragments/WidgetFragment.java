@@ -43,7 +43,7 @@ public class WidgetFragment extends Fragment {
     }
 
     private void configRecycleView() {
-        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), 300);
+        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), 240);
         recycleAdapter = new WidgetRecyclerAdapter(mListener);
         recyclerView.setLayoutManager(autofitGridlayout);
         recyclerView.setAdapter(recycleAdapter);
