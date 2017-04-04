@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.santossingh.capstoneproject.Amazon.Models.AmazonBook;
 import com.santossingh.capstoneproject.Fragments.AmazonFragment;
-import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
 import com.santossingh.capstoneproject.R;
 import com.santossingh.capstoneproject.Utilities.AnimationUtil;
 import com.squareup.picasso.Picasso;

@@ -51,7 +51,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:multidex:1.0.0'
     freeCompile 'com.google.firebase:firebase-ads:10.2.1'
-//    compile 'com.android.volley:volley:1.0.0'
     testCompile 'org.mockito:mockito-core:1.10.19'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'

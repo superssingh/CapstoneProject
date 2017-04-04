@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.santossingh.capstoneproject.Fragments.GoogleFragment;
-import com.santossingh.capstoneproject.Models.Google.Item;
+import com.santossingh.capstoneproject.Google.Models.Item;
 import com.santossingh.capstoneproject.R;
 import com.santossingh.capstoneproject.Utilities.AnimationUtil;
 

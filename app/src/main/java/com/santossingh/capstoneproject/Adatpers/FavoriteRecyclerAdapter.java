@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.santossingh.capstoneproject.Database.RealmLocalDB.FavoriteBooks;
 import com.santossingh.capstoneproject.Fragments.FavoriteFragment;
-import com.santossingh.capstoneproject.Models.Database.RealmDB.FavoriteBooks;
 import com.santossingh.capstoneproject.R;
 import com.santossingh.capstoneproject.Utilities.AnimationUtil;
 import com.squareup.picasso.Picasso;

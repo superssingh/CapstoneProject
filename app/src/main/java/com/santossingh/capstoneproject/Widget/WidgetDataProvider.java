@@ -13,7 +13,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.santossingh.capstoneproject.Models.Database.Firebase.TopBooks;
+import com.santossingh.capstoneproject.Database.Firebase.TopBooks;
 import com.santossingh.capstoneproject.R;
 
 import java.io.IOException;

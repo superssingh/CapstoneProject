@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.santossingh.capstoneproject.Database.Firebase.TopBooks;
 import com.santossingh.capstoneproject.Fragments.WidgetFragment;
-import com.santossingh.capstoneproject.Models.Database.Firebase.TopBooks;
 import com.santossingh.capstoneproject.R;
 
 public class WidgetActivity extends AppCompatActivity implements WidgetFragment.OnFragmentInteractionListener {

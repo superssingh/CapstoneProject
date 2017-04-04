@@ -14,12 +14,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.santossingh.capstoneproject.Adatpers.GoogleRecyclerAdapter;
-import com.santossingh.capstoneproject.Models.Constants;
-import com.santossingh.capstoneproject.Models.Google.BooksLibrary;
-import com.santossingh.capstoneproject.Models.Google.Item;
+import com.santossingh.capstoneproject.Google.Models.BooksLibrary;
+import com.santossingh.capstoneproject.Google.Models.Item;
+import com.santossingh.capstoneproject.Google.Services.DataManager;
 import com.santossingh.capstoneproject.R;
-import com.santossingh.capstoneproject.Services.DataManager;
 import com.santossingh.capstoneproject.Utilities.AutofitGridlayout;
+import com.santossingh.capstoneproject.Utilities.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;

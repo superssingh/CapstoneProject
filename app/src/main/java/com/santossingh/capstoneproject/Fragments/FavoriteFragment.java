@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.santossingh.capstoneproject.Adatpers.FavoriteRecyclerAdapter;
-import com.santossingh.capstoneproject.Models.Database.RealmDB.FavoriteBooks;
+import com.santossingh.capstoneproject.Database.RealmLocalDB.FavoriteBooks;
 import com.santossingh.capstoneproject.R;
 import com.santossingh.capstoneproject.Utilities.AutofitGridlayout;
 

@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.santossingh.capstoneproject.Adatpers.WidgetRecyclerAdapter;
-import com.santossingh.capstoneproject.Models.Database.Firebase.TopBooks;
+import com.santossingh.capstoneproject.Database.Firebase.TopBooks;
 import com.santossingh.capstoneproject.R;
 import com.santossingh.capstoneproject.Utilities.AutofitGridlayout;
 

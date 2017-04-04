@@ -1,13 +1,5 @@
 <resources>
     <string name="app_name">Book Reader</string>
-    <string-array name="drawerCategoryList">
-        <item>Best Seller</item>
-        <item>Business</item>
-        <item>Technology</item>
-        <item>Sports</item>
-        <item>Stories</item>
-        <item>For Kids</item>
-    </string-array>
 
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
@@ -20,15 +12,6 @@
     <string name="KEY">key</string>
     <string name="No_Internet">Please Turn ON Internet Connection</string>
     <string name="AspectRatio">0.73f</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="pdf_show_online_dialog_title">OpenTitle</string>
-    <string name="pdf_show_online_dialog_question">dialog_question</string>
-    <string name="pdf_show_online_dialog_button_no">dialog_button_NO</string>
-    <string name="pdf_show_online_dialog_button_yes">dialog_button_YES</string>
-    <string name="pdf_show_local_progress_title">local_progress_title</string>
-    <string name="pdf_show_local_progress_content">local_progress_content</string>
     <string name="action_share">Share</string>
 
     //Book Details Captions
@@ -51,8 +34,6 @@
     <string name="PRICE">PRICE</string>
     <string name="Review_Link">Review_Link</string>
 
-    <string name="piecePlaceEnum">piecePlace_ham_4</string>
-    <string name="buttonPlaceEnum">buttonPlace_ham_4</string>
     <string name="search_bar">Search</string>
     <string name="Refresh">Refresh</string>
     <string name="URL_Link">url</string>
@@ -79,5 +60,7 @@
     <string name="configure">Configure</string>
     <string name="TopBooks">Famous Books</string>
     <string name="action_Favorite">favorite</string>
+    <string name="NotFound">Sorry, your desire book or author not found.</string>
+    <string name="FillSearchBox">Please enter desire book or author name.</string>
 
 </resources>

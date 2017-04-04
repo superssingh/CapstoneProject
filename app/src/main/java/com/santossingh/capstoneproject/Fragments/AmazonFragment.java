@@ -1,13 +1,10 @@
 package com.santossingh.capstoneproject.Fragments;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,18 +16,14 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import com.santossingh.capstoneproject.AWS.AWS_URL;
-import com.santossingh.capstoneproject.AWS.MyXmlPullParser;
 import com.santossingh.capstoneproject.Adatpers.AmazonRecyclerAdapter;
-import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
-import com.santossingh.capstoneproject.Models.Constants;
+import com.santossingh.capstoneproject.Amazon.AsyncTask.AsyncResponse;
+import com.santossingh.capstoneproject.Amazon.AsyncTask.MyAsyncTask;
+import com.santossingh.capstoneproject.Amazon.Models.AmazonBook;
 import com.santossingh.capstoneproject.R;
 import com.santossingh.capstoneproject.Utilities.AutofitGridlayout;
+import com.santossingh.capstoneproject.Utilities.Constants;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +38,7 @@ import butterknife.ButterKnife;
  * create an instance of this fragment.
  */
 
-public class AmazonFragment extends Fragment {
+public class AmazonFragment extends Fragment implements AsyncResponse {
 
     private static final String STATE_BOOKS = "paid_books";
     @BindView(R.id.AWS_recycleView)
@@ -61,6 +54,7 @@ public class AmazonFragment extends Fragment {
     @BindView(R.id.input_name)
     EditText inputName;
     int menuPosition;
+    MyAsyncTask myAsyncTask;
     private List<AmazonBook> itemsList;
     private AmazonRecyclerAdapter recyclerViewAdapter;
     private View view;
@@ -93,6 +87,7 @@ public class AmazonFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_amazon, container, false);
         ButterKnife.bind(this, view);
         itemsList = new ArrayList<AmazonBook>();
+        myAsyncTask = new MyAsyncTask(this);
         configRecycleView();
 
         if (savedInstanceState != null) {
@@ -100,8 +95,7 @@ public class AmazonFragment extends Fragment {
             itemsList = savedInstanceState.getParcelableArrayList(STATE_BOOKS);
             recyclerViewAdapter.addList(itemsList);
         } else {
-            AWSAsyncTask searchQuery = new AWSAsyncTask();
-            searchQuery.execute(Constants.Business);
+            myAsyncTask.execute(Constants.Business);
             menuPosition = R.id.Business;
         }
 
@@ -109,24 +103,10 @@ public class AmazonFragment extends Fragment {
     }
 
     private void configRecycleView() {
-//        StaggeredGridLayoutManager sglm =
-//                new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), 240);
         recyclerViewAdapter = new AmazonRecyclerAdapter(mListener);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(autofitGridlayout);
-
-    }
-
-    private InputStream downloadUrl(String urls) throws IOException {
-        URL url = new URL(urls);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setReadTimeout(10000 /* milliseconds */);
-        conn.setConnectTimeout(15000 /* milliseconds */);
-        conn.setRequestMethod("GET");
-        conn.setDoInput(true);
-        conn.connect();
-        return conn.getInputStream();
     }
 
     @Override
@@ -147,16 +127,6 @@ public class AmazonFragment extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_amazon, menu);
         super.onCreateOptionsMenu(menu, inflater);
@@ -164,7 +134,6 @@ public class AmazonFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        AWSAsyncTask searchQuery = new AWSAsyncTask();
         switch (item.getItemId()) {
 
             case R.id.my_search_bar:
@@ -174,31 +143,31 @@ public class AmazonFragment extends Fragment {
             case R.id.Business:
                 item.setChecked(true);
                 menuPosition = R.id.Business;
-                searchQuery.execute(Constants.Business);
+                startQueryTask(Constants.Business);
                 return true;
 
             case R.id.Fantasy:
                 item.setChecked(true);
                 menuPosition = R.id.Fantasy;
-                searchQuery.execute(Constants.Fantasy);
+                startQueryTask(Constants.Fantasy);
                 return true;
 
             case R.id.Fiction:
                 item.setChecked(true);
                 menuPosition = R.id.Fiction;
-                searchQuery.execute(Constants.Fiction);
+                startQueryTask(Constants.Fiction);
                 return true;
 
             case R.id.NonFiction:
                 item.setChecked(true);
                 menuPosition = R.id.NonFiction;
-                searchQuery.execute(Constants.NonFiction);
+                startQueryTask(Constants.NonFiction);
                 return true;
 
             case R.id.Romance:
                 item.setChecked(true);
                 menuPosition = R.id.Romance;
-                searchQuery.execute(Constants.Romance);
+                startQueryTask(Constants.Romance);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -212,11 +181,10 @@ public class AmazonFragment extends Fragment {
             public void onClick(View view) {
                 if (!inputName.getText().toString().equals("")) {
                     searchLayout.setVisibility(View.GONE);
-                    AWSAsyncTask searchQuery = new AWSAsyncTask();
-                    searchQuery.execute(inputName.getText().toString());
+                    startQueryTask(inputName.getText().toString());
                     inputName.setText("");
                 } else {
-                    Snackbar.make(view, "Please enter your desire book name", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view, R.string.FillSearchBox, Snackbar.LENGTH_LONG).show();
                 }
             }
         });
@@ -230,52 +198,33 @@ public class AmazonFragment extends Fragment {
 
     }
 
+    @Override
+    public void processFinish(List<AmazonBook> result) {
+        progressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+
+        if (result != null) {
+            itemsList = result;
+            recyclerViewAdapter.addList(itemsList);
+            mListener.onTabletIntraction(result.get(0));
+        } else {
+            Snackbar.make(view, R.string.NotFound, Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    public void startQueryTask(String query) {
+        if (query != null) {
+            progressBar.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+            MyAsyncTask newTask = new MyAsyncTask(this);
+            newTask.execute(query);
+        }
+    }
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(AmazonBook book);
 
         void onTabletIntraction(AmazonBook book);
     }
-
-    public class AWSAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            recyclerView.setVisibility(View.GONE);
-            progressBar.setVisibility(View.VISIBLE);
-            new CountDownTimer(4000, 1000) {
-                public void onTick(long millisUntilFinished) {
-                }
-
-                public void onFinish() {
-                }
-            }.start();
-        }
-
-        @Override
-        protected List<AmazonBook> doInBackground(String... urls) {
-            String url = new AWS_URL().getURLByCategory(urls[0]);
-            Log.i("Link", url);
-            List<AmazonBook> booksList = new ArrayList<>();
-            try {
-                MyXmlPullParser myXmlPullParser = new MyXmlPullParser();
-                InputStream is = downloadUrl(url);
-                booksList = myXmlPullParser.parse(is);
-                return booksList;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return booksList;
-        }
-
-        @Override
-        protected void onPostExecute(List<AmazonBook> amazonBooksList) {
-            progressBar.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-            itemsList = amazonBooksList;
-            recyclerViewAdapter.addList(itemsList);
-            mListener.onTabletIntraction(amazonBooksList.get(0));
-        }
-    }
-
 
 }

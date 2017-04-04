@@ -14,15 +14,15 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.santossingh.capstoneproject.Activities.DetailActivity;
+import com.santossingh.capstoneproject.Amazon.Models.AmazonBook;
+import com.santossingh.capstoneproject.Database.RealmLocalDB.FavoriteBooks;
 import com.santossingh.capstoneproject.Fragments.AmazonFragment;
 import com.santossingh.capstoneproject.Fragments.DetailFragment;
 import com.santossingh.capstoneproject.Fragments.FavoriteFragment;
 import com.santossingh.capstoneproject.Fragments.GoogleFragment;
-import com.santossingh.capstoneproject.Models.Amazon.AmazonBook;
-import com.santossingh.capstoneproject.Models.Constants;
-import com.santossingh.capstoneproject.Models.Database.RealmDB.FavoriteBooks;
-import com.santossingh.capstoneproject.Models.Google.Item;
+import com.santossingh.capstoneproject.Google.Models.Item;
 import com.santossingh.capstoneproject.R;
+import com.santossingh.capstoneproject.Utilities.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
