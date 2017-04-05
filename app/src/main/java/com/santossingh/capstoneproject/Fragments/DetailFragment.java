@@ -214,7 +214,7 @@ public class DetailFragment extends android.app.Fragment {
         if (string != null) {
             filter = Html.fromHtml(string).toString();
         } else {
-            filter = "[N/A]";
+            filter = "[" + Constants.NOT_AVAILABLE + "]";
         }
         return filter;
     }
