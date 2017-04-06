@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/Red_transparent_50"
+        android:background="@color/Orange_transparent_50"
         android:focusableInTouchMode="true"
         app:headerLayout="@layout/navigation_header"
         app:itemIconTint="@color/white"
