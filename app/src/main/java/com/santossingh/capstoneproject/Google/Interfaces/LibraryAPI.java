@@ -22,10 +22,16 @@ public interface LibraryAPI {
     @GET("/books/v1/volumes?q=business&filter=free-ebooks&maxResults=40")
     Call<BooksLibrary> getFreeBusinessBooks();
 
-    @GET("/books/v1/volumes?q=romance&filter=free-ebooks&maxResults=40")
-    Call<BooksLibrary> getFreeRomanceBooks();
+    @GET("/books/v1/volumes?q=love&filter=free-ebooks&maxResults=40")
+    Call<BooksLibrary> getFreeLoveBooks();
+
+    @GET("/books/v1/volumes?q=comics&filter=free-ebooks&maxResults=40")
+    Call<BooksLibrary> getFreeComicsBooks();
 
     @GET("/books/v1/volumes?q=fantasy&filter=free-ebooks&maxResults=40")
     Call<BooksLibrary> getFreeFantasyBooks();
+
+    @GET("/books/v1/volumes?q=adventure&filter=free-ebooks&maxResults=40")
+    Call<BooksLibrary> getFreeAdventureBooks();
 
 }

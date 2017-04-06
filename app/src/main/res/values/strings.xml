@@ -42,7 +42,9 @@
     <string name="Fiction">Fiction</string>
     <string name="Fantasy">Fantasy</string>
     <string name="NonFiction">Non Fiction</string>
-    <string name="Romance">Romance</string>
+    <string name="Love">Love</string>
+    <string name="Comics">Comics</string>
+    <string name="Adventure">Adventure</string>
 
     <string name="Image_Width">240</string>
     <string name="NULL">NULL</string>

@@ -18,16 +18,24 @@
             android:title="@string/Fantasy" />
 
         <item
+            android:id="@+id/Adventure"
+            android:title="@string/Adventure" />
+
+        <item
+            android:id="@+id/Comics"
+            android:title="@string/Comics" />
+
+        <item
             android:id="@+id/Fiction"
             android:title="@string/Fiction" />
 
         <item
-            android:id="@+id/NonFiction"
-            android:title="@string/NonFiction" />
+            android:id="@+id/Love"
+            android:title="@string/Love" />
 
         <item
-            android:id="@+id/Romance"
-            android:title="@string/Romance" />
+            android:id="@+id/NonFiction"
+            android:title="@string/NonFiction" />
 
     </group>
 

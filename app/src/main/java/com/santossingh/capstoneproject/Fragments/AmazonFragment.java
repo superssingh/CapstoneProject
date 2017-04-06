@@ -162,11 +162,25 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
                 startQueryTask(getString(R.string.NonFiction));
                 return true;
 
-            case R.id.Romance:
+            case R.id.Love:
                 item.setChecked(true);
-                menuPosition = R.id.Romance;
+                menuPosition = R.id.Love;
                 searchID = 1;
-                startQueryTask(getString(R.string.Romance));
+                startQueryTask(getString(R.string.Love));
+                return true;
+
+            case R.id.Comics:
+                item.setChecked(true);
+                menuPosition = R.id.Comics;
+                searchID = 1;
+                startQueryTask(getString(R.string.Comics));
+                return true;
+
+            case R.id.Adventure:
+                item.setChecked(true);
+                menuPosition = R.id.Adventure;
+                searchID = 1;
+                startQueryTask(getString(R.string.Adventure));
                 return true;
         }
         return super.onOptionsItemSelected(item);

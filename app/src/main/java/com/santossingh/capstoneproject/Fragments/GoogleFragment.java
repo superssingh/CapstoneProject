@@ -37,12 +37,12 @@ public class GoogleFragment extends Fragment {
     ProgressBar progressBar;
     @BindView(R.id.recycleView)
     RecyclerView recyclerView;
+    int menuPosition;
     private DataManager dataManager;
     private List<Item> itemsList;
     private GoogleRecyclerAdapter recyclerViewAdapter;
     private View view;
     private OnFragmentInteractionListener mListener;
-    private int menuPosition;
 
     public GoogleFragment() {
     }
@@ -98,8 +98,12 @@ public class GoogleFragment extends Fragment {
             listCall = dataManager.getJSONData().getFreeNonFictionBooks();
         } else if (string.equalsIgnoreCase(String.valueOf(R.string.Fantasy))) {
             listCall = dataManager.getJSONData().getFreeFantasyBooks();
-        } else if (string.equalsIgnoreCase(String.valueOf(R.string.Romance))) {
-            listCall = dataManager.getJSONData().getFreeRomanceBooks();
+        } else if (string.equalsIgnoreCase(String.valueOf(R.string.Love))) {
+            listCall = dataManager.getJSONData().getFreeLoveBooks();
+        } else if (string.equalsIgnoreCase(String.valueOf(R.string.Adventure))) {
+            listCall = dataManager.getJSONData().getFreeAdventureBooks();
+        } else if (string.equalsIgnoreCase(String.valueOf(R.string.Comics))) {
+            listCall = dataManager.getJSONData().getFreeComicsBooks();
         }
 
         listCall.enqueue(new Callback<BooksLibrary>() {
@@ -176,10 +180,22 @@ public class GoogleFragment extends Fragment {
                 makeService(String.valueOf(R.string.NonFiction));
                 return true;
 
-            case R.id.Romance:
+            case R.id.Love:
                 item.setChecked(true);
-                menuPosition = R.id.Romance;
-                makeService(String.valueOf(R.string.Romance));
+                menuPosition = R.id.Love;
+                makeService(String.valueOf(R.string.Love));
+                return true;
+
+            case R.id.Adventure:
+                item.setChecked(true);
+                menuPosition = R.id.Adventure;
+                makeService(String.valueOf(R.string.Adventure));
+                return true;
+
+            case R.id.Comics:
+                item.setChecked(true);
+                menuPosition = R.id.Comics;
+                makeService(String.valueOf(R.string.Comics));
                 return true;
         }
         return super.onOptionsItemSelected(item);
