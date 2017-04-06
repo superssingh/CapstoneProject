@@ -46,7 +46,6 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
     @BindView(R.id.input_name)
     EditText inputName;
     int menuPosition;
-    MyAsyncTask myAsyncTask;
     private List<AmazonBook> itemsList;
     private AmazonRecyclerAdapter recyclerViewAdapter;
     private View view;
