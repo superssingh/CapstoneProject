@@ -5,6 +5,14 @@ apply plugin: 'com.google.gms.google-services'
 
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'Udacity_CapstoneProject'
+            keyPassword 'superuser'
+            storeFile file('/Users/santoshsingh/AndroidStudioProjects/CapstoneProject/keystore.jks')
+            storePassword 'superuser'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
     defaultConfig {
@@ -22,19 +30,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     productFlavors {
         free {
             applicationId "com.santossingh.capstoneproject.flavors.free"
+            signingConfig signingConfigs.config
         }
         paid {
             applicationId "com.santossingh.capstoneproject.flavors.paid"
+            signingConfig signingConfigs.config
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
