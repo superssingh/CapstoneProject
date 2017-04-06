@@ -2,6 +2,7 @@ package com.santossingh.capstoneproject.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -28,14 +29,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AmazonFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * create an instance of this fragment.
- */
 
 public class AmazonFragment extends Fragment implements AsyncResponse {
 
@@ -88,14 +81,13 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
         itemsList = new ArrayList<AmazonBook>();
         configRecycleView();
         progressBar.setVisibility(View.VISIBLE);
-        myAsyncTask = new MyAsyncTask(this);
 
         if (savedInstanceState != null) {
             progressBar.setVisibility(View.GONE);
             itemsList = savedInstanceState.getParcelableArrayList(STATE_BOOKS);
             recyclerViewAdapter.addList(itemsList);
         } else {
-            myAsyncTask.execute(getString(R.string.Business));
+            runTask(getString(R.string.Business));
             menuPosition = R.id.Business;
         }
 
@@ -214,6 +206,17 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
             MyAsyncTask newTask = new MyAsyncTask(this);
             newTask.execute(query);
         }
+    }
+
+    public void runTask(final String query) {
+        new CountDownTimer(3000, 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                startQueryTask(query);
+            }
+        }.start();
     }
 
     public interface OnFragmentInteractionListener {

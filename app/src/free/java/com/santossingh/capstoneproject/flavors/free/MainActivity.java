@@ -159,90 +159,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
             mInterstitialAd.show();
         }
     }
-//
-//    private void runShare() {
-//        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//        shareIntent.setType("text/plain");
-//        shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.ExtraSubject);
-//        shareIntent.putExtra(Intent.EXTRA_TEXT, R.string.ExtraText );
-//        startActivity(Intent.createChooser(shareIntent, "Share using"));
-//    }
-//
-//
-//    @Override
-//    public void onFragmentInteraction(AmazonBook book) {
-//        DetailFragment detailFragment = (DetailFragment) getFragmentManager()
-//                .findFragmentById(R.id.fragment_detail);
-//        if (detailFragment == null) {
-//            Toast.makeText(this, book.getAsin(), Toast.LENGTH_LONG).show();
-//            Intent intent = new Intent(this, DetailActivity.class)
-//                    .putExtra(getString(R.string.BOOK_ID), book.getAsin())
-//                    .putExtra(getString(R.string.BOOK_TITLE), book.getTitle())
-//                    .putExtra(getString(R.string.AUTHOR), book.getAuthor())
-//                    .putExtra(getString(R.string.PUBLISHED_YEAR), book.getPublishedDate())
-//                    .putExtra(getString(R.string.IMAGE), book.getImage())
-//                    .putExtra(getString(R.string.DESCRIPTION), book.getDescription())
-//                    .putExtra(getString(R.string.PRICE), book.getPrice())
-//                    .putExtra(getString(R.string.Review_Link), book.getReviews())
-//                    .putExtra(getString(R.string.BUY_Amazon), book.getDetailURL());
-//            startActivity(intent);
-//        } else {
-//            detailFragment.setDataforTabletUI(book);
-//        }
-//    }
-//
-//    @Override
-//    public void onTabletIntraction(AmazonBook book) {
-//        DetailFragment detailFragment = (DetailFragment) getFragmentManager()
-//                .findFragmentById(R.id.fragment_detail);
-//        Boolean has= (detailFragment==null ? false : true);
-//        if (has==true) {
-//            detailFragment.setDataforTabletUI(book);
-//        }
-//    }
-//
-//    @Override
-//    public void onFragmentInteraction(Item book) {
-//        DetailFragment detailFragment = (DetailFragment) getFragmentManager()
-//                .findFragmentById(R.id.fragment_detail);
-//        if (detailFragment == null) {
-//            Intent intent = new Intent(this, DetailActivity.class)
-//                    .putExtra(getString(R.string.BOOK_ID), book.getId())
-//                    .putExtra(getString(R.string.BOOK_TITLE), book.getVolumeInfo().getTitle() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getTitle())
-//                    .putExtra(getString(R.string.AUTHOR), book.getVolumeInfo().getAuthors() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getAuthors().get(0))
-//                    .putExtra(getString(R.string.PUBLISHED_YEAR), book.getVolumeInfo().getPublishedDate() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getPublishedDate())
-//                    .putExtra(getString(R.string.IMAGE), book.getVolumeInfo().getImageLinks().getThumbnail())
-//                    .putExtra(getString(R.string.DESCRIPTION), book.getVolumeInfo().getDescription() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getDescription())
-//                    .putExtra(getString(R.string.PRICE), getString(R.string.FREE_TAG))
-//                    .putExtra(getString(R.string.Review_Link), getString(R.string.Not_Available))
-//                    .putExtra(getString(R.string.BUY_Amazon), getString(R.string.Not_Available));
-//            startActivity(intent);
-//        } else {
-//            detailFragment.setFreeDataforTabletUI(book);
-//        }
-//    }
-//
-//    @Override
-//    public void onFragmentInteraction(FavoriteBooks book) {
-//        DetailFragment detailFragment = (DetailFragment) getFragmentManager()
-//                .findFragmentById(R.id.fragment_detail);
-//        if (detailFragment == null) {
-//            Intent intent = new Intent(this, DetailActivity.class)
-//                    .putExtra(getString(R.string.BOOK_ID), book.getId())
-//                    .putExtra(getString(R.string.BOOK_TITLE), book.getTitle())
-//                    .putExtra(getString(R.string.AUTHOR), book.getAuthor())
-//                    .putExtra(getString(R.string.PUBLISHED_YEAR), book.getPublishedDate())
-//                    .putExtra(getString(R.string.IMAGE), book.getImage())
-//                    .putExtra(getString(R.string.DESCRIPTION), book.getDescription())
-//                    .putExtra(getString(R.string.PRICE), book.getPrice())
-//                    .putExtra(getString(R.string.Review_Link), book.getReviewLink())
-//                    .putExtra(getString(R.string.BUY_Amazon), book.getBuyLink());
-//            startActivity(intent);
-//        } else {
-//            detailFragment.setFavoriteDataforTabletUI(book);
-//        }
-//    }
-
 
     private void runShare() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -251,7 +167,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         shareIntent.putExtra(Intent.EXTRA_TEXT, R.string.ExtraText);
         startActivity(Intent.createChooser(shareIntent, "Share using"));
     }
-
 
     @Override
     public void onFragmentInteraction(AmazonBook book) {
