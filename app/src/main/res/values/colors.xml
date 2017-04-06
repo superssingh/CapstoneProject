@@ -6,6 +6,8 @@
 
     <color name="Transparent">#2ff5f5f5</color>
     <color name="Orange_transparent_50">#bdb14105</color>
+    <color name="Red_transparent_50">#bdb10b05</color>
+    <color name="Pink_transparent_50">#bdb10544</color>
     <color name="Black_transparent_50">#70262626</color>
     <color name="Black_transparent_70">#4d3d3c3c</color>
 

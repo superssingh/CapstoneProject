@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:background="@drawable/gradient5"
+    android:background="@drawable/gradient1"
     android:elevation="6dp"
     android:gravity="center_vertical"
     android:orientation="horizontal">
