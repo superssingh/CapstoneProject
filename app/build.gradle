@@ -7,9 +7,9 @@ apply plugin: 'com.google.gms.google-services'
 android {
     signingConfigs {
         config {
-            keyAlias 'Udacity_CapstoneProject'
+            keyAlias 'capstoneproject'
             keyPassword 'superuser'
-            storeFile file('$rootDir/keystore.jks')
+            storeFile file("$rootDir/keystore.jks")
             storePassword 'superuser'
         }
     }
@@ -26,8 +26,17 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        shrunk {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.config
+        }
+        big {
+            minifyEnabled false
+            shrinkResources false
         }
     }
     productFlavors {
