@@ -85,7 +85,7 @@
         android:id="@+id/NoNetwork"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/Black_transparent_70"
+        android:background="@drawable/gradient"
         android:gravity="center"
         android:orientation="vertical">
 

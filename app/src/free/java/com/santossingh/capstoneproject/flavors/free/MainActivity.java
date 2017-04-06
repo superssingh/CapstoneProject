@@ -1,9 +1,6 @@
 package com.santossingh.capstoneproject.flavors.free;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
@@ -35,6 +32,8 @@ import com.santossingh.capstoneproject.Fragments.GoogleFragment;
 import com.santossingh.capstoneproject.Google.Models.Item;
 import com.santossingh.capstoneproject.R;
 
+import java.io.IOException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
@@ -50,14 +49,14 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     NavigationView navigationView;
     @BindView(R.id.adView)
     AdView adView;
-    @BindView(R.id.progressBarLayout)
-    LinearLayout layoutProgressbar;
     @BindView(R.id.main_frame)
     FrameLayout main_frame;
-    @BindView(R.id.RetryButton)
-    ImageButton retryButton;
+    @BindView(R.id.progressBarLayout)
+    LinearLayout layoutProgressbar;
     @BindView(R.id.NoNetwork)
     LinearLayout noNetwork;
+    @BindView(R.id.RetryButton)
+    ImageButton retryButton;
 
     private ActionBarDrawerToggle drawerToggle;
     private InterstitialAd mInterstitialAd;
@@ -70,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        main_frame.setVisibility(View.GONE);
 
         //Realm initialization
         Realm.init(this);
@@ -80,6 +78,13 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(config);
+
+        // Banner Ad initialization
+        adRequestBanner = new AdRequest.Builder().build();
+        adView.loadAd(adRequestBanner);
+
+        // Intersitatail Ad initialization
+        initIntersitatialAd();
 
         // * Initialize and add navigation drawer
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -93,13 +98,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
             }
         });
 
-        // Banner Ad initialization
-        adRequestBanner = new AdRequest.Builder().build();
-        adView.loadAd(adRequestBanner);
-        // Interstitial Ad initialization
-        initInterstitialAd();
-        runTask();
-
+        //Refresh or retry----
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,55 +107,25 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         });
 
         startApp();
+
     }
 
-    public void runTask() {
-        new CountDownTimer(4000, 1000) {
-            public void onTick(long millisUntilFinished) {
-            }
+    private void startApp() {
+        if (isOnline() == true) {
+            noNetwork.setVisibility(View.GONE);
+            new CountDownTimer(3000, 1000) {
+                public void onTick(long millisUntilFinished) {
+                }
 
-            public void onFinish() {
-                showInterstitial();
-            }
-        }.start();
-    }
+                public void onFinish() {
+                    layoutProgressbar.setVisibility(View.GONE);
+                    AMAZON();
+                }
+            }.start();
 
-    private void initInterstitialAd() {
-        adRequestInterstitial = new AdRequest.Builder().build();
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
-
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                layoutProgressbar.setVisibility(View.GONE);
-                main_frame.setVisibility(View.VISIBLE);
-                AMAZON();
-
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                Toast.makeText(getApplicationContext(), "Ad failed to load! error code: " + errorCode, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                Toast.makeText(getApplicationContext(), "Ad left application!", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onAdOpened() {
-                Toast.makeText(getApplicationContext(), "Ad is opened!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        mInterstitialAd.loadAd(adRequestInterstitial);
-    }
-
-    private void showInterstitial() {
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
+        } else {
+            noNetwork.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "Internet connection not available.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -242,7 +211,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         }
     }
 
-
     //----
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -294,21 +262,59 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
     }
 
+    public boolean isOnline() {
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+            int exitValue = ipProcess.waitFor();
+            return (exitValue == 0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        return false;
     }
 
-    private void startApp() {
-        if (isNetworkAvailable() == true) {
-            noNetwork.setVisibility(View.GONE);
-            runTask();
-        } else {
-            noNetwork.setVisibility(View.VISIBLE);
+    private void initIntersitatialAd() {
+        // Interstitial Ad initialization
+        adRequestInterstitial = new AdRequest.Builder().build();
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
+        mInterstitialAd.loadAd(adRequestInterstitial);
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Toast.makeText(getApplicationContext(), "Ad failed to load! error code: " + errorCode, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                Toast.makeText(getApplicationContext(), "Ad left application!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdOpened() {
+                Toast.makeText(getApplicationContext(), "Ad is opened!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void showInterstitial() {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        showInterstitial();
+    }
 }

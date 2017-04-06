@@ -72,7 +72,7 @@
     <string name="FreeBooks">Free Books</string>
     <string name="FavoriteBooks">Favorite Books</string>
     <string name="GOOGLE_PREVIEW_HTML">file:///android_asset/google_preview.html</string>
-    <string name="No_Internet_Connection">Could you please turn ON Internet connection\nOR\n Just press WiFi icon to turn ON WiFi. </string>
+    <string name="No_Internet_Connection">Internet connection turned OFF.\nCould you please turn ON Internet connection\n and press refresh button down below.</string>
     <string name="PressWiFi"></string>
 
 </resources>

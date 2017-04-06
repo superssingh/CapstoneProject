@@ -30,4 +30,5 @@ public class ViewActivity extends AppCompatActivity {
 
         webview.loadUrl(getString(R.string.GOOGLE_PREVIEW_HTML));
     }
+
 }

@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient3"
+    android:background="@drawable/gradient2"
     tools:context="com.santossingh.capstoneproject.flavors.free.MainActivity">
 
     <FrameLayout
@@ -37,50 +37,52 @@
             ads:adSize="BANNER"
             ads:adUnitId="@string/banner_ad_unit_id" />
 
-    </FrameLayout>
-
-    <LinearLayout
-        android:id="@+id/progressBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/gradient2"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ProgressBar
-            style="@android:style/Widget.ProgressBar.Inverse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/NoNetwork"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/Black_transparent_50"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
+        <LinearLayout
+            android:id="@+id/progressBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/gradient4"
+            android:layout_height="match_parent"
+            android:background="@color/Black_transparent_50"
             android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/No_Internet_Connection"
-            android:textColor="#0c079f"
-            android:textSize="16dp" />
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/RetryButton"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/round_button"
-            android:elevation="6dp"
-            android:src="@drawable/ic_refresh" />
-    </LinearLayout>
+            <ProgressBar
+                style="@android:style/Widget.ProgressBar.Inverse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/NoNetwork"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/gradient"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/Black_transparent_50"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/No_Internet_Connection"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+
+            <ImageButton
+                android:id="@+id/RetryButton"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/round_button_on"
+                android:elevation="6dp"
+                android:src="@drawable/ic_refresh" />
+
+        </LinearLayout>
+    </FrameLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigationView"
@@ -92,7 +94,6 @@
         app:headerLayout="@layout/navigation_header"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
-        app:menu="@menu/drawer_menu">
+        app:menu="@menu/drawer_menu"></android.support.design.widget.NavigationView>
 
-    </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

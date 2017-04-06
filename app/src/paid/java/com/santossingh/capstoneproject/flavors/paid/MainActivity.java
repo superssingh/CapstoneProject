@@ -87,6 +87,24 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         startApp();
     }
 
+    private void startApp() {
+        if (isOnline() == true) {
+            noNetwork.setVisibility(View.GONE);
+            new CountDownTimer(3000, 1000) {
+                public void onTick(long millisUntilFinished) {
+                }
+                public void onFinish() {
+                    layoutProgressbar.setVisibility(View.GONE);
+                    AMAZON();
+                }
+            }.start();
+
+        } else {
+            noNetwork.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "Internet connection not available.", Toast.LENGTH_LONG).show();
+        }
+    }
+
     private void runShare() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
@@ -235,5 +253,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
             noNetwork.setVisibility(View.VISIBLE);
         }
     }
+
+
 
 }
