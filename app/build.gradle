@@ -9,7 +9,7 @@ android {
         config {
             keyAlias 'Udacity_CapstoneProject'
             keyPassword 'superuser'
-            storeFile file('/Users/santoshsingh/AndroidStudioProjects/CapstoneProject/keystore.jks')
+            storeFile file('$rootDir/keystore.jks')
             storePassword 'superuser'
         }
     }
