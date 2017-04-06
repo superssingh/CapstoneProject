@@ -212,7 +212,6 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
         new CountDownTimer(3000, 1000) {
             public void onTick(long millisUntilFinished) {
             }
-
             public void onFinish() {
                 startQueryTask(query);
             }

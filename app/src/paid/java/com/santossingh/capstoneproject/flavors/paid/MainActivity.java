@@ -10,7 +10,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -48,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     @BindView(R.id.NoNetwork)
     LinearLayout noNetwork;
     private ActionBarDrawerToggle drawerToggle;
-    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     public void onTabletIntraction(AmazonBook book) {
         DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
-        Boolean has = (detailFragment == null ? false : true);
+        Boolean has = (detailFragment != null);
         if (has == true) {
             detailFragment.setDataforTabletUI(book);
         }
