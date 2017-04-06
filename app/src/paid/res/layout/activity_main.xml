@@ -22,6 +22,21 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/progressBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/Black_transparent_50"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ProgressBar
+            style="@android:style/Widget.ProgressBar.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/NoNetwork"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -10,8 +10,7 @@
 
         android:id="@+id/AWS_recycleView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
     <ProgressBar
         android:id="@+id/Progress_bar"
@@ -71,6 +70,7 @@
             android:elevation="6dp"
             android:padding="10dp"
             android:src="@drawable/ic_search_bar" />
+
     </LinearLayout>
 
 </FrameLayout>

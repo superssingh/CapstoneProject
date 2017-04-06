@@ -47,6 +47,7 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
     @BindView(R.id.input_name)
     EditText inputName;
     int menuPosition;
+    int searchID = 0;
     private List<AmazonBook> itemsList;
     private AmazonRecyclerAdapter recyclerViewAdapter;
     private View view;
@@ -129,36 +130,42 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.my_search_bar:
+                searchID = 1;
                 searchbarQuery();
                 return true;
 
             case R.id.Business:
                 item.setChecked(true);
                 menuPosition = R.id.Business;
+                searchID = 1;
                 startQueryTask(getString(R.string.Business));
                 return true;
 
             case R.id.Fantasy:
                 item.setChecked(true);
                 menuPosition = R.id.Fantasy;
+                searchID = 1;
                 startQueryTask(getString(R.string.Fantasy));
                 return true;
 
             case R.id.Fiction:
                 item.setChecked(true);
                 menuPosition = R.id.Fiction;
+                searchID = 1;
                 startQueryTask(getString(R.string.Fiction));
                 return true;
 
             case R.id.NonFiction:
                 item.setChecked(true);
                 menuPosition = R.id.NonFiction;
+                searchID = 1;
                 startQueryTask(getString(R.string.NonFiction));
                 return true;
 
             case R.id.Romance:
                 item.setChecked(true);
                 menuPosition = R.id.Romance;
+                searchID = 1;
                 startQueryTask(getString(R.string.Romance));
                 return true;
         }
@@ -195,6 +202,8 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
             itemsList = result;
             recyclerViewAdapter.addList(itemsList);
             mListener.onTabletIntraction(result.get(0));
+        } else if (searchID == 0) {
+            startQueryTask(getString(R.string.Business));
         } else {
             recyclerView.setVisibility(View.VISIBLE);
             Snackbar.make(view, R.string.NotFound, Snackbar.LENGTH_LONG).show();

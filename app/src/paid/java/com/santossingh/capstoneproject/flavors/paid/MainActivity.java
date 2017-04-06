@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     ImageButton retryButton;
     @BindView(R.id.NoNetwork)
     LinearLayout noNetwork;
+    @BindView(R.id.progressBarLayout)
+    LinearLayout layoutProgressbar;
     private ActionBarDrawerToggle drawerToggle;
 
     @Override
@@ -90,10 +92,11 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     private void startApp() {
         if (isOnline() == true) {
             noNetwork.setVisibility(View.GONE);
-            new CountDownTimer(3000, 1000) {
+            new CountDownTimer(4000, 1000) {
                 public void onTick(long millisUntilFinished) {
                 }
                 public void onFinish() {
+                    layoutProgressbar.setVisibility(View.GONE);
                     AMAZON();
                 }
             }.start();
