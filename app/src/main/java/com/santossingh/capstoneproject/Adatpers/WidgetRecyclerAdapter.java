@@ -23,11 +23,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link } and makes a call to the
- * TODO: Replace the implementation with code for your data type.
- */
-
 public class WidgetRecyclerAdapter extends RecyclerView.Adapter<WidgetRecyclerAdapter.ViewHolder> {
 
     private List<TopBooks> booksList = new ArrayList<>();

@@ -1,16 +1,23 @@
 package com.santossingh.capstoneproject.flavors.paid;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.santossingh.capstoneproject.Activities.DetailActivity;
@@ -22,7 +29,6 @@ import com.santossingh.capstoneproject.Fragments.FavoriteFragment;
 import com.santossingh.capstoneproject.Fragments.GoogleFragment;
 import com.santossingh.capstoneproject.Google.Models.Item;
 import com.santossingh.capstoneproject.R;
-import com.santossingh.capstoneproject.Utilities.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,7 +43,12 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     Toolbar toolbar;
     @BindView(R.id.navigationView)
     NavigationView navigationView;
+    @BindView(R.id.RetryButton)
+    ImageButton retryButton;
+    @BindView(R.id.NoNetwork)
+    LinearLayout noNetwork;
     private ActionBarDrawerToggle drawerToggle;
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //Realm initialization
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
@@ -67,8 +79,24 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
             }
         });
 
-        AMAZON();
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startApp();
+            }
+        });
+
+        startApp();
     }
+
+    private void runShare() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.ExtraSubject);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, R.string.ExtraText);
+        startActivity(Intent.createChooser(shareIntent, "Share using"));
+    }
+
 
     @Override
     public void onFragmentInteraction(AmazonBook book) {
@@ -96,8 +124,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     public void onTabletIntraction(AmazonBook book) {
         DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
-        Boolean has = detailFragment != null;
-
+        Boolean has = (detailFragment == null ? false : true);
         if (has == true) {
             detailFragment.setDataforTabletUI(book);
         }
@@ -105,20 +132,19 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
     @Override
     public void onFragmentInteraction(Item book) {
-
         DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
         if (detailFragment == null) {
             Intent intent = new Intent(this, DetailActivity.class)
                     .putExtra(String.valueOf(R.string.BOOK_ID), book.getId())
-                    .putExtra(String.valueOf(R.string.BOOK_TITLE), book.getVolumeInfo().getTitle() == null ? "[N/A]" : book.getVolumeInfo().getTitle())
-                    .putExtra(String.valueOf(R.string.AUTHOR), book.getVolumeInfo().getAuthors() == null ? "[N/A]" : book.getVolumeInfo().getAuthors().get(0))
-                    .putExtra(String.valueOf(R.string.PUBLISHED_YEAR), book.getVolumeInfo().getPublishedDate() == null ? "[N/A]" : book.getVolumeInfo().getPublishedDate())
+                    .putExtra(String.valueOf(R.string.BOOK_TITLE), book.getVolumeInfo().getTitle() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getTitle())
+                    .putExtra(String.valueOf(R.string.AUTHOR), book.getVolumeInfo().getAuthors() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getAuthors().get(0))
+                    .putExtra(String.valueOf(R.string.PUBLISHED_YEAR), book.getVolumeInfo().getPublishedDate() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getPublishedDate())
                     .putExtra(String.valueOf(R.string.IMAGE), book.getVolumeInfo().getImageLinks().getThumbnail())
-                    .putExtra(String.valueOf(R.string.DESCRIPTION), book.getVolumeInfo().getDescription() == null ? Constants.FREE_DESCRIPTION_TAG : book.getVolumeInfo().getDescription())
-                    .putExtra(String.valueOf(R.string.PRICE), Constants.FREE_TAG)
-                    .putExtra(String.valueOf(R.string.Review_Link), "N/A")
-                    .putExtra(String.valueOf(R.string.BUY_Amazon), "N/A");
+                    .putExtra(String.valueOf(R.string.DESCRIPTION), book.getVolumeInfo().getDescription() == null ? getString(R.string.FREE_DESCRIPTION_TAG) : book.getVolumeInfo().getDescription())
+                    .putExtra(String.valueOf(R.string.PRICE), getString(R.string.FREE_TAG))
+                    .putExtra(String.valueOf(R.string.Review_Link), getString(R.string.Not_Available))
+                    .putExtra(String.valueOf(R.string.BUY_Amazon), getString(R.string.Not_Available));
             startActivity(intent);
         } else {
             detailFragment.setFreeDataforTabletUI(book);
@@ -163,12 +189,9 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         } else if (id == R.id.menu_item_share) {
             runShare();
         }
-
         menuItem.setChecked(true);
         drawerLayout.closeDrawers();
     }
-
-    // Call to update the share intent
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -178,44 +201,41 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
     private void AMAZON() {
-        setTitle("Paid Books");
+        setTitle(R.string.PaidBooks);
         AmazonFragment fragment = new AmazonFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
     }
 
     private void GOOGLE() {
-        setTitle("Free Books");
+        setTitle(R.string.FreeBooks);
         GoogleFragment fragment = new GoogleFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
     }
 
     private void FAVORITE() {
-        setTitle("Favorite List");
+        setTitle(R.string.FavoriteBooks);
         FavoriteFragment fragment = new FavoriteFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    private void runShare() {
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Awesome Reader App");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "Hi, I believe that This is an amazing app for readers. Just try this here is the link  http://myappwebsitelink.com");
-        startActivity(Intent.createChooser(shareIntent, "Share using"));
+    private void startApp(){
+        if (isNetworkAvailable() == true) {
+            noNetwork.setVisibility(View.GONE);
+            AMAZON();
+        } else {
+            noNetwork.setVisibility(View.VISIBLE);
+        }
     }
 
 }

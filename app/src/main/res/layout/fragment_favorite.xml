@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient2"
     tools:context="com.santossingh.capstoneproject.Fragments.FavoriteFragment">
 
     <android.support.v7.widget.RecyclerView
@@ -9,5 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/Empty_List"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/Black_transparent_50"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/Favorite_empty_list"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold" />
 
 </FrameLayout>

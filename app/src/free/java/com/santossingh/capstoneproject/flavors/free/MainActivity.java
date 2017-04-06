@@ -1,6 +1,9 @@
 package com.santossingh.capstoneproject.flavors.free;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
@@ -14,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -29,7 +33,6 @@ import com.santossingh.capstoneproject.Fragments.DetailFragment;
 import com.santossingh.capstoneproject.Fragments.FavoriteFragment;
 import com.santossingh.capstoneproject.Fragments.GoogleFragment;
 import com.santossingh.capstoneproject.Google.Models.Item;
-import com.santossingh.capstoneproject.Models.Constants;
 import com.santossingh.capstoneproject.R;
 
 import butterknife.BindView;
@@ -51,10 +54,14 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     LinearLayout layoutProgressbar;
     @BindView(R.id.main_frame)
     FrameLayout main_frame;
+    @BindView(R.id.RetryButton)
+    ImageButton retryButton;
+    @BindView(R.id.NoNetwork)
+    LinearLayout noNetwork;
 
     private ActionBarDrawerToggle drawerToggle;
     private InterstitialAd mInterstitialAd;
-    private AdRequest adRequestBanner;
+    private AdRequest adRequestBanner, adRequestInterstitial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        main_frame.setVisibility(View.GONE);
 
         //Realm initialization
         Realm.init(this);
@@ -77,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -89,18 +96,43 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         // Banner Ad initialization
         adRequestBanner = new AdRequest.Builder().build();
         adView.loadAd(adRequestBanner);
-
         // Interstitial Ad initialization
-        AdRequest adRequestInterstitial = new AdRequest.Builder().build();
+        initInterstitialAd();
+        runTask();
+
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startApp();
+            }
+        });
+
+        startApp();
+    }
+
+    public void runTask() {
+        new CountDownTimer(4000, 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                showInterstitial();
+            }
+        }.start();
+    }
+
+    private void initInterstitialAd() {
+        adRequestInterstitial = new AdRequest.Builder().build();
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
-        mInterstitialAd.loadAd(adRequestInterstitial);
+
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
                 layoutProgressbar.setVisibility(View.GONE);
                 main_frame.setVisibility(View.VISIBLE);
                 AMAZON();
+
             }
 
             @Override
@@ -119,19 +151,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
             }
         });
 
-        runTask();
-
-    }
-
-    public void runTask() {
-        new CountDownTimer(4000, 1000) {
-            public void onTick(long millisUntilFinished) {
-            }
-
-            public void onFinish() {
-                showInterstitial();
-            }
-        }.start();
+        mInterstitialAd.loadAd(adRequestInterstitial);
     }
 
     private void showInterstitial() {
@@ -139,11 +159,99 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
             mInterstitialAd.show();
         }
     }
+//
+//    private void runShare() {
+//        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+//        shareIntent.setType("text/plain");
+//        shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.ExtraSubject);
+//        shareIntent.putExtra(Intent.EXTRA_TEXT, R.string.ExtraText );
+//        startActivity(Intent.createChooser(shareIntent, "Share using"));
+//    }
+//
+//
+//    @Override
+//    public void onFragmentInteraction(AmazonBook book) {
+//        DetailFragment detailFragment = (DetailFragment) getFragmentManager()
+//                .findFragmentById(R.id.fragment_detail);
+//        if (detailFragment == null) {
+//            Toast.makeText(this, book.getAsin(), Toast.LENGTH_LONG).show();
+//            Intent intent = new Intent(this, DetailActivity.class)
+//                    .putExtra(getString(R.string.BOOK_ID), book.getAsin())
+//                    .putExtra(getString(R.string.BOOK_TITLE), book.getTitle())
+//                    .putExtra(getString(R.string.AUTHOR), book.getAuthor())
+//                    .putExtra(getString(R.string.PUBLISHED_YEAR), book.getPublishedDate())
+//                    .putExtra(getString(R.string.IMAGE), book.getImage())
+//                    .putExtra(getString(R.string.DESCRIPTION), book.getDescription())
+//                    .putExtra(getString(R.string.PRICE), book.getPrice())
+//                    .putExtra(getString(R.string.Review_Link), book.getReviews())
+//                    .putExtra(getString(R.string.BUY_Amazon), book.getDetailURL());
+//            startActivity(intent);
+//        } else {
+//            detailFragment.setDataforTabletUI(book);
+//        }
+//    }
+//
+//    @Override
+//    public void onTabletIntraction(AmazonBook book) {
+//        DetailFragment detailFragment = (DetailFragment) getFragmentManager()
+//                .findFragmentById(R.id.fragment_detail);
+//        Boolean has= (detailFragment==null ? false : true);
+//        if (has==true) {
+//            detailFragment.setDataforTabletUI(book);
+//        }
+//    }
+//
+//    @Override
+//    public void onFragmentInteraction(Item book) {
+//        DetailFragment detailFragment = (DetailFragment) getFragmentManager()
+//                .findFragmentById(R.id.fragment_detail);
+//        if (detailFragment == null) {
+//            Intent intent = new Intent(this, DetailActivity.class)
+//                    .putExtra(getString(R.string.BOOK_ID), book.getId())
+//                    .putExtra(getString(R.string.BOOK_TITLE), book.getVolumeInfo().getTitle() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getTitle())
+//                    .putExtra(getString(R.string.AUTHOR), book.getVolumeInfo().getAuthors() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getAuthors().get(0))
+//                    .putExtra(getString(R.string.PUBLISHED_YEAR), book.getVolumeInfo().getPublishedDate() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getPublishedDate())
+//                    .putExtra(getString(R.string.IMAGE), book.getVolumeInfo().getImageLinks().getThumbnail())
+//                    .putExtra(getString(R.string.DESCRIPTION), book.getVolumeInfo().getDescription() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getDescription())
+//                    .putExtra(getString(R.string.PRICE), getString(R.string.FREE_TAG))
+//                    .putExtra(getString(R.string.Review_Link), getString(R.string.Not_Available))
+//                    .putExtra(getString(R.string.BUY_Amazon), getString(R.string.Not_Available));
+//            startActivity(intent);
+//        } else {
+//            detailFragment.setFreeDataforTabletUI(book);
+//        }
+//    }
+//
+//    @Override
+//    public void onFragmentInteraction(FavoriteBooks book) {
+//        DetailFragment detailFragment = (DetailFragment) getFragmentManager()
+//                .findFragmentById(R.id.fragment_detail);
+//        if (detailFragment == null) {
+//            Intent intent = new Intent(this, DetailActivity.class)
+//                    .putExtra(getString(R.string.BOOK_ID), book.getId())
+//                    .putExtra(getString(R.string.BOOK_TITLE), book.getTitle())
+//                    .putExtra(getString(R.string.AUTHOR), book.getAuthor())
+//                    .putExtra(getString(R.string.PUBLISHED_YEAR), book.getPublishedDate())
+//                    .putExtra(getString(R.string.IMAGE), book.getImage())
+//                    .putExtra(getString(R.string.DESCRIPTION), book.getDescription())
+//                    .putExtra(getString(R.string.PRICE), book.getPrice())
+//                    .putExtra(getString(R.string.Review_Link), book.getReviewLink())
+//                    .putExtra(getString(R.string.BUY_Amazon), book.getBuyLink());
+//            startActivity(intent);
+//        } else {
+//            detailFragment.setFavoriteDataforTabletUI(book);
+//        }
+//    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+
+    private void runShare() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.ExtraSubject);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, R.string.ExtraText);
+        startActivity(Intent.createChooser(shareIntent, "Share using"));
     }
+
 
     @Override
     public void onFragmentInteraction(AmazonBook book) {
@@ -171,29 +279,27 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     public void onTabletIntraction(AmazonBook book) {
         DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
-        Boolean has= detailFragment==null ? false : true;
-
-        if (has==true) {
+        Boolean has = (detailFragment != null);
+        if (has == true) {
             detailFragment.setDataforTabletUI(book);
         }
     }
 
     @Override
     public void onFragmentInteraction(Item book) {
-
         DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
         if (detailFragment == null) {
             Intent intent = new Intent(this, DetailActivity.class)
                     .putExtra(String.valueOf(R.string.BOOK_ID), book.getId())
-                    .putExtra(String.valueOf(R.string.BOOK_TITLE), book.getVolumeInfo().getTitle() == null ? "[N/A]" : book.getVolumeInfo().getTitle())
-                    .putExtra(String.valueOf(R.string.AUTHOR), book.getVolumeInfo().getAuthors() == null ? "[N/A]" : book.getVolumeInfo().getAuthors().get(0))
-                    .putExtra(String.valueOf(R.string.PUBLISHED_YEAR), book.getVolumeInfo().getPublishedDate() == null ? "[N/A]" : book.getVolumeInfo().getPublishedDate())
+                    .putExtra(String.valueOf(R.string.BOOK_TITLE), book.getVolumeInfo().getTitle() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getTitle())
+                    .putExtra(String.valueOf(R.string.AUTHOR), book.getVolumeInfo().getAuthors() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getAuthors().get(0))
+                    .putExtra(String.valueOf(R.string.PUBLISHED_YEAR), book.getVolumeInfo().getPublishedDate() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getPublishedDate())
                     .putExtra(String.valueOf(R.string.IMAGE), book.getVolumeInfo().getImageLinks().getThumbnail())
-                    .putExtra(String.valueOf(R.string.DESCRIPTION), book.getVolumeInfo().getDescription() == null ? Constants.FREE_DESCRIPTION_TAG : book.getVolumeInfo().getDescription())
-                    .putExtra(String.valueOf(R.string.PRICE), Constants.FREE_TAG)
-                    .putExtra(String.valueOf(R.string.Review_Link), "N/A")
-                    .putExtra(String.valueOf(R.string.BUY_Amazon), "N/A");
+                    .putExtra(String.valueOf(R.string.DESCRIPTION), book.getVolumeInfo().getDescription() == null ? getString(R.string.FREE_DESCRIPTION_TAG) : book.getVolumeInfo().getDescription())
+                    .putExtra(String.valueOf(R.string.PRICE), getString(R.string.FREE_TAG))
+                    .putExtra(String.valueOf(R.string.Review_Link), getString(R.string.Not_Available))
+                    .putExtra(String.valueOf(R.string.BUY_Amazon), getString(R.string.Not_Available));
             startActivity(intent);
         } else {
             detailFragment.setFreeDataforTabletUI(book);
@@ -221,6 +327,8 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         }
     }
 
+
+    //----
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Locate MenuItem with ShareActionProvider
@@ -238,7 +346,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         } else if (id == R.id.menu_item_share) {
             runShare();
         }
-
         menuItem.setChecked(true);
         drawerLayout.closeDrawers();
     }
@@ -251,44 +358,42 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
     private void AMAZON() {
-        setTitle("Paid Books");
+        setTitle(R.string.PaidBooks);
         AmazonFragment fragment = new AmazonFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
     }
 
     private void GOOGLE() {
-        setTitle("Free Books");
+        setTitle(R.string.FreeBooks);
         GoogleFragment fragment = new GoogleFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
     }
 
     private void FAVORITE() {
-        setTitle("Favorite List");
+        setTitle(R.string.FavoriteBooks);
         FavoriteFragment fragment = new FavoriteFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    private void runShare() {
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Awesome Reader App");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "Hi, This is an amazing app for readers. Just try this, here is the link: http://myappwebsitelink.com");
-        startActivity(Intent.createChooser(shareIntent, "Share using"));
+    private void startApp() {
+        if (isNetworkAvailable() == true) {
+            noNetwork.setVisibility(View.GONE);
+            runTask();
+        } else {
+            noNetwork.setVisibility(View.VISIBLE);
+        }
     }
 
 }
-

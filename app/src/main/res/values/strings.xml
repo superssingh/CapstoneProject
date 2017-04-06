@@ -44,7 +44,9 @@
     <string name="NonFiction">Non Fiction</string>
     <string name="Romance">Romance</string>
 
+    <string name="Image_Width">240</string>
     <string name="NULL">NULL</string>
+    <string name="Not_Available">[N/A]</string>
     <string name="BOOK_TAG">BOOK_TAG</string>
     <string name="ASIN">asin</string>
     <string name="FavoriteMarked">This book marked as favorite.</string>
@@ -62,5 +64,15 @@
     <string name="action_Favorite">favorite</string>
     <string name="NotFound">Sorry, your desire book or author not found.</string>
     <string name="FillSearchBox">Please enter desire book or author name.</string>
+    <string name="FREE_TAG">FREE</string>
+    <string name="FREE_DESCRIPTION_TAG">[N/A]. Please click on [Google Preview] for free access.</string>
+    <string name="ExtraSubject">Awesome Reader App</string>
+    <string name="ExtraText">Hi, This is an amazing app for readers. Just try this, here is the link: http://myappwebsitelink.com</string>
+    <string name="PaidBooks">Paid Books</string>
+    <string name="FreeBooks">Free Books</string>
+    <string name="FavoriteBooks">Favorite Books</string>
+    <string name="GOOGLE_PREVIEW_HTML">file:///android_asset/google_preview.html</string>
+    <string name="No_Internet_Connection">Could you please turn ON Internet connection\nOR\n Just press WiFi icon to turn ON WiFi. </string>
+    <string name="PressWiFi"></string>
 
 </resources>

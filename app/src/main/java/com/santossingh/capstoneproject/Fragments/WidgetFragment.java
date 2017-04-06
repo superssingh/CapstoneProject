@@ -30,7 +30,6 @@ public class WidgetFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -43,7 +42,7 @@ public class WidgetFragment extends Fragment {
     }
 
     private void configRecycleView() {
-        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), 240);
+        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), Integer.getInteger(getString(R.string.Image_Width)));
         recycleAdapter = new WidgetRecyclerAdapter(mListener);
         recyclerView.setLayoutManager(autofitGridlayout);
         recyclerView.setAdapter(recycleAdapter);

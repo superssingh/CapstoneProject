@@ -22,7 +22,6 @@ import com.santossingh.capstoneproject.Amazon.AsyncTask.MyAsyncTask;
 import com.santossingh.capstoneproject.Amazon.Models.AmazonBook;
 import com.santossingh.capstoneproject.R;
 import com.santossingh.capstoneproject.Utilities.AutofitGridlayout;
-import com.santossingh.capstoneproject.Utilities.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +72,7 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(STATE_BOOKS,
-                new ArrayList<AmazonBook>(recyclerViewAdapter.getBooksList()));
+                new ArrayList<>(recyclerViewAdapter.getBooksList()));
     }
 
     @Override
@@ -87,15 +86,16 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
         view = inflater.inflate(R.layout.fragment_amazon, container, false);
         ButterKnife.bind(this, view);
         itemsList = new ArrayList<AmazonBook>();
-        myAsyncTask = new MyAsyncTask(this);
         configRecycleView();
+        progressBar.setVisibility(View.VISIBLE);
+        myAsyncTask = new MyAsyncTask(this);
 
         if (savedInstanceState != null) {
             progressBar.setVisibility(View.GONE);
             itemsList = savedInstanceState.getParcelableArrayList(STATE_BOOKS);
             recyclerViewAdapter.addList(itemsList);
         } else {
-            myAsyncTask.execute(Constants.Business);
+            myAsyncTask.execute(getString(R.string.Business));
             menuPosition = R.id.Business;
         }
 
@@ -103,7 +103,7 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
     }
 
     private void configRecycleView() {
-        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), 240);
+        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), Integer.parseInt(getString(R.string.Image_Width)));
         recyclerViewAdapter = new AmazonRecyclerAdapter(mListener);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(autofitGridlayout);
@@ -135,7 +135,6 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
             case R.id.my_search_bar:
                 searchbarQuery();
                 return true;
@@ -143,31 +142,31 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
             case R.id.Business:
                 item.setChecked(true);
                 menuPosition = R.id.Business;
-                startQueryTask(Constants.Business);
+                startQueryTask(getString(R.string.Business));
                 return true;
 
             case R.id.Fantasy:
                 item.setChecked(true);
                 menuPosition = R.id.Fantasy;
-                startQueryTask(Constants.Fantasy);
+                startQueryTask(getString(R.string.Fantasy));
                 return true;
 
             case R.id.Fiction:
                 item.setChecked(true);
                 menuPosition = R.id.Fiction;
-                startQueryTask(Constants.Fiction);
+                startQueryTask(getString(R.string.Fiction));
                 return true;
 
             case R.id.NonFiction:
                 item.setChecked(true);
                 menuPosition = R.id.NonFiction;
-                startQueryTask(Constants.NonFiction);
+                startQueryTask(getString(R.string.NonFiction));
                 return true;
 
             case R.id.Romance:
                 item.setChecked(true);
                 menuPosition = R.id.Romance;
-                startQueryTask(Constants.Romance);
+                startQueryTask(getString(R.string.Romance));
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -175,7 +174,6 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
 
     public void searchbarQuery() {
         searchLayout.setVisibility(View.VISIBLE);
-
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,21 +186,18 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
                 }
             }
         });
-
         search_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 searchLayout.setVisibility(View.GONE);
             }
         });
-
     }
 
     @Override
     public void processFinish(List<AmazonBook> result) {
         progressBar.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
-
         if (result != null) {
             itemsList = result;
             recyclerViewAdapter.addList(itemsList);
@@ -223,7 +218,6 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(AmazonBook book);
-
         void onTabletIntraction(AmazonBook book);
     }
 

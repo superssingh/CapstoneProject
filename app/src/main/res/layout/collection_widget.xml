@@ -59,7 +59,7 @@
                 android:layout_margin="8dp"
                 android:background="@drawable/round_button"
                 android:orientation="horizontal"
-                android:src="@drawable/ic_launch_black_24dp"></ImageButton>
+                android:src="@drawable/ic_launch"></ImageButton>
 
 
         </FrameLayout>

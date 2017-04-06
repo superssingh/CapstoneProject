@@ -9,9 +9,8 @@ import com.santossingh.capstoneproject.R;
 
 public class ViewActivity extends AppCompatActivity {
 
-    private static final String url = "file:///android_asset/google_preview.html";
-    WebView webview;
     String id = "";
+    private WebView webview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +28,6 @@ public class ViewActivity extends AppCompatActivity {
             }
         });
 
-        webview.loadUrl(url);
+        webview.loadUrl(getString(R.string.GOOGLE_PREVIEW_HTML));
     }
 }

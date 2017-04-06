@@ -8,7 +8,6 @@ import android.widget.Toast;
 import com.santossingh.capstoneproject.Amazon.Models.AmazonBook;
 import com.santossingh.capstoneproject.Google.Models.Item;
 import com.santossingh.capstoneproject.R;
-import com.santossingh.capstoneproject.Utilities.Constants;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -115,13 +114,13 @@ public class RealmContentProvider {
             public void execute(Realm bgRealm) {
                 FavoriteBooks favoriteBook = bgRealm.createObject(FavoriteBooks.class, book.getId());
                 favoriteBook.setTitle(book.getVolumeInfo().getTitle());
-                favoriteBook.setAuthor(book.getVolumeInfo().getAuthors() == null ? Constants.NOT_AVAILABLE : book.getVolumeInfo().getAuthors().get(0));
-                favoriteBook.setImage(Constants.NOT_AVAILABLE);
-                favoriteBook.setPrice(Constants.FREE_TAG);
-                favoriteBook.setPublishedDate(book.getVolumeInfo().getPublishedDate() == null ? Constants.NOT_AVAILABLE : book.getVolumeInfo().getPublishedDate());
-                favoriteBook.setDescription(book.getVolumeInfo().getDescription() == null ? Constants.FREE_DESCRIPTION_TAG : book.getVolumeInfo().getDescription());
-                favoriteBook.setReviewLink(Constants.NOT_AVAILABLE);
-                favoriteBook.setBuyLink(Constants.NOT_AVAILABLE);
+                favoriteBook.setAuthor(book.getVolumeInfo().getAuthors() == null ? context.getString(R.string.Not_Available) : book.getVolumeInfo().getAuthors().get(0));
+                favoriteBook.setImage(context.getString(R.string.Not_Available));
+                favoriteBook.setPrice(context.getString(R.string.FREE_TAG));
+                favoriteBook.setPublishedDate(book.getVolumeInfo().getPublishedDate() == null ? context.getString(R.string.Not_Available) : book.getVolumeInfo().getPublishedDate());
+                favoriteBook.setDescription(book.getVolumeInfo().getDescription() == null ? context.getString(R.string.FREE_DESCRIPTION_TAG) : book.getVolumeInfo().getDescription());
+                favoriteBook.setReviewLink(context.getString(R.string.Not_Available));
+                favoriteBook.setBuyLink(context.getString(R.string.Not_Available));
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override

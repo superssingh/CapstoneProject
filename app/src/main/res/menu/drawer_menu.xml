@@ -9,7 +9,7 @@
             android:title="@string/BUY_Amazon" />
         <item
             android:id="@+id/nav_google"
-            android:icon="@drawable/book_24dp"
+            android:icon="@drawable/ic_book"
             android:title="Google Free Books" />
         <item
             android:id="@+id/nav_favorite"

@@ -1,11 +1,11 @@
 package com.santossingh.capstoneproject.Adatpers;
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,10 +20,6 @@ import butterknife.ButterKnife;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link } and makes a call to the
- * TODO: Replace the implementation with code for your data type.
- */
 public class FavoriteRecyclerAdapter extends RecyclerView.Adapter<FavoriteRecyclerAdapter.ViewHolder> {
 
     FavoriteFragment.OnFragmentInteractionListener mListener;
@@ -102,7 +98,7 @@ public class FavoriteRecyclerAdapter extends RecyclerView.Adapter<FavoriteRecycl
         @BindView(R.id.Fav_BookTitle)
         TextView title;
         @BindView(R.id.Fav_delete)
-        FloatingActionButton delete;
+        ImageButton delete;
         @BindView(R.id.Fav_thumbnail)
         ImageView imageView;
         private FavoriteBooks book;

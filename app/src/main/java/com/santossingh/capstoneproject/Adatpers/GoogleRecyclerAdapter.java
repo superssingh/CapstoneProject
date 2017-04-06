@@ -14,13 +14,9 @@ import com.santossingh.capstoneproject.Utilities.AnimationUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link Item} and makes a call to the
- * TODO: Replace the implementation with code for your data type.
- */
 public class GoogleRecyclerAdapter extends RecyclerView.Adapter<GoogleRecyclerAdapter.ViewHolder> {
 
-    private List<Item> itemList = new ArrayList<Item>();
+    private List<Item> itemList = new ArrayList<>();
     private GoogleFragment.OnFragmentInteractionListener mListener;
     private int preposition;
 
@@ -38,7 +34,7 @@ public class GoogleRecyclerAdapter extends RecyclerView.Adapter<GoogleRecyclerAd
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mData = itemList.get(position);
-        holder.textView.setText(holder.mData.getVolumeInfo().getTitle() == null ? "Unknown" : holder.mData.getVolumeInfo().getTitle());
+        holder.textView.setText(holder.mData.getVolumeInfo().getTitle() == null ? String.valueOf(R.string.Not_Available) : holder.mData.getVolumeInfo().getTitle());
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

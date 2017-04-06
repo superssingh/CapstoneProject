@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
  */
 
 public class AnimationUtil {
-
     public static void animate(RecyclerView.ViewHolder holder, boolean down) {
         AnimatorSet animationSet = new AnimatorSet();
         ObjectAnimator animatorY = ObjectAnimator.ofFloat(holder.itemView,

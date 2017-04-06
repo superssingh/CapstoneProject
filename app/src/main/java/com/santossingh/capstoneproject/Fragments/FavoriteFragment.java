@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.santossingh.capstoneproject.Adatpers.FavoriteRecyclerAdapter;
 import com.santossingh.capstoneproject.Database.RealmLocalDB.FavoriteBooks;
@@ -31,6 +32,8 @@ public class FavoriteFragment extends Fragment {
 
     @BindView(R.id.Favorite_recycleView)
     RecyclerView recyclerView;
+    @BindView(R.id.Empty_List)
+    TextView Empty_textView;
     private RealmResults<FavoriteBooks> booksList;
     private FavoriteRecyclerAdapter recyclerViewAdapter;
     private View view;
@@ -60,12 +63,13 @@ public class FavoriteFragment extends Fragment {
             recyclerView.setVisibility(View.GONE);
             Snackbar.make(view, R.string.Favorite_empty_list, Snackbar.LENGTH_LONG).show();
         } else {
+            Empty_textView.setVisibility(View.GONE);
             configRecycleView(booksList);
         }
     }
 
     private void configRecycleView(RealmResults<FavoriteBooks> results) {
-        AutofitGridlayout layoutManager = new AutofitGridlayout(getActivity(), 240);
+        AutofitGridlayout layoutManager = new AutofitGridlayout(getActivity(), Integer.parseInt(getString(R.string.Image_Width)));
         recyclerViewAdapter = new FavoriteRecyclerAdapter(mListener, results);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);

@@ -1,7 +1,6 @@
 package com.santossingh.capstoneproject.Amazon.AsyncTask;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.santossingh.capstoneproject.Amazon.Models.AmazonBook;
 import com.santossingh.capstoneproject.Amazon.Services.AWS_URL;
@@ -21,7 +20,6 @@ import java.util.List;
 public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
 
     private AsyncResponse listener = null;
-
     public MyAsyncTask(AsyncResponse listener) {
         this.listener = listener;
     }
@@ -34,17 +32,18 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
     @Override
     protected List<AmazonBook> doInBackground(String... urls) {
         String url = new AWS_URL().getURLByCategory(urls[0]);
-        Log.i("Link", url);
         List<AmazonBook> booksList = new ArrayList<>();
         try {
             MyXmlPullParser myXmlPullParser = new MyXmlPullParser();
             InputStream is = downloadUrl(url);
             booksList = myXmlPullParser.parse(is);
-            return booksList;
+            if (booksList != null) {
+                return booksList;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return booksList;
+        return null;
     }
 
     @Override

@@ -22,4 +22,5 @@
     <color name="aqua">#00ccff</color>
     <color name="pink">#f1066f</color>
     <color name="red">#e4043c</color>
+    <color name="whiteDark">#e1dbdb</color>
 </resources>

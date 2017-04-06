@@ -19,7 +19,6 @@ import com.santossingh.capstoneproject.Google.Models.Item;
 import com.santossingh.capstoneproject.Google.Services.DataManager;
 import com.santossingh.capstoneproject.R;
 import com.santossingh.capstoneproject.Utilities.AutofitGridlayout;
-import com.santossingh.capstoneproject.Utilities.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +29,6 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 public class GoogleFragment extends Fragment {
 
@@ -70,7 +68,7 @@ public class GoogleFragment extends Fragment {
         configRecycleView();
 
         if (savedInstanceState == null) {
-            makeService(Constants.Business);
+            makeService(String.valueOf(R.string.Business));
         } else {
             itemsList = savedInstanceState.getParcelableArrayList(BOOKS_STATE);
             recyclerViewAdapter.addList(itemsList);
@@ -80,7 +78,7 @@ public class GoogleFragment extends Fragment {
     }
 
     private void configRecycleView() {
-        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), 240);
+        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), Integer.parseInt(getString(R.string.Image_Width)));
         recyclerViewAdapter = new GoogleRecyclerAdapter(mListener);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(autofitGridlayout);
@@ -92,15 +90,15 @@ public class GoogleFragment extends Fragment {
         dataManager = new DataManager();
         Call<BooksLibrary> listCall = null;
 
-        if (string.equalsIgnoreCase(Constants.Business)) {
+        if (string.equalsIgnoreCase(String.valueOf(R.string.Business))) {
             listCall = dataManager.getJSONData().getFreeBusinessBooks();
-        } else if (string.equalsIgnoreCase(Constants.Fiction)) {
+        } else if (string.equalsIgnoreCase(String.valueOf(R.string.Fiction))) {
             listCall = dataManager.getJSONData().getFreeFictionBooks();
-        } else if (string.equalsIgnoreCase(Constants.NonFiction)) {
+        } else if (string.equalsIgnoreCase(String.valueOf(R.string.NonFiction))) {
             listCall = dataManager.getJSONData().getFreeNonFictionBooks();
-        } else if (string.equalsIgnoreCase(Constants.Fantasy)) {
+        } else if (string.equalsIgnoreCase(String.valueOf(R.string.Fantasy))) {
             listCall = dataManager.getJSONData().getFreeFantasyBooks();
-        } else if (string.equalsIgnoreCase(Constants.Romance)) {
+        } else if (string.equalsIgnoreCase(String.valueOf(R.string.Romance))) {
             listCall = dataManager.getJSONData().getFreeRomanceBooks();
         }
 
@@ -157,31 +155,31 @@ public class GoogleFragment extends Fragment {
             case R.id.Business:
                 item.setChecked(true);
                 menuPosition = R.id.Business;
-                makeService(Constants.Business);
+                makeService(String.valueOf(R.string.Business));
                 return true;
 
             case R.id.Fantasy:
                 item.setChecked(true);
                 menuPosition = R.id.Fantasy;
-                makeService(Constants.Fantasy);
+                makeService(String.valueOf(R.string.Fantasy));
                 return true;
 
             case R.id.Fiction:
                 item.setChecked(true);
                 menuPosition = R.id.Fiction;
-                makeService(Constants.Fiction);
+                makeService(String.valueOf(R.string.Fiction));
                 return true;
 
             case R.id.NonFiction:
                 item.setChecked(true);
                 menuPosition = R.id.NonFiction;
-                makeService(Constants.NonFiction);
+                makeService(String.valueOf(R.string.NonFiction));
                 return true;
 
             case R.id.Romance:
                 item.setChecked(true);
                 menuPosition = R.id.Romance;
-                makeService(Constants.Romance);
+                makeService(String.valueOf(R.string.Romance));
                 return true;
         }
         return super.onOptionsItemSelected(item);
