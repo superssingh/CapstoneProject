@@ -147,11 +147,11 @@ public class DetailFragment extends android.app.Fragment {
 
     public void setFreeDataforTabletUI(final Item book) {
         Book_ID = book.getId();
-        Title.setText(book.getVolumeInfo().getTitle() == null ? String.valueOf(R.string.Not_Available) : book.getVolumeInfo().getTitle());
-        Author.setText(book.getVolumeInfo().getAuthors() == null ? String.valueOf(R.string.Not_Available) : book.getVolumeInfo().getAuthors().get(0));
-        Year.setText(book.getVolumeInfo().getPublishedDate() == null ? String.valueOf(R.string.Not_Available) : book.getVolumeInfo().getPublishedDate());
-        Price.setText(String.valueOf(R.string.FREE_TAG));
-        Description.setText(String.valueOf(R.string.FREE_DESCRIPTION_TAG));
+        Title.setText(book.getVolumeInfo().getTitle() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getTitle());
+        Author.setText(book.getVolumeInfo().getAuthors() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getAuthors().get(0));
+        Year.setText(book.getVolumeInfo().getPublishedDate() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getPublishedDate());
+        Price.setText(getString(R.string.FREE_TAG));
+        Description.setText(getString(R.string.FREE_DESCRIPTION_TAG));
         setImage(book.getVolumeInfo().getImageLinks().getThumbnail());
 
         hasAmazon(false);

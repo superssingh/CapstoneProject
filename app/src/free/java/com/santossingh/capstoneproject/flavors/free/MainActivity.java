@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
             new CountDownTimer(3000, 1000) {
                 public void onTick(long millisUntilFinished) {
                 }
-
                 public void onFinish() {
                     layoutProgressbar.setVisibility(View.GONE);
                     AMAZON();
@@ -142,7 +141,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
         if (detailFragment == null) {
-            Toast.makeText(this, book.getAsin(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, DetailActivity.class)
                     .putExtra(String.valueOf(R.string.BOOK_ID), book.getAsin())
                     .putExtra(String.valueOf(R.string.BOOK_TITLE), book.getTitle())
