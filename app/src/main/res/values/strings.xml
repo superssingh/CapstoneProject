@@ -74,5 +74,6 @@
     <string name="GOOGLE_PREVIEW_HTML">file:///android_asset/google_preview.html</string>
     <string name="No_Internet_Connection">Internet connection turned OFF.\nCould you please turn ON Internet connection\n and press refresh button down below.</string>
     <string name="PressWiFi"></string>
+    <string name="AmazonLink">Amazon Link</string>
 
 </resources>

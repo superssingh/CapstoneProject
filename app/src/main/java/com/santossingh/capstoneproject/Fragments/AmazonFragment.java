@@ -33,6 +33,7 @@ import butterknife.ButterKnife;
 public class AmazonFragment extends Fragment implements AsyncResponse {
 
     private static final String STATE_BOOKS = "paid_books";
+    private static final String MENU_POSITION = "menu_item";
     @BindView(R.id.AWS_recycleView)
     RecyclerView recyclerView;
     @BindView(R.id.Progress_bar)
@@ -51,6 +52,7 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
     private View view;
     private OnFragmentInteractionListener mListener;
 
+
     public AmazonFragment() {
     }
 
@@ -63,8 +65,8 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(STATE_BOOKS,
-                new ArrayList<>(recyclerViewAdapter.getBooksList()));
+        outState.putParcelableArrayList(STATE_BOOKS, new ArrayList<>(recyclerViewAdapter.getBooksList()));
+        outState.putInt(MENU_POSITION, menuPosition);
     }
 
     @Override
@@ -77,17 +79,17 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_amazon, container, false);
         ButterKnife.bind(this, view);
-        itemsList = new ArrayList<AmazonBook>();
+        itemsList = new ArrayList<>();
         configRecycleView();
-        progressBar.setVisibility(View.VISIBLE);
 
-        if (savedInstanceState != null) {
-            progressBar.setVisibility(View.GONE);
-            itemsList = savedInstanceState.getParcelableArrayList(STATE_BOOKS);
-            recyclerViewAdapter.addList(itemsList);
-        } else {
+        if (savedInstanceState == null) {
             runTask(getString(R.string.Business));
             menuPosition = R.id.Business;
+        } else {
+            progressBar.setVisibility(View.GONE);
+            itemsList = savedInstanceState.getParcelableArrayList(STATE_BOOKS);
+            menuPosition = savedInstanceState.getInt(MENU_POSITION);
+            recyclerViewAdapter.addList(itemsList);
         }
 
         return view;
@@ -194,6 +196,7 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
             recyclerViewAdapter.addList(itemsList);
             mListener.onTabletIntraction(result.get(0));
         } else {
+            recyclerView.setVisibility(View.VISIBLE);
             Snackbar.make(view, R.string.NotFound, Snackbar.LENGTH_LONG).show();
         }
     }

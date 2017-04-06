@@ -36,9 +36,9 @@ public class DetailFragment extends android.app.Fragment {
     @BindView(R.id.ImageBar)
     ImageView imageView;
     @BindView(R.id.Amazon)
-    Button Amazon;
+    Button Amazon_Button;
     @BindView(R.id.BTNReview)
-    Button REVIEW;
+    Button REVIEW_Button;
     @BindView(R.id.G_Preview)
     ImageButton Google_Preview;
     @BindView(R.id.fab_fav)
@@ -86,27 +86,32 @@ public class DetailFragment extends android.app.Fragment {
         if (book != null) {
             setDataforTabletUI(book);
         }
+
         setAllListener();
+
         return view;
     }
 
     private void setAllListener() {
-        Amazon.setOnClickListener(new View.OnClickListener() {
+
+        REVIEW_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AmazonActivity.class)
-                        .putExtra(String.valueOf(R.string.BUY_Amazon), Buy_Link);
+                        .putExtra(String.valueOf(R.string.URL_Link), Review_Link);
                 startActivity(intent);
             }
         });
-        REVIEW.setOnClickListener(new View.OnClickListener() {
+
+        Amazon_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AmazonActivity.class)
-                        .putExtra(String.valueOf(R.string.Review_Link), Review_Link);
+                        .putExtra(String.valueOf(R.string.URL_Link), Buy_Link);
                 startActivity(intent);
             }
         });
+
         Google_Preview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,14 +120,12 @@ public class DetailFragment extends android.app.Fragment {
                 startActivity(intent);
             }
         });
+
     }
 
     public void setDataforTabletUI(final AmazonBook book1) {
         book = book1;
-        FAVORITE.setVisibility(View.VISIBLE);
-        Amazon.setVisibility(View.VISIBLE);
-        REVIEW.setVisibility(View.VISIBLE);
-        Google_Preview.setVisibility(View.GONE);
+        hasAmazon(true);
         Title.setText(book.getTitle());
         Author.setText(book.getAuthor());
         Year.setText(book.getPublishedDate());
@@ -139,6 +142,7 @@ public class DetailFragment extends android.app.Fragment {
                 contentProvider.addBookFromTabletUIForPaid(getActivity(), book);
             }
         });
+
     }
 
     public void setFreeDataforTabletUI(final Item book) {
@@ -150,9 +154,7 @@ public class DetailFragment extends android.app.Fragment {
         Description.setText(String.valueOf(R.string.FREE_DESCRIPTION_TAG));
         setImage(book.getVolumeInfo().getImageLinks().getThumbnail());
 
-        Google_Preview.setVisibility(View.VISIBLE);
-        Amazon.setVisibility(View.GONE);
-        REVIEW.setVisibility(View.GONE);
+        hasAmazon(false);
 
         FAVORITE.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,14 +169,10 @@ public class DetailFragment extends android.app.Fragment {
         Book_ID = intent.getStringExtra(String.valueOf(R.string.BOOK_ID));
         String priceStatus = intent.getStringExtra(String.valueOf(R.string.PRICE));
 
-        if (!priceStatus.equals(getString(R.string.FREE_TAG))) {
-            Google_Preview.setVisibility(View.GONE);
-            REVIEW.setVisibility(View.VISIBLE);
-            Amazon.setVisibility(View.VISIBLE);
+        if (priceStatus.equals(getString(R.string.FREE_TAG))) {
+            hasAmazon(false);
         } else {
-            Google_Preview.setVisibility(View.VISIBLE);
-            REVIEW.setVisibility(View.GONE);
-            Amazon.setVisibility(View.GONE);
+            hasAmazon(true);
         }
 
         Title.setText(intent.getStringExtra(String.valueOf(R.string.BOOK_TITLE)));
@@ -207,13 +205,9 @@ public class DetailFragment extends android.app.Fragment {
 
     public void setFavoriteDataforTabletUI(final FavoriteBooks book) {
         if (!book.getPrice().equals(String.valueOf(R.string.FREE_TAG))) {
-            Google_Preview.setVisibility(View.GONE);
-            REVIEW.setVisibility(View.VISIBLE);
-            Amazon.setVisibility(View.VISIBLE);
+            hasAmazon(false);
         } else {
-            REVIEW.setVisibility(View.GONE);
-            Amazon.setVisibility(View.GONE);
-            Google_Preview.setVisibility(View.VISIBLE);
+            hasAmazon(true);
         }
 
         setImage(book.getImage());
@@ -239,6 +233,18 @@ public class DetailFragment extends android.app.Fragment {
                 .fit()
                 .placeholder(R.mipmap.placeholder)
                 .into(imageView);
+    }
+
+    private void hasAmazon(boolean b) {
+        if (b == true) {
+            Google_Preview.setVisibility(View.GONE);
+            REVIEW_Button.setVisibility(View.VISIBLE);
+            Amazon_Button.setVisibility(View.VISIBLE);
+        } else {
+            REVIEW_Button.setVisibility(View.GONE);
+            Amazon_Button.setVisibility(View.GONE);
+            Google_Preview.setVisibility(View.VISIBLE);
+        }
     }
 
 }

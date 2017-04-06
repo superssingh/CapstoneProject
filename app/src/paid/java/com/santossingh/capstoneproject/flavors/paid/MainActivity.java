@@ -1,10 +1,8 @@
 package com.santossingh.capstoneproject.flavors.paid;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -28,6 +26,8 @@ import com.santossingh.capstoneproject.Fragments.FavoriteFragment;
 import com.santossingh.capstoneproject.Fragments.GoogleFragment;
 import com.santossingh.capstoneproject.Google.Models.Item;
 import com.santossingh.capstoneproject.R;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
                 public void onTick(long millisUntilFinished) {
                 }
                 public void onFinish() {
-                    layoutProgressbar.setVisibility(View.GONE);
                     AMAZON();
                 }
             }.start();
@@ -103,6 +102,21 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
             noNetwork.setVisibility(View.VISIBLE);
             Toast.makeText(this, "Internet connection not available.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public boolean isOnline() {
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+            int exitValue = ipProcess.waitFor();
+            return (exitValue == 0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     private void runShare() {
@@ -119,7 +133,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
         if (detailFragment == null) {
-            Toast.makeText(this, book.getAsin(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, DetailActivity.class)
                     .putExtra(String.valueOf(R.string.BOOK_ID), book.getAsin())
                     .putExtra(String.valueOf(R.string.BOOK_TITLE), book.getTitle())
@@ -237,23 +250,5 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
     }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-    private void startApp(){
-        if (isNetworkAvailable() == true) {
-            noNetwork.setVisibility(View.GONE);
-            AMAZON();
-        } else {
-            noNetwork.setVisibility(View.VISIBLE);
-        }
-    }
-
-
 
 }

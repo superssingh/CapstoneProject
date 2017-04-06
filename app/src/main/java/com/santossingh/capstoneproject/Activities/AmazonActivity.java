@@ -16,14 +16,8 @@ public class AmazonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_amazon);
         Intent intent = getIntent();
-        String BuyLink = intent.getStringExtra(String.valueOf(R.string.BUY_Amazon));
-        String ReviewsLink = intent.getStringExtra(String.valueOf(R.string.Review_Link));
-        if (BuyLink != null) {
-            showWebLink(BuyLink);
-        } else {
-            showWebLink(ReviewsLink);
-        }
-
+        String Link = intent.getStringExtra(String.valueOf(R.string.URL_Link));
+        showWebLink(Link);
     }
 
     public void showWebLink(String url) {
