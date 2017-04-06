@@ -65,14 +65,6 @@ public class DetailFragment extends android.app.Fragment {
         setHasOptionsMenu(true);
     }
 
-//    public static Typeface getTypeface(Context context, String typeface) {
-//
-//        if (mFont == null) {
-//            mFont = Typeface.createFromAsset(context.getAssets(), typeface);
-//        }
-//        return mFont;
-//    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +79,7 @@ public class DetailFragment extends android.app.Fragment {
             setDataforTabletUI(book);
         }
 
+        setUIFont(view);
         setAllListener();
 
         return view;
@@ -245,6 +238,11 @@ public class DetailFragment extends android.app.Fragment {
             Amazon_Button.setVisibility(View.GONE);
             Google_Preview.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void setUIFont(View view) {
+        final TextView descriptionView = (TextView) view.findViewById(R.id.Detail_Description);
+        descriptionView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "Roboto-Regular.ttf"));
     }
 
 }
