@@ -10,20 +10,20 @@
         <item
             android:id="@+id/nav_google"
             android:icon="@drawable/ic_book"
-            android:title="Google Free Books" />
+            android:title="@string/GoogleFreeBooks" />
         <item
             android:id="@+id/nav_favorite"
-            android:icon="@drawable/ic_favorite"
-            android:title="Favorite Books" />
+            android:icon="@drawable/ic_favorite_enabled"
+            android:title="@string/Favorite_List" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/Communicate">
         <menu>
             <item
                 android:id="@+id/menu_item_share"
                 android:actionProviderClass="android.widget.ShareActionProvider"
                 android:icon="@drawable/ic_share"
-                android:title="Share" />
+                android:title="@string/ShareCaption" />
         </menu>
     </item>
 

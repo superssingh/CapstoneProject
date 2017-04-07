@@ -79,7 +79,8 @@
                     <TextView
                         android:id="@+id/Detail_YEAR"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right" />
 
                     <TextView
                         android:id="@+id/Detail_Price"
@@ -190,6 +191,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#0fdad9d9"
+            android:contentDescription="@string/ImageCover"
             android:src="@drawable/gbs_preview_button"
             android:visibility="gone" />
 

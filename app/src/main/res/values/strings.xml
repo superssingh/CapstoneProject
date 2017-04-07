@@ -116,4 +116,26 @@
     <string name="Share">Share Using</string>
     <string name="MessageType">text/plain</string>
 
+    <!--contentDescription-->
+    <string name="RetryButton">This is retry button!</string>
+    <string name="BookCover">This is a book image from the list of books!</string>
+    <string name="WidgetBook">This is a book image from the online list of top famous books!</string>
+    <string name="WidgetIcon">This is icon of book widget.</string>
+    <string name="widgetButton">This is a widget button for launch widget activity that shows top famous books list.</string>
+    <string name="FavoriteBookImage">This is a book image from favorite list.</string>
+    <string name="DeleteButton">This is a delete button to delete this book from favorite list.</string>
+    <string name="CancelButton">This is a close button to close search box.</string>
+    <string name="searchButton">This is a search button to start search a particular book or author name that you have entered in input box.</string>
+    <string name="InputBox">This is the input box. Please enter your desire book or author name here.</string>
+    <string name="RefreshButton">This is a refresh button for refresh and retry to gather books list.</string>
+    <string name="ImageCover">This is image of the selected book from book detail page.</string>
+    <string name="GooglePreview">This is view button to read selected free book online.</string>
+    <string name="FreeBookImage">This is a book from list of free books.</string>
+    <string name="appIcon">This is an app icon of navigation header.</string>
+    <string name="widgetImage">This is a book of widget book list.</string>
+    <string name="Communicate">Communicate</string>
+    <string name="ShareCaption">Share</string>
+    <string name="Favorite_List">Favorite Books</string>
+    <string name="GoogleFreeBooks">Google Free Books</string>
+
 </resources>

@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@mipmap/book_cover"
+        android:contentDescription="@string/widgetImage"
         android:scaleType="fitXY" />
 
     <LinearLayout
@@ -26,7 +27,6 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:maxLines="3"
-            android:text="Title"
             android:textColor="#fff"
             android:textSize="14dp"
             android:textStyle="bold" />

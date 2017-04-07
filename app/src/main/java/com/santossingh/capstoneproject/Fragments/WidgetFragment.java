@@ -36,7 +36,7 @@ public class WidgetFragment extends Fragment {
     }
 
     private void configRecycleView() {
-        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), Integer.getInteger(getString(R.string.Image_Width)));
+        AutofitGridlayout autofitGridlayout = new AutofitGridlayout(getActivity(), Integer.parseInt(getString(R.string.Image_Width)));
         recycleAdapter = new WidgetRecyclerAdapter(mListener);
         recyclerView.setLayoutManager(autofitGridlayout);
         recyclerView.setAdapter(recycleAdapter);

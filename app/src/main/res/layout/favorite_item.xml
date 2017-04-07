@@ -14,7 +14,8 @@
         android:id="@+id/Fav_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/book_cover" />
+        android:background="@mipmap/book_cover"
+        android:contentDescription="@string/FavoriteBookImage" />
 
 
     <LinearLayout
@@ -43,6 +44,7 @@
         android:layout_height="40dp"
         android:layout_gravity="bottom|end"
         android:background="@drawable/round_button_off"
+        android:contentDescription="@string/DeleteButton"
         android:elevation="4dp"
         android:src="@drawable/ic_delete" />
 

@@ -78,6 +78,7 @@
                 android:layout_height="56dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/round_button_on"
+                android:contentDescription="@string/RetryButton"
                 android:elevation="6dp"
                 android:src="@drawable/ic_refresh" />
 

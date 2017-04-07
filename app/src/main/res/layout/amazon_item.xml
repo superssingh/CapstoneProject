@@ -15,7 +15,8 @@
         android:id="@+id/AWS_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/placeholder" />
+        android:background="@mipmap/placeholder"
+        android:contentDescription="@string/BookCover" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
             android:id="@+id/AWS_BookTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#61292828"
+            android:background="@color/Black_transparent_50"
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/white"
