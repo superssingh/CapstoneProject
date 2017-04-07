@@ -20,32 +20,17 @@ import butterknife.ButterKnife;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FavoriteFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * create an instance of this fragment.
- */
-
 public class FavoriteFragment extends Fragment {
 
     @BindView(R.id.Favorite_recycleView)
     RecyclerView recyclerView;
     @BindView(R.id.Empty_List)
     TextView Empty_textView;
-    private RealmResults<FavoriteBooks> booksList;
-    private FavoriteRecyclerAdapter recyclerViewAdapter;
     private View view;
     private Realm realm;
     private OnFragmentInteractionListener mListener;
 
     public FavoriteFragment() {
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -58,7 +43,7 @@ public class FavoriteFragment extends Fragment {
 
     private void getFavoriteList() {
         realm = Realm.getDefaultInstance();
-        booksList = realm.where(FavoriteBooks.class).findAll();
+        RealmResults<FavoriteBooks> booksList = realm.where(FavoriteBooks.class).findAll();
         if (booksList.size() == 0) {
             recyclerView.setVisibility(View.GONE);
             Snackbar.make(view, R.string.Favorite_empty_list, Snackbar.LENGTH_LONG).show();
@@ -70,7 +55,7 @@ public class FavoriteFragment extends Fragment {
 
     private void configRecycleView(RealmResults<FavoriteBooks> results) {
         AutofitGridlayout layoutManager = new AutofitGridlayout(getActivity(), Integer.parseInt(getString(R.string.Image_Width)));
-        recyclerViewAdapter = new FavoriteRecyclerAdapter(mListener, results);
+        FavoriteRecyclerAdapter recyclerViewAdapter = new FavoriteRecyclerAdapter(mListener, results);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);
     }
@@ -82,7 +67,7 @@ public class FavoriteFragment extends Fragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + R.string.ImplementFragmentListener);
         }
     }
 

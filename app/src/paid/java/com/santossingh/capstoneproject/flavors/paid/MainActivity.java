@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
                     .putExtra(String.valueOf(R.string.BUY_Amazon), book.getDetailURL());
             startActivity(intent);
         } else {
-            detailFragment.setDataforTabletUI(book);
+            detailFragment.setInfoInTabletUI(book);
         }
     }
 
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
                 .findFragmentById(R.id.fragment_detail);
         Boolean has = (detailFragment != null);
         if (has == true) {
-            detailFragment.setDataforTabletUI(book);
+            detailFragment.setInfoInTabletUI(book);
         }
     }
 
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
                     .putExtra(String.valueOf(R.string.BUY_Amazon), getString(R.string.Not_Available));
             startActivity(intent);
         } else {
-            detailFragment.setFreeDataforTabletUI(book);
+            detailFragment.setFreeInfoInTabletUI(book);
         }
     }
 
@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
                     .putExtra(String.valueOf(R.string.BUY_Amazon), book.getBuyLink());
             startActivity(intent);
         } else {
-            detailFragment.setFavoriteDataforTabletUI(book);
+            detailFragment.setFavoriteInfoInTablet(book);
         }
     }
 

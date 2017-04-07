@@ -13,13 +13,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Stark on 05/09/2016.
- */
-
 public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
 
     private AsyncResponse listener = null;
+
     public MyAsyncTask(AsyncResponse listener) {
         this.listener = listener;
     }
@@ -37,13 +34,23 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
             MyXmlPullParser myXmlPullParser = new MyXmlPullParser();
             InputStream is = downloadUrl(url);
             booksList = myXmlPullParser.parse(is);
-            if (booksList != null) {
-                return booksList;
+            if (isCancelled()) {
+                return null;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return booksList;
+    }
+
+    @Override
+    protected void onCancelled(List<AmazonBook> amazonBooks) {
+        super.onCancelled(amazonBooks);
+    }
+
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
     }
 
     @Override

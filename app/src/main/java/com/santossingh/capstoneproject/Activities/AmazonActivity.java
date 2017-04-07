@@ -1,5 +1,6 @@
 package com.santossingh.capstoneproject.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +9,6 @@ import android.webkit.WebView;
 import com.santossingh.capstoneproject.R;
 
 public class AmazonActivity extends AppCompatActivity {
-
-    private WebView webview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +19,9 @@ public class AmazonActivity extends AppCompatActivity {
         showWebLink(Link);
     }
 
-    public void showWebLink(String url) {
-        webview = (WebView) findViewById(R.id.webView_Amazon);
+    @SuppressLint("SetJavaScriptEnabled")
+    private void showWebLink(String url) {
+        WebView webview = (WebView) findViewById(R.id.webView_Amazon);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setDisplayZoomControls(true);
         webview.loadUrl(url);

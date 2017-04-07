@@ -1,5 +1,6 @@
 package com.santossingh.capstoneproject.Adatpers;
 
+import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,8 @@ import java.util.List;
 
 public class GoogleRecyclerAdapter extends RecyclerView.Adapter<GoogleRecyclerAdapter.ViewHolder> {
 
+    private final GoogleFragment.OnFragmentInteractionListener mListener;
     private List<Item> itemList = new ArrayList<>();
-    private GoogleFragment.OnFragmentInteractionListener mListener;
     private int preposition;
 
     public GoogleRecyclerAdapter(GoogleFragment.OnFragmentInteractionListener listener) {
@@ -31,8 +32,9 @@ public class GoogleRecyclerAdapter extends RecyclerView.Adapter<GoogleRecyclerAd
         return new ViewHolder(view);
     }
 
+    @SuppressLint("RecyclerView")
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mData = itemList.get(position);
         holder.textView.setText(holder.mData.getVolumeInfo().getTitle() == null ? String.valueOf(R.string.Not_Available) : holder.mData.getVolumeInfo().getTitle());
         holder.mView.setOnClickListener(new View.OnClickListener() {

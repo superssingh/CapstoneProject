@@ -25,13 +25,12 @@ import butterknife.ButterKnife;
 
 public class WidgetRecyclerAdapter extends RecyclerView.Adapter<WidgetRecyclerAdapter.ViewHolder> {
 
-    private List<TopBooks> booksList = new ArrayList<>();
-    private WidgetFragment.OnFragmentInteractionListener listener;
-    private DatabaseReference databaseReference;
+    private final List<TopBooks> booksList = new ArrayList<>();
+    private final WidgetFragment.OnFragmentInteractionListener listener;
 
     public WidgetRecyclerAdapter(WidgetFragment.OnFragmentInteractionListener listener) {
         this.listener = listener;
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("topbooks");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(String.valueOf(R.string.TopBooksTag));
 
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
@@ -58,6 +57,7 @@ public class WidgetRecyclerAdapter extends RecyclerView.Adapter<WidgetRecyclerAd
                 }
                 TopBooks topBooks = dataSnapshot.getValue(TopBooks.class);
                 topBooks.setKey(dataSnapshot.getKey());
+                assert booksList != null;
                 booksList.add(0, topBooks);
                 notifyDataSetChanged();
             }
@@ -80,7 +80,7 @@ public class WidgetRecyclerAdapter extends RecyclerView.Adapter<WidgetRecyclerAd
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.book = booksList.get(position);
         Picasso.with(holder.mView.getContext()).load(holder.book.getImage())
                 .fit()
@@ -104,11 +104,11 @@ public class WidgetRecyclerAdapter extends RecyclerView.Adapter<WidgetRecyclerAd
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        final View mView;
         @BindView(R.id.widgetImage)
         ImageView imageView;
         @BindView(R.id.widgetTitle)
         TextView title;
-        View mView;
         private TopBooks book;
 
         public ViewHolder(View view) {

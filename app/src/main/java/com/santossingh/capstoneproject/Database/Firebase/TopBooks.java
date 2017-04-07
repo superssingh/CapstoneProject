@@ -1,9 +1,7 @@
 package com.santossingh.capstoneproject.Database.Firebase;
 
-/**
- * Created by santoshsingh on 01/04/17.
- */
 
+@SuppressWarnings("ALL")
 public class TopBooks {
     private String id;
     private String title;

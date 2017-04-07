@@ -2,11 +2,6 @@ package com.santossingh.capstoneproject.Amazon.Services;
 
 import java.util.HashMap;
 import java.util.Map;
-
-/**
- * Created by santoshsingh on 17/02/17.
- */
-
 public class AWS_URL {
 
     // Your AWS Access Key ID, as taken from the AWS Your Account page.

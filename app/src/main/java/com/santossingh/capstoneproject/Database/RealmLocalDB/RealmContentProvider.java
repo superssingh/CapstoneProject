@@ -12,10 +12,6 @@ import com.santossingh.capstoneproject.R;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-/**
- * Created by santoshsingh on 18/03/17.
- */
-
 public class RealmContentProvider {
 
     private Context context;

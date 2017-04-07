@@ -37,8 +37,6 @@ public class GoogleFragment extends Fragment {
     ProgressBar progressBar;
     @BindView(R.id.recycleView)
     RecyclerView recyclerView;
-    int menuPosition;
-    private DataManager dataManager;
     private List<Item> itemsList;
     private GoogleRecyclerAdapter recyclerViewAdapter;
     private View view;
@@ -56,7 +54,7 @@ public class GoogleFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(BOOKS_STATE, new ArrayList<Item>(recyclerViewAdapter.getBooksList()));
+        outState.putParcelableArrayList(BOOKS_STATE, new ArrayList<>(recyclerViewAdapter.getBooksList()));
     }
 
     @Override
@@ -64,7 +62,7 @@ public class GoogleFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_base, container, false);
         ButterKnife.bind(this, view);
-        itemsList = new ArrayList<Item>();
+        itemsList = new ArrayList<>();
         configRecycleView();
 
         if (savedInstanceState == null) {
@@ -85,9 +83,9 @@ public class GoogleFragment extends Fragment {
         recyclerView.setAdapter(recyclerViewAdapter);
     }
 
-    public void makeService(String string) {
+    private void makeService(String string) {
         progressBar.setVisibility(View.VISIBLE);
-        dataManager = new DataManager();
+        DataManager dataManager = new DataManager();
         Call<BooksLibrary> listCall = null;
 
         if (string.equalsIgnoreCase(String.valueOf(R.string.Business))) {
@@ -106,12 +104,14 @@ public class GoogleFragment extends Fragment {
             listCall = dataManager.getJSONData().getFreeComicsBooks();
         }
 
+        //noinspection ConstantConditions
         listCall.enqueue(new Callback<BooksLibrary>() {
             @Override
             public void onResponse(Call<BooksLibrary> call, Response<BooksLibrary> response) {
                 if (response.isSuccessful()) {
                     Item[] items = response.body().getItems();
-                    itemsList = new ArrayList<Item>(Arrays.asList(items));
+                    itemsList = new ArrayList<>(Arrays.asList(items));
+                    //noinspection ConstantConditions
                     if (itemsList != null) {
                         recyclerViewAdapter.addList(itemsList);
                         progressBar.setVisibility(View.GONE);
@@ -158,43 +158,36 @@ public class GoogleFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.Business:
                 item.setChecked(true);
-                menuPosition = R.id.Business;
                 makeService(String.valueOf(R.string.Business));
                 return true;
 
             case R.id.Fantasy:
                 item.setChecked(true);
-                menuPosition = R.id.Fantasy;
                 makeService(String.valueOf(R.string.Fantasy));
                 return true;
 
             case R.id.Fiction:
                 item.setChecked(true);
-                menuPosition = R.id.Fiction;
                 makeService(String.valueOf(R.string.Fiction));
                 return true;
 
             case R.id.NonFiction:
                 item.setChecked(true);
-                menuPosition = R.id.NonFiction;
                 makeService(String.valueOf(R.string.NonFiction));
                 return true;
 
             case R.id.Love:
                 item.setChecked(true);
-                menuPosition = R.id.Love;
                 makeService(String.valueOf(R.string.Love));
                 return true;
 
             case R.id.Adventure:
                 item.setChecked(true);
-                menuPosition = R.id.Adventure;
                 makeService(String.valueOf(R.string.Adventure));
                 return true;
 
             case R.id.Comics:
                 item.setChecked(true);
-                menuPosition = R.id.Comics;
                 makeService(String.valueOf(R.string.Comics));
                 return true;
         }

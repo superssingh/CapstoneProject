@@ -1,5 +1,6 @@
 package com.santossingh.capstoneproject.Adatpers;
 
+import android.annotation.SuppressLint;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,9 +23,8 @@ import io.realm.RealmResults;
 
 public class FavoriteRecyclerAdapter extends RecyclerView.Adapter<FavoriteRecyclerAdapter.ViewHolder> {
 
-    FavoriteFragment.OnFragmentInteractionListener mListener;
+    private final FavoriteFragment.OnFragmentInteractionListener mListener;
     private RealmResults<FavoriteBooks> booksList;
-    private Realm realm;
     private int preposition;
 
     public FavoriteRecyclerAdapter(FavoriteFragment.OnFragmentInteractionListener mListener, RealmResults<FavoriteBooks> books) {
@@ -39,8 +39,9 @@ public class FavoriteRecyclerAdapter extends RecyclerView.Adapter<FavoriteRecycl
         return new ViewHolder(rcView);
     }
 
+    @SuppressLint("RecyclerView")
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
         holder.book = booksList.get(position);
         holder.title.setText(holder.book.getTitle());
@@ -61,7 +62,7 @@ public class FavoriteRecyclerAdapter extends RecyclerView.Adapter<FavoriteRecycl
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                delete(position);
+                delete(holder.getAdapterPosition());
                 booksList.size();
                 if (booksList.size() == 0) {
                     Snackbar.make(view, R.string.Favorite_empty_list, Snackbar.LENGTH_LONG).show();
@@ -84,7 +85,7 @@ public class FavoriteRecyclerAdapter extends RecyclerView.Adapter<FavoriteRecycl
     }
 
     private void delete(int position) {
-        realm = Realm.getDefaultInstance();
+        Realm realm = Realm.getDefaultInstance();
         booksList = realm.where(FavoriteBooks.class).findAll();
         realm.beginTransaction();
         FavoriteBooks fm = booksList.get(position);

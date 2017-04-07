@@ -28,11 +28,8 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- */
 public class DetailFragment extends android.app.Fragment {
 
-    private static Typeface mFont;
     @BindView(R.id.ImageBar)
     ImageView imageView;
     @BindView(R.id.Amazon)
@@ -57,7 +54,6 @@ public class DetailFragment extends android.app.Fragment {
     TextView Description;
     @BindView(R.id.CoordinateLayout)
     CoordinatorLayout coordinatorLayout;
-    private View view;
     private String Buy_Link = "", Review_Link = "", Book_ID = "";
     private AmazonBook book;
 
@@ -66,18 +62,11 @@ public class DetailFragment extends android.app.Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_detail, container, false);
         ButterKnife.bind(this, view);
         book = new AmazonBook();
-        if (book != null) {
-            setDataforTabletUI(book);
-        }
+        setInfoInTabletUI(book);
 
         setUIFont(view);
         setAllListener();
@@ -116,7 +105,7 @@ public class DetailFragment extends android.app.Fragment {
 
     }
 
-    public void setDataforTabletUI(final AmazonBook book1) {
+    public void setInfoInTabletUI(final AmazonBook book1) {
         book = book1;
         hasAmazon(true);
         Title.setText(book.getTitle());
@@ -138,7 +127,7 @@ public class DetailFragment extends android.app.Fragment {
 
     }
 
-    public void setFreeDataforTabletUI(final Item book) {
+    public void setFreeInfoInTabletUI(final Item book) {
         Book_ID = book.getId();
         Title.setText(book.getVolumeInfo().getTitle() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getTitle());
         Author.setText(book.getVolumeInfo().getAuthors() == null ? getString(R.string.Not_Available) : book.getVolumeInfo().getAuthors().get(0));
@@ -189,6 +178,7 @@ public class DetailFragment extends android.app.Fragment {
     private String filterTags(String string) {
         String filter;
         if (string != null) {
+            //noinspection deprecation
             filter = Html.fromHtml(string).toString();
         } else {
             filter = String.valueOf(R.string.Not_Available);
@@ -196,8 +186,8 @@ public class DetailFragment extends android.app.Fragment {
         return filter;
     }
 
-    public void setFavoriteDataforTabletUI(final FavoriteBooks book) {
-        if (!book.getPrice().equals(String.valueOf(R.string.FREE_TAG))) {
+    public void setFavoriteInfoInTablet(final FavoriteBooks book) {
+        if (book.getPrice().equals(String.valueOf(R.string.FREE_TAG))) {
             hasAmazon(false);
         } else {
             hasAmazon(true);
@@ -229,7 +219,7 @@ public class DetailFragment extends android.app.Fragment {
     }
 
     private void hasAmazon(boolean b) {
-        if (b == true) {
+        if (b) {
             Google_Preview.setVisibility(View.GONE);
             REVIEW_Button.setVisibility(View.VISIBLE);
             Amazon_Button.setVisibility(View.VISIBLE);

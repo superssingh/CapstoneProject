@@ -63,6 +63,7 @@
     <string name="empty_widget">Empty widget.</string>
     <string name="configure">Configure</string>
     <string name="TopBooks">Famous Books</string>
+    <string name="TopBooksTag">topbooks</string>
     <string name="action_Favorite">favorite</string>
     <string name="NotFound">Sorry, your desire book or author not found.</string>
     <string name="FillSearchBox">Please enter desire book or author name.</string>
@@ -77,5 +78,26 @@
     <string name="No_Internet_Connection">Internet connection turned OFF.\nCould you please turn ON Internet connection\n and press refresh button down below.</string>
     <string name="PressWiFi"></string>
     <string name="AmazonLink">Amazon Link</string>
+    <string name="AWS_ACCESS_KEY_ID">AKIAILMCDWNHZ6OBN2QQ</string>
+    <string name="AWS_SECRET_KEY">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</string>
+    <string name="ENDPOINT">webservices.amazon.in</string>
+    <string name="AWS_Service">Service</string>
+    <string name="AWSECommerceService">AWSECommerceService</string>
+    <string name="AWS_Operation">Operation</string>
+    <string name="ItemSearch">ItemSearch</string>
+    <string name="AWSAccessKeyId">AWSAccessKeyId</string>
+    <string name="ASSOCIATE_TAG">superssingh-21</string>
+    <string name="AssociateTag">AssociateTag</string>
+    <string name="SearchIndex">SearchIndex</string>
+    <string name="searchIndexKey">Books</string>
+    <string name="RESPONSE_GROUP">EditorialReview,Images,ItemAttributes,Reviews</string>
+    <string name="ResponseGroup">ResponseGroup</string>
+    <string name="Keywords">Keywords</string>
+    <string name="AWS_EndpointException">endpoint is null or empty</string>
+    <string name="AWS_ACCESS_KEY_ID_Exception">awsAccessKeyId is null or empty</string>
+    <string name="AWS_SECRET_KEY_Exception">awsSecretKey is null or empty</string>
+    <string name="Timestamp">Timestamp</string>
+    <string name="ImplementFragmentListener">must implement OnFragmentInteractionListener.</string>
+    <string name="Retry">Please retry.</string>
 
 </resources>

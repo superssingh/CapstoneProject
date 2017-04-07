@@ -3,10 +3,6 @@ package com.santossingh.capstoneproject.Database.RealmLocalDB;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by santoshsingh on 18/03/17.
- */
-
 public class FavoriteBooks extends RealmObject {
 
     @PrimaryKey

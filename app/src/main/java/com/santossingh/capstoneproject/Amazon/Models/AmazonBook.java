@@ -6,10 +6,6 @@ import android.os.Parcelable;
 
 import com.santossingh.capstoneproject.R;
 
-/**
- * Created by santoshsingh on 22/02/17.
- */
-
 public class AmazonBook implements Parcelable {
 
     public static final Creator<AmazonBook> CREATOR = new Creator<AmazonBook>() {
@@ -60,7 +56,7 @@ public class AmazonBook implements Parcelable {
         detailURL = bundle.getString(String.valueOf(R.string.BUY_LINK));
     }
 
-    protected AmazonBook(Parcel in) {
+    private AmazonBook(Parcel in) {
         asin = in.readString();
         detailURL = in.readString();
         image = in.readString();

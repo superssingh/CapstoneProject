@@ -1,5 +1,6 @@
 package com.santossingh.capstoneproject.Activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
@@ -9,9 +10,10 @@ import com.santossingh.capstoneproject.R;
 
 public class ViewActivity extends AppCompatActivity {
 
-    String id = "";
+    private String id = "";
     private WebView webview;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
