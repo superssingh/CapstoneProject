@@ -214,7 +214,7 @@ public class DetailFragment extends android.app.Fragment {
     private void setImage(String imageURL) {
         Picasso.with(getActivity()).load(imageURL)
                 .fit()
-                .placeholder(R.mipmap.book_frame)
+                .placeholder(R.mipmap.placeholder)
                 .into(imageView);
     }
 
