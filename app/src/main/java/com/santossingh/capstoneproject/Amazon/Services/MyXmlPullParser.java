@@ -103,7 +103,7 @@ public class MyXmlPullParser {
                 book.setImage(readSUB_TAG(IMAGE_PATH, IMAGE, parser));
 
             } else if (name.equals(ATTRIBUTES_PATH)) {
-                readAttributes(ATTRIBUTES_PATH, parser);
+                readAttributes(parser);
                 book.setAuthor(BookAuthor);
                 book.setPrice(BookPrice);
                 book.setPublishedDate(BookYear);
@@ -113,7 +113,7 @@ public class MyXmlPullParser {
                 book.setReviews(readSUB_TAG(REVIEW_PATH, REVIEWS, parser));
 
             } else if (name.equalsIgnoreCase(DES_PATH)) {
-                book.setDescription(readNestedTAG1(DES_PATH, DES_PATH2, DESCRIPTION, parser));
+                book.setDescription(readNestedTAG1(parser));
 
             } else {
                 skip(parser);
@@ -124,40 +124,46 @@ public class MyXmlPullParser {
     }
 
     // getting other attributes that into a single tag ---------
-    private void readAttributes(String TAG1, XmlPullParser parser) throws IOException, XmlPullParserException {
-        parser.require(XmlPullParser.START_TAG, ns, TAG1);
+    private void readAttributes(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, ns, MyXmlPullParser.ATTRIBUTES_PATH);
 
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
             }
             String name = parser.getName();
-            if (name.equals(AUTHOR)) {
-                BookAuthor = readTAG(AUTHOR, parser);
-            } else if (name.equals(Price_PATH)) {
-                BookPrice = readSUB_TAG(Price_PATH, PRICE, parser);
-            } else if (name.equals(PUB_DATE)) {
-                BookYear = readTAG(PUB_DATE, parser);
-            } else if (name.equals(TITLE)) {
-                BookTitle = readTAG(TITLE, parser);
-            } else {
-                skip(parser);
+            switch (name) {
+                case AUTHOR:
+                    BookAuthor = readTAG(AUTHOR, parser);
+                    break;
+                case Price_PATH:
+                    BookPrice = readSUB_TAG(Price_PATH, PRICE, parser);
+                    break;
+                case PUB_DATE:
+                    BookYear = readTAG(PUB_DATE, parser);
+                    break;
+                case TITLE:
+                    BookTitle = readTAG(TITLE, parser);
+                    break;
+                default:
+                    skip(parser);
+                    break;
             }
         }
     }
 
 
-    private String readNestedTAG1(String TAG1, String TAG2, String TAG3, XmlPullParser parser) throws IOException, XmlPullParserException {
+    private String readNestedTAG1(XmlPullParser parser) throws IOException, XmlPullParserException {
         String data = "Unavailable";
-        parser.require(XmlPullParser.START_TAG, ns, TAG1);
+        parser.require(XmlPullParser.START_TAG, ns, MyXmlPullParser.DES_PATH);
 
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
             }
             String name = parser.getName();
-            if (name.equals(TAG2)) {
-                data = readSUB_TAG(TAG2, TAG3, parser);
+            if (name.equals(MyXmlPullParser.DES_PATH2)) {
+                data = readSUB_TAG(MyXmlPullParser.DES_PATH2, MyXmlPullParser.DESCRIPTION, parser);
             } else {
                 skip(parser);
             }

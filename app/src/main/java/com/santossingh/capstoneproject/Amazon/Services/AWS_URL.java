@@ -1,7 +1,10 @@
 package com.santossingh.capstoneproject.Amazon.Services;
 
+import com.santossingh.capstoneproject.R;
+
 import java.util.HashMap;
 import java.util.Map;
+
 public class AWS_URL {
 
     // Your AWS Access Key ID, as taken from the AWS Your Account page.
@@ -10,6 +13,9 @@ public class AWS_URL {
     private static final String AWS_SECRET_KEY = "qWESYwVUgn2IcdHOmZZwK1xU3VcK98TxcRlQsEV2";
     //Use the end-point according to the region you are interested in.
     private static final String ENDPOINT = "webservices.amazon.in";
+    private static final String ASSOCIATE_TAG = "superssingh-21";
+    private static final String RESPONSE_GROUP = "EditorialReview,Images,ItemAttributes,Reviews";
+
 
     public String getURLByCategory(String keyword) {
 
@@ -21,16 +27,16 @@ public class AWS_URL {
             e.printStackTrace();
             return e.getMessage();
         }
-        String requestUrl = null;
+        String requestUrl;
 
         Map<String, String> params = new HashMap<String, String>();
 
-        params.put("Service", "AWSECommerceService");
+        params.put("Service", String.valueOf(R.string.AWSECommerceService));
         params.put("Operation", "ItemSearch");
-        params.put("AWSAccessKeyId", "AKIAILMCDWNHZ6OBN2QQ");
-        params.put("AssociateTag", "superssingh-21");
+        params.put("AWSAccessKeyId", AWS_ACCESS_KEY_ID);
+        params.put("AssociateTag", ASSOCIATE_TAG);
         params.put("SearchIndex", "Books");
-        params.put("ResponseGroup", "EditorialReview,Images,ItemAttributes,Reviews");
+        params.put("ResponseGroup", RESPONSE_GROUP);
         params.put("Keywords", keyword);
 
         requestUrl = helper.sign(params);
@@ -38,4 +44,7 @@ public class AWS_URL {
     }
 
 }
+
+
+
 
