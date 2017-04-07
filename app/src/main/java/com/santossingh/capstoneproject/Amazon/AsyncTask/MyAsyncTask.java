@@ -28,16 +28,18 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
 
     @Override
     protected List<AmazonBook> doInBackground(String... urls) {
-        String url = new AWS_URL().getURLByCategory(urls[0]);
+
         List<AmazonBook> booksList = new ArrayList<>();
         try {
-            MyXmlPullParser myXmlPullParser = new MyXmlPullParser();
-            InputStream is = downloadUrl(url);
-            booksList = myXmlPullParser.parse(is);
             if (isCancelled()) {
                 booksList = null;
                 return booksList;
             }
+            String url = new AWS_URL().getURLByCategory(urls[0]);
+            MyXmlPullParser myXmlPullParser = new MyXmlPullParser();
+            InputStream is = downloadUrl(url);
+            booksList = myXmlPullParser.parse(is);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

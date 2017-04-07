@@ -2,7 +2,6 @@ package com.santossingh.capstoneproject.flavors.paid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -92,15 +91,8 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     private void startApp() {
         if (isOnline() == true) {
             noNetwork.setVisibility(View.GONE);
-            new CountDownTimer(4000, 1000) {
-                public void onTick(long millisUntilFinished) {
-                }
-                public void onFinish() {
-                    layoutProgressbar.setVisibility(View.GONE);
-                    AMAZON();
-                }
-            }.start();
-
+            layoutProgressbar.setVisibility(View.GONE);
+            AMAZON();
         } else {
             noNetwork.setVisibility(View.VISIBLE);
             Toast.makeText(this, "Internet connection not available.", Toast.LENGTH_LONG).show();
