@@ -22,18 +22,12 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
     }
 
     @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
-
-    @Override
     protected List<AmazonBook> doInBackground(String... urls) {
 
         List<AmazonBook> booksList = new ArrayList<>();
         try {
             if (isCancelled()) {
-                booksList = null;
-                return booksList;
+                return null;
             }
             String url = new AWS_URL().getURLByCategory(urls[0]);
             MyXmlPullParser myXmlPullParser = new MyXmlPullParser();
@@ -49,11 +43,6 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
     @Override
     protected void onCancelled(List<AmazonBook> amazonBooks) {
         super.onCancelled(amazonBooks);
-    }
-
-    @Override
-    protected void onCancelled() {
-        super.onCancelled();
     }
 
     @Override

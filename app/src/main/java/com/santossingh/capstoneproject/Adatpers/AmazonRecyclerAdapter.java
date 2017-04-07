@@ -1,5 +1,6 @@
 package com.santossingh.capstoneproject.Adatpers;
 
+import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,15 +37,13 @@ public class AmazonRecyclerAdapter extends RecyclerView.Adapter<AmazonRecyclerAd
         return new ViewHolder(view);
     }
 
+    @SuppressLint("RecyclerView")
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.book = booksList.get(position);
         holder.title.setText(holder.book.getTitle());
         Picasso.with(holder.mView.getContext()).load(holder.book.getImage())
-                .fit()
-                .error(R.mipmap.placeholder)
-                .into(holder.imageView);
+                .fit().error(R.mipmap.placeholder).into(holder.imageView);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

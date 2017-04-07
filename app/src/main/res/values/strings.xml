@@ -77,6 +77,8 @@
     <string name="GOOGLE_PREVIEW_HTML">file:///android_asset/google_preview.html</string>
     <string name="No_Internet_Connection">Internet connection turned OFF.\nCould you please turn ON Internet connection\n and press refresh button down below.</string>
     <string name="PressWiFi"></string>
+
+    <!-- AWS Services-->
     <string name="AmazonLink">Amazon Link</string>
     <string name="AWS_ACCESS_KEY_ID">AKIAILMCDWNHZ6OBN2QQ</string>
     <string name="AWS_SECRET_KEY">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</string>
@@ -97,8 +99,17 @@
     <string name="AWS_ACCESS_KEY_ID_Exception">awsAccessKeyId is null or empty</string>
     <string name="AWS_SECRET_KEY_Exception">awsSecretKey is null or empty</string>
     <string name="Timestamp">Timestamp</string>
+
+    <!--Main Activity-->
     <string name="ImplementFragmentListener">must implement OnFragmentInteractionListener.</string>
     <string name="Retry">Please retry.</string>
     <string name="DefaultSearch">Data refreshed.</string>
+    <string name="SYSTEM_PING">/system/bin/ping -c 1 8.8.8.8</string>
+    <string name="AdLoadError">\"Ad failed to load! \"</string>
+    <string name="AdLeftApplication">Ad left application!</string>
+    <string name="AdOpen">Ad is opened!</string>
+    <string name="RealmDatabaseName">favorite.realm</string>
+    <string name="InternetAvailable">Internet connection not available.</string>
+    <string name="InternetNotAvailable">Internet connection not available.</string>
 
 </resources>
