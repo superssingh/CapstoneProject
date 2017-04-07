@@ -187,7 +187,7 @@ public class DetailFragment extends android.app.Fragment {
     }
 
     public void setFavoriteInfoInTablet(final FavoriteBooks book) {
-        if (book.getPrice().equals(String.valueOf(R.string.FREE_TAG))) {
+        if (book.getPrice().equals(getString(R.string.FREE_TAG))) {
             hasAmazon(false);
         } else {
             hasAmazon(true);
@@ -214,7 +214,7 @@ public class DetailFragment extends android.app.Fragment {
     private void setImage(String imageURL) {
         Picasso.with(getActivity()).load(imageURL)
                 .fit()
-                .placeholder(R.mipmap.placeholder)
+                .placeholder(R.mipmap.book_frame)
                 .into(imageView);
     }
 

@@ -3,15 +3,8 @@
     android:id="@+id/fragment_base"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/gradient2"
     tools:context="com.santossingh.capstoneproject.Fragments.GoogleFragment">
-
-    <ProgressBar
-        android:id="@+id/base_Progress_bar"
-        style="@android:style/Widget.ProgressBar.Inverse"
-        android:layout_width="30dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleView"
@@ -20,6 +13,20 @@
         android:padding="10dp">
 
     </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/base_Progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/Black_transparent_70"
+        android:gravity="center">
+
+        <ProgressBar
+            style="@android:style/Widget.ProgressBar.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 
 </FrameLayout>

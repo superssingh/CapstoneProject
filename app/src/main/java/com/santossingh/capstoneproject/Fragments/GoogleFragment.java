@@ -10,7 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.santossingh.capstoneproject.Adatpers.GoogleRecyclerAdapter;
@@ -34,7 +34,7 @@ public class GoogleFragment extends Fragment {
 
     private static final String BOOKS_STATE = "free_books";
     @BindView(R.id.base_Progress_bar)
-    ProgressBar progressBar;
+    LinearLayout progressBar;
     @BindView(R.id.recycleView)
     RecyclerView recyclerView;
     private List<Item> itemsList;
