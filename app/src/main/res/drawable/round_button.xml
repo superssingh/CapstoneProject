@@ -3,12 +3,12 @@
 
     <item android:state_pressed="false">
         <shape android:shape="oval">
-            <gradient android:centerColor="#05e736" android:endColor="#04a607" android:startColor="#049f07" />
+            <gradient android:centerColor="#07a90f" android:endColor="#08c935" android:startColor="#06c629" />
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape android:shape="oval">
-            <gradient android:centerColor="#d91b6a" android:endColor="#b30528" android:startColor="#b10626" />
+            <gradient android:centerColor="#0af5ee" android:endColor="#05b3b0" android:startColor="#06b1ab" />
         </shape>
     </item>
 </selector>

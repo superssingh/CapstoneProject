@@ -73,4 +73,16 @@
 
     </LinearLayout>
 
+    <ImageButton
+        android:id="@+id/BTN_Refresh"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_button"
+        android:elevation="6dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_refresh"
+        android:visibility="gone" />
+
 </FrameLayout>

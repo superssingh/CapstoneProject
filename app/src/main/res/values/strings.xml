@@ -99,5 +99,6 @@
     <string name="Timestamp">Timestamp</string>
     <string name="ImplementFragmentListener">must implement OnFragmentInteractionListener.</string>
     <string name="Retry">Please retry.</string>
+    <string name="DefaultSearch">Data refreshed.</string>
 
 </resources>

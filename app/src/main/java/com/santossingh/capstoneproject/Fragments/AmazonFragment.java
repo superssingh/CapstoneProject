@@ -2,7 +2,6 @@ package com.santossingh.capstoneproject.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -44,6 +43,8 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
     ImageButton search_cancel;
     @BindView(R.id.BTN_search)
     ImageButton searchButton;
+    @BindView(R.id.BTN_Refresh)
+    ImageButton refresh;
     @BindView(R.id.input_name)
     EditText inputName;
     int menuPosition;
@@ -211,16 +212,15 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
     @Override
     public void processFinish(List<AmazonBook> result) {
         progressBar.setVisibility(View.GONE);
-        if (!result.equals(null)) {
+        if (result.equals(null)) {
+            recyclerView.setVisibility(View.GONE);
+            refresh.setVisibility(View.VISIBLE);
+            Snackbar.make(view, R.string.Retry, Snackbar.LENGTH_LONG).show();
+        } else {
             itemsList = result;
             recyclerView.setVisibility(View.VISIBLE);
             recyclerViewAdapter.addList(itemsList);
-            mListener.onFragmentInteraction(result.get(0));
-        } else if (result.equals(null) && searchID == 0) {
-            startQueryTask(getString(R.string.Business));
-        } else if (result.equals(null) && searchID == 1) {
-            recyclerView.setVisibility(View.GONE);
-            Snackbar.make(view, R.string.Retry, Snackbar.LENGTH_LONG).show();
+            mListener.onTabletIntraction(result.get(0));
         }
     }
 
@@ -233,15 +233,15 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
         }
     }
 
-    public void runTask(final String query) {
-        new CountDownTimer(3000, 1000) {
-            public void onTick(long millisUntilFinished) {
+    private void setRefresh() {
+        refresh.setVisibility(View.VISIBLE);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startQueryTask(getString(R.string.Business));
+                Snackbar.make(view, R.string.DefaultSearch, Snackbar.LENGTH_LONG).show();
             }
-
-            public void onFinish() {
-                startQueryTask(query);
-            }
-        }.start();
+        });
     }
 
     public interface OnFragmentInteractionListener {

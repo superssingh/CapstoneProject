@@ -35,7 +35,8 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
             InputStream is = downloadUrl(url);
             booksList = myXmlPullParser.parse(is);
             if (isCancelled()) {
-                return null;
+                booksList = null;
+                return booksList;
             }
         } catch (Exception e) {
             e.printStackTrace();
