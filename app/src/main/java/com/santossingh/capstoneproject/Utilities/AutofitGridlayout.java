@@ -4,9 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-/**
- * Created by Stark on 19/04/2016.
- */
 
 public class AutofitGridlayout extends GridLayoutManager {
 

@@ -152,7 +152,6 @@ public class MyXmlPullParser {
         }
     }
 
-
     private String readNestedTAG1(XmlPullParser parser) throws IOException, XmlPullParserException {
         String data = "Unavailable";
         parser.require(XmlPullParser.START_TAG, ns, MyXmlPullParser.DES_PATH);

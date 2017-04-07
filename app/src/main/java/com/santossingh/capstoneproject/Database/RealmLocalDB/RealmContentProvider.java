@@ -18,9 +18,6 @@ public class RealmContentProvider {
 
     public RealmContentProvider() {
     }
-    // Add method with Realm Asynchronous Transactions---------------------------
-    // To write data on background thread which avoid blocking the UI thread----
-    // Adding current movie info which comes from Intent (Handset view)----------
 
     public void addBookFromIntent(final Context context, final Intent intent) {
         this.context = context;

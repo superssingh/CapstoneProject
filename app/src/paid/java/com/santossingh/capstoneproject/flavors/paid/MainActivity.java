@@ -55,13 +55,14 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Realm initialization
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
-                .name("favorite.realm")
-                .schemaVersion(1)
+                .name(getString(R.string.RealmDatabaseName))
+                .schemaVersion(Integer.parseInt(getString(R.string.VERSION)))
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(config);
@@ -89,25 +90,23 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     }
 
     private void startApp() {
-        if (isOnline() == true) {
+        if (isOnline()) {
             noNetwork.setVisibility(View.GONE);
             layoutProgressbar.setVisibility(View.GONE);
             AMAZON();
         } else {
             noNetwork.setVisibility(View.VISIBLE);
-            Toast.makeText(this, "Internet connection not available.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.InternetNotAvailable, Toast.LENGTH_LONG).show();
         }
     }
 
     public boolean isOnline() {
         Runtime runtime = Runtime.getRuntime();
         try {
-            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+            Process ipProcess = runtime.exec(getString(R.string.SYSTEM_PING));
             int exitValue = ipProcess.waitFor();
             return (exitValue == 0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
@@ -116,10 +115,10 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
     private void runShare() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
+        shareIntent.setType(getString(R.string.MessageType));
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.ExtraSubject);
         shareIntent.putExtra(Intent.EXTRA_TEXT, R.string.ExtraText);
-        startActivity(Intent.createChooser(shareIntent, "Share using"));
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.Share)));
     }
 
 
@@ -149,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
         Boolean has = (detailFragment != null);
-        if (has == true) {
+        if (has) {
             detailFragment.setInfoInTabletUI(book);
         }
     }
@@ -219,10 +218,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     private void AMAZON() {

@@ -232,7 +232,7 @@ public class DetailFragment extends android.app.Fragment {
 
     private void setUIFont(View view) {
         final TextView descriptionView = (TextView) view.findViewById(R.id.Detail_Description);
-        descriptionView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "Roboto-Regular.ttf"));
+        descriptionView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), getString(R.string.RobotoRegular)));
     }
 
 }

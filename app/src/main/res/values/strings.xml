@@ -111,5 +111,9 @@
     <string name="RealmDatabaseName">favorite.realm</string>
     <string name="InternetAvailable">Internet connection not available.</string>
     <string name="InternetNotAvailable">Internet connection not available.</string>
+    <string name="RobotoRegular">Roboto-Regular.ttf</string>
+    <string name="VERSION">1</string>
+    <string name="Share">Share Using</string>
+    <string name="MessageType">text/plain</string>
 
 </resources>

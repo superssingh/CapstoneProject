@@ -6,9 +6,6 @@ import com.santossingh.capstoneproject.Google.Interfaces.LibraryService;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Stark on 18/04/2016.
- */
 public class DataManager implements LibraryService {
     private LibraryAPI BooksInfo;
 

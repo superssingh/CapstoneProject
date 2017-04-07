@@ -17,14 +17,9 @@ import com.santossingh.capstoneproject.Database.Firebase.TopBooks;
 import com.santossingh.capstoneproject.R;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by santoshsingh on 02/04/17.
- */
 
 public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory {
 
@@ -44,7 +39,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public void onCreate() {
-        topBooksList = new ArrayList<TopBooks>();
+        topBooksList = new ArrayList<>();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("topbooks");
         getDataFromFirebase();
     }
@@ -76,8 +71,6 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
         try {
             url = new URL(topBooksList.get(position).getImage());
             image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

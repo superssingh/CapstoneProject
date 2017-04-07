@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
                 .name(getString(R.string.RealmDatabaseName))
-                .schemaVersion(1)
+                .schemaVersion(Integer.parseInt(getString(R.string.VERSION)))
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(config);
@@ -121,10 +121,10 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
     private void runShare() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
+        shareIntent.setType(getString(R.string.MessageType));
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.ExtraSubject);
         shareIntent.putExtra(Intent.EXTRA_TEXT, R.string.ExtraText);
-        startActivity(Intent.createChooser(shareIntent, "Share using"));
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.Share)));
     }
 
     @Override

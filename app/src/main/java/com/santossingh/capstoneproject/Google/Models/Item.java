@@ -3,9 +3,6 @@ package com.santossingh.capstoneproject.Google.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by santoshsingh on 25/12/16.
- */
 
 public class Item implements Parcelable {
     public static final Creator<Item> CREATOR = new Creator<Item>() {

@@ -21,6 +21,8 @@
 package com.santossingh.capstoneproject.Amazon.Services;
 
 
+import android.annotation.SuppressLint;
+
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
@@ -129,7 +131,7 @@ public class SignedRequestsHelper {
 
         // The parameters need to be processed in lexicographical order, so we'll
         // use a TreeMap implementation for that.
-        SortedMap<String, String> sortedParamMap = new TreeMap<String, String>(params);
+        SortedMap<String, String> sortedParamMap = new TreeMap<>(params);
 
         // get the canonical form the query string
         String canonicalQS = this.canonicalize(sortedParamMap);
@@ -146,10 +148,8 @@ public class SignedRequestsHelper {
         String sig = this.percentEncodeRfc3986(hmac);
 
         // construct the URL
-        String url =
-                "http://" + this.endpoint + REQUEST_URI + "?" + canonicalQS + "&Signature=" + sig;
 
-        return url;
+        return "http://" + this.endpoint + REQUEST_URI + "?" + canonicalQS + "&Signature=" + sig;
     }
 
     /**
@@ -195,7 +195,7 @@ public class SignedRequestsHelper {
     private String timestamp() {
         String timestamp = null;
         Calendar cal = Calendar.getInstance();
-        DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        @SuppressLint("SimpleDateFormat") DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         dfm.setTimeZone(TimeZone.getTimeZone("GMT"));
         timestamp = dfm.format(cal.getTime());
         return timestamp;
@@ -212,7 +212,7 @@ public class SignedRequestsHelper {
             return "";
         }
 
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         Iterator<Map.Entry<String, String>> iter = sortedParamMap.entrySet().iterator();
 
         while (iter.hasNext()) {
@@ -224,8 +224,7 @@ public class SignedRequestsHelper {
                 buffer.append("&");
             }
         }
-        String cannoical = buffer.toString();
-        return cannoical;
+        return buffer.toString();
     }
 
     /**
@@ -257,7 +256,7 @@ public class SignedRequestsHelper {
      * @return
      */
     private Map<String, String> createParameterMap(String queryString) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         String[] pairs = queryString.split("&");
 
         for (String pair : pairs) {
@@ -269,7 +268,7 @@ public class SignedRequestsHelper {
             for (int j = 0; j < tokens.length; j++) {
                 try {
                     tokens[j] = URLDecoder.decode(tokens[j], UTF8_CHARSET);
-                } catch (UnsupportedEncodingException e) {
+                } catch (UnsupportedEncodingException ignored) {
                 }
             }
             switch (tokens.length) {

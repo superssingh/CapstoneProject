@@ -21,21 +21,15 @@ public class WidgetFragment extends Fragment {
     @BindView(R.id.WidgetRecycleView)
     RecyclerView recyclerView;
     WidgetRecyclerAdapter recycleAdapter;
-    private View view;
     private OnFragmentInteractionListener mListener;
 
     public WidgetFragment() {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_widget, container, false);
+        View view = inflater.inflate(R.layout.fragment_widget, container, false);
         ButterKnife.bind(this, view);
         configRecycleView();
         return view;

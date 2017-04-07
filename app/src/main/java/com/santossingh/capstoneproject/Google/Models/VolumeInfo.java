@@ -2,9 +2,6 @@ package com.santossingh.capstoneproject.Google.Models;
 
 import java.util.List;
 
-/*
- * Created by santoshsingh on 25/12/16.
- */
 
 public class VolumeInfo {
     private String title;

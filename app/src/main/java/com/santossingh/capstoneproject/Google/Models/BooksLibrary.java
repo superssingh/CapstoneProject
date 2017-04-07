@@ -1,9 +1,5 @@
 package com.santossingh.capstoneproject.Google.Models;
 
-/**
- * Created by santoshsingh on 24/12/16.
- */
-
 public class BooksLibrary {
     private String kind;
     private int totalItems;

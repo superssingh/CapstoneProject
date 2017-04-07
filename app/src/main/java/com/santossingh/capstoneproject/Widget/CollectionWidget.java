@@ -13,9 +13,6 @@ import android.widget.RemoteViews;
 import com.santossingh.capstoneproject.Activities.WidgetActivity;
 import com.santossingh.capstoneproject.R;
 
-/**
- * Implementation of App Widget functionality.
- */
 public class CollectionWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
@@ -25,11 +22,7 @@ public class CollectionWidget extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.collection_widget);
 
         // Set up the collection
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            setRemoteAdapter(context, views);
-        } else {
-            setRemoteAdapterV11(context, views);
-        }
+        setRemoteAdapter(context, views);
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
