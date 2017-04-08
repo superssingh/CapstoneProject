@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import com.santossingh.capstoneproject.Amazon.Models.AmazonBook;
 import com.santossingh.capstoneproject.Amazon.Services.AWS_URL;
 import com.santossingh.capstoneproject.Amazon.Services.MyXmlPullParser;
+import com.santossingh.capstoneproject.R;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,8 +53,8 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
     private InputStream downloadUrl(String urls) throws IOException {
         URL url = new URL(urls);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setReadTimeout(10000 /* milliseconds */);
-        conn.setConnectTimeout(15000 /* milliseconds */);
+        conn.setReadTimeout(R.string.ReadTimeOutSecond /* milliseconds */);
+        conn.setConnectTimeout(R.string.ConnectTimeOutSecond /* milliseconds */);
         conn.setRequestMethod("GET");
         conn.setDoInput(true);
         conn.connect();

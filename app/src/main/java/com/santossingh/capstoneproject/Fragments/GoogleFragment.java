@@ -32,7 +32,6 @@ import retrofit2.Response;
 
 public class GoogleFragment extends Fragment {
 
-    private static final String BOOKS_STATE = "free_books";
     @BindView(R.id.base_Progress_bar)
     LinearLayout progressBar;
     @BindView(R.id.recycleView)
@@ -54,7 +53,7 @@ public class GoogleFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(BOOKS_STATE, new ArrayList<>(recyclerViewAdapter.getBooksList()));
+        outState.putParcelableArrayList(getString(R.string.FREE_STATE), new ArrayList<>(recyclerViewAdapter.getBooksList()));
     }
 
     @Override
@@ -68,7 +67,7 @@ public class GoogleFragment extends Fragment {
         if (savedInstanceState == null) {
             makeService(String.valueOf(R.string.Business));
         } else {
-            itemsList = savedInstanceState.getParcelableArrayList(BOOKS_STATE);
+            itemsList = savedInstanceState.getParcelableArrayList(getString(R.string.FREE_STATE));
             recyclerViewAdapter.addList(itemsList);
         }
 

@@ -83,7 +83,6 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
         ButterKnife.bind(this, view);
         itemsList = new ArrayList<>();
         configRecycleView();
-
         if (savedInstanceState == null) {
             startQueryTask(getString(R.string.Business));
             menuPosition = R.id.Business;
@@ -219,7 +218,7 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
             mListener.onTabletIntraction(result.get(0));
         } else {
             recyclerView.setVisibility(View.GONE);
-            refresh.setVisibility(View.VISIBLE);
+            setRefresh();
             Snackbar.make(view, R.string.Retry, Snackbar.LENGTH_LONG).show();
         }
     }
