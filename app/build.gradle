@@ -4,14 +4,7 @@ apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'mykey'
-            keyPassword 'superuser'
-            storeFile file("$rootDir/keystore.jks")
-            storePassword 'superuser'
-        }
-    }
+
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
     defaultConfig {
@@ -27,17 +20,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
         }
     }
     productFlavors {
         free {
             applicationId "com.santossingh.capstoneproject.flavors.free"
-            signingConfig signingConfigs.config
         }
         paid {
             applicationId "com.santossingh.capstoneproject.flavors.paid"
-            signingConfig signingConfigs.config
         }
     }
 }
