@@ -34,19 +34,17 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
         this.intent = intent;
         appWidgetIds = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
-        topBooksList = new ArrayList<>();
-        initFirebaseDatabase();
+
     }
 
     @Override
     public void onCreate() {
+        initFirebaseDatabase();
     }
 
     @Override
     public void onDataSetChanged() {
-        synchronized (topBooksList) {
-            topBooksList.notify();
-        }
+        initFirebaseDatabase();
     }
 
     @Override
@@ -60,18 +58,21 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public RemoteViews getViewAt(int position) {
+        initFirebaseDatabase();
+        TopBooks book = topBooksList.get(position);
         URL url = null;
         Bitmap image = null;
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+        remoteViews.setTextViewText(R.id.widgetTitle, book.getTitle());
+
         try {
-            url = new URL(topBooksList.get(0).getImage());
+            url = new URL(book.getImage());
             image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         remoteViews.setImageViewBitmap(R.id.widgetImage, image);
-        remoteViews.setTextViewText(R.id.widgetTitle, topBooksList.get(position).getTitle());
 
         return remoteViews;
     }
@@ -93,50 +94,21 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public boolean hasStableIds() {
-        return true;
-    }
-
-    public void setTopBooksList(List<TopBooks> topBooksList) {
-        this.topBooksList = topBooksList;
-        onDataSetChanged();
-    }
-
-    public Bitmap getImage(final String imageURL) {
-        final Bitmap[] bitmap = {null};
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(imageURL);
-                    bitmap[0] = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        return bitmap[0];
+        return false;
     }
 
     private void initFirebaseDatabase() {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(FIREBASE_DATABASE_PATH);
+
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                TopBooks topBook = dataSnapshot.getValue(TopBooks.class);
-                topBook.setKey(dataSnapshot.getKey());
-                topBooksList.add(0, topBook);
-                onDataSetChanged();
+                TopBooks topBooks = dataSnapshot.getValue(TopBooks.class);
+                topBooksList.add(0, topBooks);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                if (topBooksList != null) topBooksList.clear();
-
-                TopBooks topBook = dataSnapshot.getValue(TopBooks.class);
-                topBook.setKey(dataSnapshot.getKey());
-                topBooksList.add(0, topBook);
-                onDataSetChanged();
             }
 
             @Override

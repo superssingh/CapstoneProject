@@ -25,7 +25,7 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
     protected List<AmazonBook> doInBackground(String... urls) {
         List<AmazonBook> booksList = new ArrayList<>();
         try {
-            if (isCancelled()) {
+            while (isCancelled()) {
                 return null;
             }
             String url = new AWS_URL().getURLByCategory(urls[0]);

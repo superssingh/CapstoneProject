@@ -138,5 +138,7 @@
     <string name="GoogleFreeBooks">Google Free Books</string>
     <string name="BooksFetched">Books list fetched!</string>
     <string name="into">It is</string>
+    <string name="FavoriteBooksWidget">Favorite List</string>
+    <string name="TopBooksWidget">Top Famous Books List</string>
 
 </resources>

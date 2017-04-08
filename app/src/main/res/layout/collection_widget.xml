@@ -6,14 +6,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/widget_layout_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#aaDEDFDE"
+            android:background="@drawable/gradient5"
             android:orientation="horizontal"
             android:paddingLeft="5dp"
             android:paddingRight="5dp">
@@ -33,7 +33,7 @@
                 android:padding="@dimen/widget_header_padding"
                 android:text="@string/TopBooks"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/Orange_transparent_50"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -41,20 +41,18 @@
             android:id="@+id/widget_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:numColumns="2"
-            android:visibility="visible"></GridView>
+            android:numColumns="2">
 
+        </GridView>
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/widgetButton"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_gravity="bottom|end"
-        android:layout_margin="8dp"
         android:background="@drawable/round_button"
-        android:contentDescription="@string/widgetButton"
-        android:orientation="horizontal"
-        android:src="@drawable/ic_launch"></ImageButton>
+        android:elevation="4dp"
+        android:src="@drawable/ic_launch" />
 
 </FrameLayout>
