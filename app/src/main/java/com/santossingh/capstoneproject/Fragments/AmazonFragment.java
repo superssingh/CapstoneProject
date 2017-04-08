@@ -219,7 +219,7 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
             mListener.onTabletIntraction(result.get(0));
         } else {
             recyclerView.setVisibility(View.GONE);
-            refresh.setVisibility(View.VISIBLE);
+            setRefresh();
             Snackbar.make(view, R.string.Retry, Snackbar.LENGTH_LONG).show();
         }
     }
