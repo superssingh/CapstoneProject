@@ -12,13 +12,13 @@ import com.santossingh.capstoneproject.R;
 
 public class WidgetActivity extends AppCompatActivity implements WidgetFragment.OnFragmentInteractionListener {
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_widget);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(R.string.TopBooks);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -33,7 +33,7 @@ public class WidgetActivity extends AppCompatActivity implements WidgetFragment.
     public void onFragmentInteraction(TopBooks book) {
         if (book != null) {
             Intent intent = new Intent(WidgetActivity.this, AmazonActivity.class)
-                    .putExtra(String.valueOf(R.string.BUY_Amazon), book.getBuyLink());
+                    .putExtra(String.valueOf(R.string.URL_Link), book.getBuyLink());
             startActivity(intent);
         }
     }

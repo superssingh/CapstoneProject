@@ -7,11 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.santossingh.capstoneproject.Database.Firebase.TopBooks;
 import com.santossingh.capstoneproject.Fragments.WidgetFragment;
 import com.santossingh.capstoneproject.R;
@@ -25,51 +20,11 @@ import butterknife.ButterKnife;
 
 public class WidgetRecyclerAdapter extends RecyclerView.Adapter<WidgetRecyclerAdapter.ViewHolder> {
 
-    private final List<TopBooks> booksList = new ArrayList<>();
-    private final WidgetFragment.OnFragmentInteractionListener listener;
+    private List<TopBooks> booksList = new ArrayList<>();
+    private WidgetFragment.OnFragmentInteractionListener listener;
 
     public WidgetRecyclerAdapter(WidgetFragment.OnFragmentInteractionListener listener) {
         this.listener = listener;
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(String.valueOf(R.string.TopBooksTag));
-
-        databaseReference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                TopBooks topBooks = dataSnapshot.getValue(TopBooks.class);
-                topBooks.setKey(dataSnapshot.getKey());
-                booksList.add(0, topBooks);
-                notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                booksList.clear();
-                TopBooks topBooks = dataSnapshot.getValue(TopBooks.class);
-                topBooks.setKey(dataSnapshot.getKey());
-                booksList.add(0, topBooks);
-                notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                if (booksList != null) {
-                    booksList.clear();
-                }
-                TopBooks topBooks = dataSnapshot.getValue(TopBooks.class);
-                topBooks.setKey(dataSnapshot.getKey());
-                assert booksList != null;
-                booksList.add(0, topBooks);
-                notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
     }
 
     @Override
@@ -93,7 +48,6 @@ public class WidgetRecyclerAdapter extends RecyclerView.Adapter<WidgetRecyclerAd
                 if (null != listener) {
                     listener.onFragmentInteraction(holder.book);
                 }
-
             }
         });
     }
@@ -101,6 +55,11 @@ public class WidgetRecyclerAdapter extends RecyclerView.Adapter<WidgetRecyclerAd
     @Override
     public int getItemCount() {
         return booksList.size();
+    }
+
+    public void setBooksList(List<TopBooks> booksList) {
+        this.booksList = booksList;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -117,4 +76,5 @@ public class WidgetRecyclerAdapter extends RecyclerView.Adapter<WidgetRecyclerAd
             ButterKnife.bind(this, mView);
         }
     }
+
 }

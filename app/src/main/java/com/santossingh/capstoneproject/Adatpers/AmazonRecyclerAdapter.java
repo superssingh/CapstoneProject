@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.santossingh.capstoneproject.Amazon.Models.AmazonBook;
 import com.santossingh.capstoneproject.Fragments.AmazonFragment;
@@ -49,6 +50,7 @@ public class AmazonRecyclerAdapter extends RecyclerView.Adapter<AmazonRecyclerAd
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
+                    Toast.makeText(v.getContext(), String.valueOf(R.string.into) + " " + holder.book.getTitle(), Toast.LENGTH_LONG).show();
                     mListener.onFragmentInteraction(holder.book);
                 }
             }

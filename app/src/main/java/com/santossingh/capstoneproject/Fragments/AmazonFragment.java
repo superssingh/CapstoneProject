@@ -212,15 +212,15 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
     @Override
     public void processFinish(List<AmazonBook> result) {
         progressBar.setVisibility(View.GONE);
-        if (result.equals(null)) {
-            recyclerView.setVisibility(View.GONE);
-            refresh.setVisibility(View.VISIBLE);
-            Snackbar.make(view, R.string.Retry, Snackbar.LENGTH_LONG).show();
-        } else {
+        if (!result.equals(null)) {
             itemsList = result;
             recyclerView.setVisibility(View.VISIBLE);
             recyclerViewAdapter.addList(itemsList);
             mListener.onTabletIntraction(result.get(0));
+        } else {
+            recyclerView.setVisibility(View.GONE);
+            refresh.setVisibility(View.VISIBLE);
+            Snackbar.make(view, R.string.Retry, Snackbar.LENGTH_LONG).show();
         }
     }
 

@@ -152,9 +152,10 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
     public void onTabletIntraction(AmazonBook book) {
         DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_detail);
-        Boolean has = (detailFragment != null);
-        if (has) {
+        if (detailFragment != null) {
             detailFragment.setInfoInTabletUI(book);
+        } else {
+            Toast.makeText(this, R.string.BooksFetched, Toast.LENGTH_SHORT).show();
         }
     }
 

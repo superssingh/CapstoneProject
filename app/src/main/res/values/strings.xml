@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Book Reader</string>
-
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
 
@@ -137,5 +136,7 @@
     <string name="ShareCaption">Share</string>
     <string name="Favorite_List">Favorite Books</string>
     <string name="GoogleFreeBooks">Google Free Books</string>
+    <string name="BooksFetched">Books list fetched!</string>
+    <string name="into">It is</string>
 
 </resources>

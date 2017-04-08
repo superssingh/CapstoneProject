@@ -23,7 +23,6 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
 
     @Override
     protected List<AmazonBook> doInBackground(String... urls) {
-
         List<AmazonBook> booksList = new ArrayList<>();
         try {
             if (isCancelled()) {
@@ -33,11 +32,11 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
             MyXmlPullParser myXmlPullParser = new MyXmlPullParser();
             InputStream is = downloadUrl(url);
             booksList = myXmlPullParser.parse(is);
-
+            return booksList;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return booksList;
+        return null;
     }
 
     @Override
