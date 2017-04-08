@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:4034208760:android:da48467d5b3709a1",
         "android_client_info": {
-          "package_name": "com.santossingh.capstoneproject"
+          "package_name": "com.santossingh.capstoneproject.flavors.paid"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "4034208760-l6ursrolrg4n4jft8oe3q4ebsukfj6uh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.santossingh.capstoneproject",
+            "package_name": "com.santossingh.capstoneproject.flavors.paid",
             "certificate_hash": "eeb62ba605179a4ca19342c5554144bd5b7f3a61"
           }
         },
