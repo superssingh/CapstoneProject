@@ -40,6 +40,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     @Override
     public void onCreate() {
         initFirebaseDatabase();
+
     }
 
     @Override
@@ -59,11 +60,10 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     @Override
     public RemoteViews getViewAt(int position) {
         initFirebaseDatabase();
-        TopBooks book = topBooksList.get(position);
         URL url = null;
         Bitmap image = null;
+        TopBooks book = topBooksList.get(position);
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-        remoteViews.setTextViewText(R.id.widgetTitle, book.getTitle());
 
         try {
             url = new URL(book.getImage());
@@ -72,6 +72,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
             e.printStackTrace();
         }
 
+        remoteViews.setTextViewText(R.id.widgetTitle, book.getTitle());
         remoteViews.setImageViewBitmap(R.id.widgetImage, image);
 
         return remoteViews;
@@ -94,7 +95,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
     }
 
     private void initFirebaseDatabase() {
