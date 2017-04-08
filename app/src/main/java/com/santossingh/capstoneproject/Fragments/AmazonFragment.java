@@ -83,7 +83,6 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
         ButterKnife.bind(this, view);
         itemsList = new ArrayList<>();
         configRecycleView();
-
         if (savedInstanceState == null) {
             startQueryTask(getString(R.string.Business));
             menuPosition = R.id.Business;
