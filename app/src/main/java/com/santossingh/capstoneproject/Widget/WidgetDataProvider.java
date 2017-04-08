@@ -23,25 +23,23 @@ import java.util.List;
 
 public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory {
 
-    List<String> collection = new ArrayList<>();
-    Context context;
-    Intent intent;
-    int appWidgetIds;
-    List<TopBooks> topBooksList;
-    DatabaseReference databaseReference;
+    private static final String FIREBASE_DATABASE_PATH = "topbooks";
+    private Context context;
+    private Intent intent;
+    private int appWidgetIds;
+    private List<TopBooks> topBooksList = new ArrayList<>();
 
     public WidgetDataProvider(Context context, Intent intent) {
         this.context = context;
         this.intent = intent;
         appWidgetIds = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
+        topBooksList = new ArrayList<>();
+        initFirebaseDatabase();
     }
 
     @Override
     public void onCreate() {
-        topBooksList = new ArrayList<>();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child(String.valueOf(R.string.TopBooksTag));
-        getDataFromFirebase();
     }
 
     @Override
@@ -64,17 +62,16 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     public RemoteViews getViewAt(int position) {
         URL url = null;
         Bitmap image = null;
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
-                R.layout.widget_layout);
-        remoteViews.setTextViewText(R.id.widgetTitle, topBooksList.get(position).getTitle());
-
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
         try {
-            url = new URL(topBooksList.get(position).getImage());
+            url = new URL(topBooksList.get(0).getImage());
             image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         remoteViews.setImageViewBitmap(R.id.widgetImage, image);
+        remoteViews.setTextViewText(R.id.widgetTitle, topBooksList.get(position).getTitle());
 
         return remoteViews;
     }
@@ -99,39 +96,51 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
         return true;
     }
 
-    public void getDataFromFirebase() {
+    public void setTopBooksList(List<TopBooks> topBooksList) {
+        this.topBooksList = topBooksList;
+        onDataSetChanged();
+    }
+
+    public Bitmap getImage(final String imageURL) {
+        final Bitmap[] bitmap = {null};
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(imageURL);
+                    bitmap[0] = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        return bitmap[0];
+    }
+
+    private void initFirebaseDatabase() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(FIREBASE_DATABASE_PATH);
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                topBooksList.clear();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    TopBooks topBook = dataSnapshot1.getValue(TopBooks.class);
-                    topBook.setKey(dataSnapshot1.getKey());
-                    topBooksList.add(topBook);
-                }
+                TopBooks topBook = dataSnapshot.getValue(TopBooks.class);
+                topBook.setKey(dataSnapshot.getKey());
+                topBooksList.add(0, topBook);
                 onDataSetChanged();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                topBooksList.clear();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    TopBooks topBook = dataSnapshot1.getValue(TopBooks.class);
-                    topBook.setKey(dataSnapshot1.getKey());
-                    topBooksList.add(topBook);
-                }
+                if (topBooksList != null) topBooksList.clear();
+
+                TopBooks topBook = dataSnapshot.getValue(TopBooks.class);
+                topBook.setKey(dataSnapshot.getKey());
+                topBooksList.add(0, topBook);
                 onDataSetChanged();
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                topBooksList.clear();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    TopBooks topBook = dataSnapshot1.getValue(TopBooks.class);
-                    topBook.setKey(dataSnapshot1.getKey());
-                    topBooksList.add(topBook);
-                }
-                onDataSetChanged();
             }
 
             @Override

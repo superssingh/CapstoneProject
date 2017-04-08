@@ -5,8 +5,13 @@ import android.widget.RemoteViewsService;
 
 public class WidgetService extends RemoteViewsService {
     int appWidgetId;
+
+    private WidgetDataProvider widgetDataProvider;
+
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
-        return new WidgetDataProvider(this, intent);
+        WidgetDataProvider widgetDataProvider = new WidgetDataProvider(this, intent);
+        return widgetDataProvider;
     }
+
 }
