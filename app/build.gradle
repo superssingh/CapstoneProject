@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 apply plugin: 'com.jakewharton.butterknife'
-apply plugin: 'com.google.gms.google-services'
 
 android {
 
@@ -54,3 +53,4 @@ dependencies {
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }
+apply plugin: 'com.google.gms.google-services'
