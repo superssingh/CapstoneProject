@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
 
-    public static final String GET = "GET";
+    private static final String GET = "GET";
     private AsyncResponse listener = null;
 
     public MyAsyncTask(AsyncResponse listener) {
