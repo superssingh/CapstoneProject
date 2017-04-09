@@ -32,9 +32,6 @@ public class WidgetFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private List<TopBooks> topBooksList;
 
-    public WidgetFragment() {
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

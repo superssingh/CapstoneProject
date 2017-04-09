@@ -21,6 +21,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.santossingh.capstoneproject.R;
 import com.santossingh.capstoneproject.activities.DetailActivity;
 import com.santossingh.capstoneproject.amazon.models.AmazonBook;
 import com.santossingh.capstoneproject.database.realm_database.FavoriteBooks;
@@ -29,7 +30,6 @@ import com.santossingh.capstoneproject.fragments.DetailFragment;
 import com.santossingh.capstoneproject.fragments.FavoriteFragment;
 import com.santossingh.capstoneproject.fragments.GoogleFragment;
 import com.santossingh.capstoneproject.google.models.Item;
-import com.santossingh.capstoneproject.R;
 
 import java.io.IOException;
 

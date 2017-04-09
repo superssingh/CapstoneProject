@@ -30,9 +30,6 @@ public class FavoriteFragment extends Fragment {
     private Realm realm;
     private OnFragmentInteractionListener mListener;
 
-    public FavoriteFragment() {
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_favorite, container, false);

@@ -52,10 +52,6 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
     private View view;
     private OnFragmentInteractionListener mListener;
 
-
-    public AmazonFragment() {
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

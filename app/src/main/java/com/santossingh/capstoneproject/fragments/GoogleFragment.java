@@ -41,9 +41,6 @@ public class GoogleFragment extends Fragment {
     private View view;
     private OnFragmentInteractionListener mListener;
 
-    public GoogleFragment() {
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
