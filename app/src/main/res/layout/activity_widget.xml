@@ -6,16 +6,16 @@
     android:layout_gravity="center"
     android:background="@drawable/gradient4"
     android:orientation="vertical"
-    tools:context="com.santossingh.capstoneproject.Activities.WidgetActivity">
+    tools:context="com.santossingh.capstoneproject.activities.WidgetActivity">
 
     <include layout="@layout/toolbar" />
 
     <fragment
         android:id="@+id/fragment_widget"
-        class="com.santossingh.capstoneproject.Fragments.WidgetFragment"
+        class="com.santossingh.capstoneproject.fragments.WidgetFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Fragments.WidgetFrament"
+        tools:context=".fragments.WidgetFrament"
         tools:layout="@layout/fragment_widget" />
 </LinearLayout>
 

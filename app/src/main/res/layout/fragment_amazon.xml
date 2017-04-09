@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient2"
-    tools:context="com.santossingh.capstoneproject.Fragments.AmazonFragment">
+    tools:context="com.santossingh.capstoneproject.fragments.AmazonFragment">
 
     <android.support.v7.widget.RecyclerView
 

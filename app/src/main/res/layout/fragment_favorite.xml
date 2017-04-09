@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient2"
-    tools:context="com.santossingh.capstoneproject.Fragments.FavoriteFragment">
+    tools:context="com.santossingh.capstoneproject.fragments.FavoriteFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/Favorite_recycleView"

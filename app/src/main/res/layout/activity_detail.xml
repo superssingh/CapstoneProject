@@ -5,7 +5,7 @@
     android:id="@+id/activity_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.santossingh.capstoneproject.Activities.DetailActivity">
+    tools:context="com.santossingh.capstoneproject.activities.DetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,10 +16,10 @@
 
         <fragment
             android:id="@+id/fragment_detail"
-            class="com.santossingh.capstoneproject.Fragments.DetailFragment"
+            class="com.santossingh.capstoneproject.fragments.DetailFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".Fragments.DetailFragment"
+            tools:context=".fragments.DetailFragment"
             tools:layout="@layout/fragment_detail" />
 
     </LinearLayout>

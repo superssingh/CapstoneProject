@@ -1,8 +1,8 @@
 package com.santossingh.capstoneproject;
 
-import com.santossingh.capstoneproject.Amazon.AsyncTask.AsyncResponse;
-import com.santossingh.capstoneproject.Amazon.AsyncTask.MyAsyncTask;
-import com.santossingh.capstoneproject.Amazon.Models.AmazonBook;
+import com.santossingh.capstoneproject.amazon.async_task.AsyncResponse;
+import com.santossingh.capstoneproject.amazon.async_task.MyAsyncTask;
+import com.santossingh.capstoneproject.amazon.models.AmazonBook;
 
 import junit.framework.TestCase;
 

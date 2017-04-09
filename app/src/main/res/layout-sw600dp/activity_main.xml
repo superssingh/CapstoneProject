@@ -40,7 +40,7 @@
 
             <fragment
                 android:id="@+id/fragment_detail"
-                class="com.santossingh.capstoneproject.Fragments.DetailFragment"
+                class="com.santossingh.capstoneproject.fragments.DetailFragment"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

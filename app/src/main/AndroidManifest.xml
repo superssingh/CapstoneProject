@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:configChanges="orientation|screenSize">
 
             <!--
@@ -26,12 +26,12 @@
             <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".Activities.DetailActivity" />
-        <activity android:name=".Activities.AmazonActivity" />
-        <activity android:name=".Activities.ViewActivity" />
-        <activity android:name=".Activities.WidgetActivity" />
+        <activity android:name=".activities.DetailActivity" />
+        <activity android:name=".activities.AmazonActivity" />
+        <activity android:name=".activities.ViewActivity" />
+        <activity android:name=".activities.WidgetActivity" />
 
-        <receiver android:name=".Widget.CollectionWidget">
+        <receiver android:name=".widget.CollectionWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -42,7 +42,7 @@
         </receiver>
 
         <service
-            android:name=".Widget.WidgetService"
+            android:name=".widget.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
     </application>
