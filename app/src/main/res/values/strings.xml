@@ -143,5 +143,7 @@
     <string name="ReadTimeOutSecond">10000</string>
     <string name="ConnectTimeOutSecond">15000</string>
     <string name="FREE_STATE">free_books</string>
+    <string name="RetryApp">This is a retry button for re-run app.</string>
+    <string name="widgetLauncher">This is launcher button to show all top famous books list.</string>
 
 </resources>
