@@ -1,7 +1,5 @@
 package com.santossingh.capstoneproject.Amazon.Services;
 
-import com.santossingh.capstoneproject.R;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +29,7 @@ public class AWS_URL {
 
         Map<String, String> params = new HashMap<String, String>();
 
-        params.put("Service", String.valueOf(R.string.AWSECommerceService));
+        params.put("Service", "AWSECommerceService");
         params.put("Operation", "ItemSearch");
         params.put("AWSAccessKeyId", AWS_ACCESS_KEY_ID);
         params.put("AssociateTag", ASSOCIATE_TAG);

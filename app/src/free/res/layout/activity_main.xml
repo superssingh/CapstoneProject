@@ -59,7 +59,8 @@
             android:layout_gravity="center"
             android:background="@drawable/gradient"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -95,6 +96,6 @@
         app:headerLayout="@layout/navigation_header"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
-        app:menu="@menu/drawer_menu"></android.support.design.widget.NavigationView>
+        app:menu="@menu/drawer_menu" />
 
 </android.support.v4.widget.DrawerLayout>

@@ -116,7 +116,7 @@ public class GoogleFragment extends Fragment {
                         progressBar.setVisibility(View.GONE);
                     } else {
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(getActivity(), "Null Value", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.NULL_Value, Toast.LENGTH_SHORT).show();
                     }
                 }
             }

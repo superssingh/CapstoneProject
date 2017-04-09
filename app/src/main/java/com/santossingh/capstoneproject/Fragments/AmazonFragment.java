@@ -67,8 +67,8 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(STATE_BOOKS, new ArrayList<>(recyclerViewAdapter.getBooksList()));
-        outState.putInt(MENU_POSITION, menuPosition);
+        outState.putParcelableArrayList(getString(R.string.PAID_BOOKS), new ArrayList<>(recyclerViewAdapter.getBooksList()));
+        outState.putInt(getString(R.string.MENU_POSITION), menuPosition);
     }
 
     @Override
@@ -88,8 +88,8 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
             menuPosition = R.id.Business;
         } else {
             progressBar.setVisibility(View.GONE);
-            itemsList = savedInstanceState.getParcelableArrayList(STATE_BOOKS);
-            menuPosition = savedInstanceState.getInt(MENU_POSITION);
+            itemsList = savedInstanceState.getParcelableArrayList(getString(R.string.PAID_BOOKS));
+            menuPosition = savedInstanceState.getInt(getString(R.string.MENU_POSITION));
             recyclerViewAdapter.addList(itemsList);
         }
 
@@ -110,7 +110,7 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + getString(R.string.ImplementFragmentListener));
         }
     }
 
@@ -212,13 +212,14 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
     public void processFinish(List<AmazonBook> result) {
         progressBar.setVisibility(View.GONE);
         if (result != null) {
+            setRefresh(false);
             itemsList = result;
             recyclerView.setVisibility(View.VISIBLE);
             recyclerViewAdapter.addList(itemsList);
             mListener.onTabletIntraction(result.get(0));
         } else {
             recyclerView.setVisibility(View.GONE);
-            setRefresh();
+            setRefresh(true);
             Snackbar.make(view, R.string.Retry, Snackbar.LENGTH_LONG).show();
         }
     }
@@ -232,15 +233,19 @@ public class AmazonFragment extends Fragment implements AsyncResponse {
         }
     }
 
-    private void setRefresh() {
-        refresh.setVisibility(View.VISIBLE);
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startQueryTask(getString(R.string.Business));
-                Snackbar.make(view, R.string.DefaultSearch, Snackbar.LENGTH_LONG).show();
-            }
-        });
+    private void setRefresh(boolean b) {
+        if (b) {
+            refresh.setVisibility(View.VISIBLE);
+            refresh.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startQueryTask(getString(R.string.Business));
+                    Snackbar.make(view, R.string.DefaultSearch, Snackbar.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            refresh.setVisibility(View.GONE);
+        }
     }
 
     public interface OnFragmentInteractionListener {

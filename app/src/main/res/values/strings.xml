@@ -75,7 +75,6 @@
     <string name="FavoriteBooks">Favorite Books</string>
     <string name="GOOGLE_PREVIEW_HTML">file:///android_asset/google_preview.html</string>
     <string name="No_Internet_Connection">Internet connection turned OFF.\nCould you please turn ON Internet connection\n and press refresh button down below.</string>
-    <string name="PressWiFi"></string>
 
     <!-- AWS Services-->
     <string name="AmazonLink">Amazon Link</string>
@@ -83,7 +82,6 @@
     <string name="AWS_SECRET_KEY">qWESYwVUgn2IcdHOmZZwK1xU3VcK98TxcRlQsEV2</string>
     <string name="ENDPOINT">webservices.amazon.in</string>
     <string name="AWS_Service">Service</string>
-    <string name="AWSECommerceService">AWSECommerceService</string>
     <string name="AWS_Operation">Operation</string>
     <string name="ItemSearch">ItemSearch</string>
     <string name="AWSAccessKeyId">AWSAccessKeyId</string>
@@ -145,5 +143,15 @@
     <string name="FREE_STATE">free_books</string>
     <string name="RetryApp">This is a retry button for re-run app.</string>
     <string name="widgetLauncher">This is launcher button to show all top famous books list.</string>
+    <string name="PAID_BOOKS">paid_books</string>
+    <string name="MENU_POSITION">menu_item</string>
+    <string name="NULL_Value">Null Value</string>
+    <string name="GET">GET</string>
+
+    <!-- Testing -->
+    <string name="TestNullBooks">Null Books</string>
+    <string name="TEST_KEY">test</string>
+    <string name="TestEMPTY_LIST">EMPTY BOOK LIST.</string>
+    <string name="TRANSLATION_Y">translationY</string>
 
 </resources>

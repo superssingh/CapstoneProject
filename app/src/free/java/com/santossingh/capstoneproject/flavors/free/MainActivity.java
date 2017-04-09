@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
     private void startApp() {
         if (isOnline()) {
+            Toast.makeText(this, "ON", Toast.LENGTH_LONG).show();
             noNetwork.setVisibility(View.GONE);
             layoutProgressbar.setVisibility(View.GONE);
             AMAZON();
@@ -259,6 +260,7 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
         return false;
     }
+
 
     private void initializeInterstitial() {
         // Interstitial Ad initialization
