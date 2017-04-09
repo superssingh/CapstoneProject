@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class AsyncTaskUnitTest extends TestCase {
+    @SuppressWarnings("HardCodedStringLiteral")
     private final String key = "test";
     List<AmazonBook> books;
     boolean called;

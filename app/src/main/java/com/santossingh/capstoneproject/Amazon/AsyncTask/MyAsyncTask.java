@@ -16,6 +16,7 @@ import java.util.List;
 
 public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
 
+    public static final String GET = "GET";
     private AsyncResponse listener = null;
 
     public MyAsyncTask(AsyncResponse listener) {
@@ -55,7 +56,7 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<AmazonBook>> {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setReadTimeout(R.string.ReadTimeOutSecond /* milliseconds */);
         conn.setConnectTimeout(R.string.ConnectTimeOutSecond /* milliseconds */);
-        conn.setRequestMethod("GET");
+        conn.setRequestMethod(GET);
         conn.setDoInput(true);
         conn.connect();
         return conn.getInputStream();

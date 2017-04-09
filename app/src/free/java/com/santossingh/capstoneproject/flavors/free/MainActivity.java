@@ -110,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
 
     private void startApp() {
         if (isOnline()) {
-            Toast.makeText(this, "ON", Toast.LENGTH_LONG).show();
             noNetwork.setVisibility(View.GONE);
             layoutProgressbar.setVisibility(View.GONE);
             AMAZON();

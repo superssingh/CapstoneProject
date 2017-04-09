@@ -97,7 +97,7 @@ public class WidgetFragment extends Fragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + R.string.ImplementFragmentListener);
+                    + getString(R.string.ImplementFragmentListener));
         }
     }
 

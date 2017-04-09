@@ -153,5 +153,8 @@
     <string name="TEST_KEY">test</string>
     <string name="TestEMPTY_LIST">EMPTY BOOK LIST.</string>
     <string name="TRANSLATION_Y">translationY</string>
+    <string name="JAVASCRIPT_INIT">javascript:initialize(\'</string>
+    <string name="JAVASCRIPT_CLOSE">\')</string>
+    <string name="google_books_domain">https://www.googleapis.com</string>
 
 </resources>

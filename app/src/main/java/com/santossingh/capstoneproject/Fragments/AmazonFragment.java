@@ -31,8 +31,6 @@ import butterknife.ButterKnife;
 
 public class AmazonFragment extends Fragment implements AsyncResponse {
 
-    private static final String STATE_BOOKS = "paid_books";
-    private static final String MENU_POSITION = "menu_item";
     @BindView(R.id.AWS_recycleView)
     RecyclerView recyclerView;
     @BindView(R.id.Progress_bar)

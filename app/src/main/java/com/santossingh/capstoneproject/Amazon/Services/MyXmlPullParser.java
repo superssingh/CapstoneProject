@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("HardCodedStringLiteral")
 public class MyXmlPullParser {
     private static final String BASE_TAG = "ItemSearchResponse";
     private static final String PARENT_TAG = "Items";

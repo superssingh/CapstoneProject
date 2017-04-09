@@ -12,6 +12,7 @@ import com.santossingh.capstoneproject.R;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
+@SuppressWarnings("HardCodedStringLiteral")
 public class RealmContentProvider {
 
     private Context context;

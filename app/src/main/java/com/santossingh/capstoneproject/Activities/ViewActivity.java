@@ -26,7 +26,7 @@ public class ViewActivity extends AppCompatActivity {
         webview.getSettings().setDisplayZoomControls(true);
         webview.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {
-                webview.loadUrl("javascript:initialize('" + id + "')");
+                webview.loadUrl(getString(R.string.JAVASCRIPT_INIT) + id + getString(R.string.JAVASCRIPT_CLOSE));
             }
         });
 

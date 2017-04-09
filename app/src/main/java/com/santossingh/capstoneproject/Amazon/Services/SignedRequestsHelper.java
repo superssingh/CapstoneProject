@@ -47,6 +47,7 @@ import javax.crypto.spec.SecretKeySpec;
  * This class contains all the logic for signing requests
  * to the Work Product Advertising API.
  */
+@SuppressWarnings("HardCodedStringLiteral")
 public class SignedRequestsHelper {
     /**
      * All strings are handled as UTF-8

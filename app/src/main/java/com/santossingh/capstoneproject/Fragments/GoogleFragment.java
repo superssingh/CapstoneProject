@@ -136,7 +136,7 @@ public class GoogleFragment extends Fragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + getString(R.string.ImplementFragmentListener));
         }
     }
 
