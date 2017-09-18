@@ -26,25 +26,30 @@ This is an app which allows to the user to buy their favorite books from AMAZON 
 
 ### Screen 2: Detail Activity
 
-![](screenshots/cp2.png)   ![](screenshots/cp3.png)
+![](screenshots/cp2.png)  
 
 #### Tablet View
 
-![](screenshots/cp4.png)
+
 
 ###Screen 3: View Activity 
 * Implemented google Embedded Viewer API for online book preview. 
 * Linked with HTML and JavaScript files from Assets folder.
 
-![](screenshots/cp5.png)
+![](screenshots/cp4.png)
 
 ###Screen 4: Favorite Activity 
 
-![](screenshots/cp6.png)
+![](screenshots/cp5.png)
 
 ###Screen 5 App Widget 
 
+![](screenshots/cp6.png)
+
+#### Share Option
+
 ![](screenshots/cp7.png)
+
 
 ##### Handle Data Persistence? 
 I have built a custom content provider with realm database. 
@@ -58,7 +63,6 @@ I have built a custom content provider with realm database.
 * **Firebase** - For Firebase real-time database for getting famous books.
 * **Firebase AdMob** - For Ads.
 * **Variants** - Built both variant Free and Paid.
-* **Firebase Invites** - For invite friends.
 
 
 **_Enjoy_… :) **
