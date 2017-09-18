@@ -1,5 +1,5 @@
 # Online Book Store App
-This is an app which allows to the user to buy their favorite books from AMAZON and read online free books from Google Book Library in any category including business, fantasy, romance, fiction and non-fiction. It has integrated with both AMAZON AWS API and Google Book RESTful API.  
+This is an app that allows the user to buy their favorite books from AMAZON and read online free books from Google Book Library in any category including bestsellers, business, science, fantasy. It has implemented both AMAZON AWS API and Google Book RESTful API.  
 
 ![demo](screenshots/demo.gif)
 
