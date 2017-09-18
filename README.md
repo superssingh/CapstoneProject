@@ -51,9 +51,6 @@ This is an app which allows to the user to buy their favorite books from AMAZON 
 ![](screenshots/cp3.png)
 
 
-##### Handle Data Persistence? 
-I have built a custom content provider with realm database. 
-
 ##### Open source libraries. 
 * **Retrofit** - to fetch JSON data from web. 
 * **Realm** - to store local data. 
