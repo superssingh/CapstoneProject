@@ -26,7 +26,7 @@ This is an app which allows to the user to buy their favorite books from AMAZON 
 
 ### Screen 2: Detail Activity
 
-![](screenshots/cp2.png)  
+![](screenshots/cp21.png)  
 
 #### Tablet View
 
