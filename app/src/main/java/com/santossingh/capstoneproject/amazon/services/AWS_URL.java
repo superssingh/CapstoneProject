@@ -7,9 +7,9 @@ import java.util.Map;
 public class AWS_URL {
 
     // Your AWS Access Key ID, as taken from the AWS Your Account page.
-    private static final String AWS_ACCESS_KEY_ID = "xxxxxxxxxxx";
+    private static final String AWS_ACCESS_KEY_ID = "xxxxxxxxxxxxxxxx";
     // Your AWS Secret Key corresponding to the above ID, as taken from the AWS
-    private static final String AWS_SECRET_KEY = "xxxxxxxxxxxxxx";
+    private static final String AWS_SECRET_KEY = "xxxxxxxxxxxxxxxxxx";
     //Use the end-point according to the region you are interested in.
     private static final String ENDPOINT = "webservices.amazon.in";
     private static final String ASSOCIATE_TAG = "superssingh-21";
