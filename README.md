@@ -17,20 +17,27 @@ This is an app which allows to the user to buy their favorite books from AMAZON 
 ## User Interface Mocks 
 ### Screen 1: Main Activity 
 * Home screen 
-* Navigation Drawer of Main Activity 
+![Alt text]("screenshots/cp1.png")
+* Navigation Drawer of Main Activity
+ ![Alt text]("screenshots/cp8.png")
 
-### Screen 2: Detail Activity 
+### Screen 2: Detail Activity
+ ![Alt text]("screenshots/cp2.png")
+ ![Alt text]("screenshots/cp3.png")
 
 #### Tablet View
+![Alt text]("screenshots/cp4.png")
 
 ###Screen 3: View Activity 
 * Implemented google Embedded Viewer API for online book preview. _
 * Linked with HTML and JavaScript files from Assets folder.
-     
+![Alt text]("screenshots/cp5.png")
 
 ###Screen 4: Favorite Activity 
+![Alt text]("screenshots/cp6.png")
 
 ###Screen 5 App Widget 
+![Alt text]("screenshots/cp7.png")
 
 ##### Handle Data Persistence? 
 I have built a custom content provider with realm database. 
