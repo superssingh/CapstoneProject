@@ -90,4 +90,5 @@ public class AmazonRecyclerAdapter extends RecyclerView.Adapter<AmazonRecyclerAd
             ButterKnife.bind(this, mView);
         }
     }
+
 }

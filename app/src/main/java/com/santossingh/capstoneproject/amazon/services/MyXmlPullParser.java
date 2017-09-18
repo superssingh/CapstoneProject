@@ -35,7 +35,7 @@ public class MyXmlPullParser {
 
     private final String ns = null;
 
-    String BookAuthor = "0", BookYear = "0", BookPrice = "0", BookTitle = "";
+    String BookAuthor = "", BookYear = "0", BookPrice = "0", BookTitle = "";
 
     public List<AmazonBook> parse(InputStream in) throws XmlPullParserException, IOException {
 

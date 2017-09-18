@@ -287,7 +287,6 @@ public class MainActivity extends AppCompatActivity implements AmazonFragment.On
                 Toast.makeText(getApplicationContext(), R.string.AdOpen, Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     private void showInterstitial() {

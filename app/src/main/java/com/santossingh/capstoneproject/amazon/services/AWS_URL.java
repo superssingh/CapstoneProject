@@ -7,14 +7,13 @@ import java.util.Map;
 public class AWS_URL {
 
     // Your AWS Access Key ID, as taken from the AWS Your Account page.
-    private static final String AWS_ACCESS_KEY_ID = "AKIAILMCDWNHZ6OBN2QQ";
+    private static final String AWS_ACCESS_KEY_ID = "AKIAIZZ4V4XGPY4XYC4A";
     // Your AWS Secret Key corresponding to the above ID, as taken from the AWS
-    private static final String AWS_SECRET_KEY = "qWESYwVUgn2IcdHOmZZwK1xU3VcK98TxcRlQsEV2";
+    private static final String AWS_SECRET_KEY = "ebpteDajq6WKngZ0maKfHlQ3/GTdSrxH3AChsQU8";
     //Use the end-point according to the region you are interested in.
     private static final String ENDPOINT = "webservices.amazon.in";
     private static final String ASSOCIATE_TAG = "superssingh-21";
     private static final String RESPONSE_GROUP = "EditorialReview,Images,ItemAttributes,Reviews";
-
 
     public String getURLByCategory(String keyword) {
 
