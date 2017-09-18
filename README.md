@@ -17,9 +17,11 @@ This is an app which allows to the user to buy their favorite books from AMAZON 
 ## User Interface Mocks 
 ### Screen 1: Main Activity 
 * Home screen 
-![](screenshots/cp1.png)
+
+![Alt text](screenshots/cp1.png "OPT1")
 
 * Navigation Drawer of Main Activity
+
 ![](screenshots/cp8.png)
 
 ### Screen 2: Detail Activity
