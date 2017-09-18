@@ -48,7 +48,7 @@ This is an app which allows to the user to buy their favorite books from AMAZON 
 
 #### Share Option
 
-![](screenshots/cp7.png)
+![](screenshots/cp3.png)
 
 
 ##### Handle Data Persistence? 
