@@ -18,40 +18,44 @@ This is an app which allows to the user to buy their favorite books from AMAZON 
 ### Screen 1: Main Activity 
 * Home screen 
 
-![Alt text](screenshots/cp1.png "OPT1")
+![](screenshots/cp1.png)
 
 * Navigation Drawer of Main Activity
 
 ![](screenshots/cp8.png)
 
 ### Screen 2: Detail Activity
-![Alt text]("screenshots/cp2.png")
-![Alt text]("screenshots/cp3.png")
+
+![](screenshots/cp2.png)   ![](screenshots/cp3.png)
 
 #### Tablet View
-![Alt text]("screenshots/cp4.png")
+
+![](screenshots/cp4.png)
 
 ###Screen 3: View Activity 
-* Implemented google Embedded Viewer API for online book preview. _
+* Implemented google Embedded Viewer API for online book preview. 
 * Linked with HTML and JavaScript files from Assets folder.
-![Alt text]("screenshots/cp5.png")
+
+![](screenshots/cp5.png)
 
 ###Screen 4: Favorite Activity 
-![Alt text]("screenshots/cp6.png")
+
+![](screenshots/cp6.png)
 
 ###Screen 5 App Widget 
-![Alt text]("screenshots/cp7.png")
+
+![](screenshots/cp7.png)
 
 ##### Handle Data Persistence? 
 I have built a custom content provider with realm database. 
 
 ##### Open source libraries. 
-* **Retrofit** - to fetch JSON data from web. _
-* **Realm** - to store local data. _
+* **Retrofit** - to fetch JSON data from web. 
+* **Realm** - to store local data. 
 * **Butterknife** - to inject views with components.
 
 ##### Google Play Services: _
-* **Firebase** - For Firebase real-time database for getting famous books _
+* **Firebase** - For Firebase real-time database for getting famous books.
 * **Firebase AdMob** - For Ads.
 * **Variants** - Built both variant Free and Paid.
 * **Firebase Invites** - For invite friends.
